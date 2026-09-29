@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manage your organisation's workforce learning roster in EmpowerOne.">
+  <title>Learners — EmpowerOne</title>
+  <link rel="stylesheet" href="../styles/app.css">
+  <style>
+    .learner-row{cursor:pointer}.learner-row:focus-visible{outline:3px solid rgba(0,80,216,.35);outline-offset:-3px}
+    .learner-detail{position:fixed;inset:0 0 0 auto;width:min(540px,100%);height:100vh;background:#fff;z-index:500;border-left:1px solid var(--border);box-shadow:-12px 0 40px rgba(2,38,112,.12);transform:translateX(102%);transition:transform .24s ease;overflow-y:auto;padding:26px}
+    .learner-detail.open{transform:translateX(0)}.learner-detail-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px}
+    .detail-progress{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.detail-progress>div{padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:10px}
+    .detail-progress strong{display:block;font:700 1.15rem var(--fh);color:var(--navy)}.detail-progress span{font-size:.7rem;color:var(--tm)}
+    .detail-course{padding:12px 0;border-bottom:1px solid var(--border)}
+    .screen-overlay{position:fixed;inset:0;background:rgba(2,38,112,.24);z-index:499;display:none}.screen-overlay.open{display:block}
+    @media(max-width:760px){.learner-detail{padding:18px}.detail-progress{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><img src="../Images and Files/LOGO PNG.png" alt="EmpowerOne"></div>
+    <nav class="snav" aria-label="Organisation navigation">
+      <a href="spoc-dashboard.html" class="snav-item"><span>▦</span><span>Dashboard</span></a>
+      <div class="snav-section">Organisation</div>
+      <a href="learners.html" class="snav-item active" aria-current="page"><span>♙</span><span>Learners</span></a>
+      <a href="course-management.html" class="snav-item"><span>▱</span><span>Courses</span></a>
+      <a href="spoc-dashboard.html#reports" class="snav-item"><span>▥</span><span>Reports</span></a>
+      <a href="settings.html" class="snav-item"><span>⚙</span><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-foot"><div class="suser"><div class="av av-md" style="background:#0D7A4E">PS</div><div class="suser-info"><div class="suser-name">Priya Sharma</div><div class="suser-role">SPOC · Jetex Manufacturing</div></div></div><a href="login.html" class="snav-item mt2" style="color:var(--danger)">Sign Out</a></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div class="tb-left"><div class="breadcrumb"><span class="t-tm">Jetex Manufacturing Pvt. Ltd.</span><span class="sep">/</span><span class="cur">Learners</span></div></div><div class="tb-right"><label class="tb-search"><span class="sr-only">Search learners</span><input id="learner-search" type="search" placeholder="Search learners…" autocomplete="off"></label><div class="av av-md" aria-label="Priya Sharma">PS</div></div></header>
+    <div class="page">
+      <div class="ph"><div class="ph-left"><h1>Learners</h1><p>Manage your organisation's people and assigned learning.</p></div><div class="ph-right"><button class="btn btn-secondary" id="export-learners" type="button">Export CSV</button><button class="btn btn-primary" id="open-add-learner" type="button">+ Add Learner</button></div></div>
+      <div class="g3 mb6">
+        <div class="kpi"><div class="kpi-value" id="learners-active">147</div><div class="kpi-label">Active learners</div></div>
+        <div class="kpi"><div class="kpi-value" id="learners-licences">53</div><div class="kpi-label">Licences remaining</div></div>
+        <div class="kpi"><div class="kpi-value" id="learners-assigned">3</div><div class="kpi-label">Courses assigned to new learners</div></div>
+      </div>
+      <section class="card" aria-labelledby="learner-table-heading">
+        <div class="card-header"><div><h2 class="card-title" id="learner-table-heading">Organisation learner roster</h2><p class="fs-xs t-tm mt2" id="sample-note">Showing a representative set of learner records.</p></div><div class="flex gap2 fw"><select class="form-select" id="department-filter" aria-label="Filter by department" style="width:auto"><option value="">All departments</option></select><select class="form-select" id="status-filter" aria-label="Filter by learning status" style="width:auto"><option value="">All statuses</option><option>Completed</option><option>In Progress</option><option>Not Started</option><option>Overdue</option></select></div></div>
+        <div class="table-wrap"><table id="learners-table"><thead><tr><th scope="col">Learner</th><th scope="col">Employee ID</th><th scope="col">Department</th><th scope="col">Role</th><th scope="col">Courses</th><th scope="col">Completion</th><th scope="col">Status</th></tr></thead><tbody id="learners-body"></tbody></table></div>
+        <div class="flex aic jcb mt4"><span class="fs-xs t-tm" id="result-count" aria-live="polite"></span><button class="btn btn-secondary btn-sm" id="clear-filters" type="button">Clear filters</button></div>
+      </section>
+    </div>
+  </main>
+</div>
+<div class="screen-overlay" id="detail-overlay"></div>
+<aside class="learner-detail" id="learner-detail" aria-labelledby="detail-name" aria-hidden="true" role="dialog">
+  <div class="learner-detail-head"><div><div class="eyebrow">Learner profile</div><h2 id="detail-name">Learner</h2><p id="detail-subtitle"></p></div><button class="btn btn-secondary btn-sm" id="close-detail" type="button" aria-label="Close learner profile">Close</button></div>
+  <div class="detail-progress"><div><strong id="detail-completion">0%</strong><span>Course completion</span></div><div><strong id="detail-course-count">0</strong><span>Assigned courses</span></div><div><strong id="detail-status">—</strong><span>Learning status</span></div></div>
+  <h3 class="mt6 mb3">Assigned learning</h3><div id="detail-courses"></div>
+  <p class="form-hint mt5">Course assignments follow the current organisation policy. New learners automatically receive courses assigned to this organisation.</p>
+</aside>
+<div class="modal-overlay" id="add-modal" style="display:none" role="presentation">
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="add-title">
+    <header class="modal-header"><div><h2 id="add-title">Add learner</h2><p class="fs-xs t-tm mt2">The learner will receive courses assigned to Jetex Manufacturing.</p></div><button class="btn btn-ghost btn-sm" id="close-add" type="button" aria-label="Close add learner form">×</button></header>
+    <form id="add-form"><div class="modal-body">
+      <div class="form-row fr-2 mb4"><label class="form-group"><span class="form-label">First name</span><input class="form-input" name="first" autocomplete="given-name" required></label><label class="form-group"><span class="form-label">Last name</span><input class="form-input" name="last" autocomplete="family-name" required></label></div>
+      <label class="form-group mb4"><span class="form-label">Work email</span><input class="form-input" name="email" type="email" autocomplete="email" required></label>
+      <div class="form-row fr-2 mb4"><label class="form-group"><span class="form-label">Department</span><select class="form-select" name="department" required><option value="">Select department</option><option>Manufacturing</option><option>Materials</option><option>Quality</option><option>Maintenance</option><option>Engineering / R&amp;D</option><option>Tool Room</option><option>NPD</option></select></label><label class="form-group"><span class="form-label">Role / designation</span><input class="form-input" name="designation" placeholder="e.g. Line Operator" required></label></div>
+      <label class="form-group mb4"><span class="form-label">Employee ID <span class="t-tm">Optional</span></span><input class="form-input" name="employeeId"></label>
+      <div class="alert alert-info" id="assignment-hint"></div><p class="form-hint mt3" id="form-error" role="alert"></p>
+    </div><footer class="modal-footer"><button class="btn btn-secondary" id="cancel-add" type="button">Cancel</button><button class="btn btn-primary" type="submit">Add learner</button></footer></form>
+  </section>
+</div>
+<div class="app-toast" id="page-toast" role="status" aria-live="polite"></div>
+<script src="../js/demo-store.js"></script>
+<script>
+(() => {
+  const data = window.EmpowerOneData;
+  const orgId = data.currentOrganisationId();
+  const org = data.getOrganisation(orgId);
+  const courseMap = new Map(data.getSnapshot().courses.map(course => [course.id, course]));
+  const rows = document.getElementById('learners-body');
+  const modal = document.getElementById('add-modal');
+  const form = document.getElementById('add-form');
+  const toast = document.getElementById('page-toast');
+  let toastTimer;
+  let visibleLearners = [];
+  const escape = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const badgeClass = status => ({Completed:'b-completed','In Progress':'b-inprogress','Not Started':'b-notstarted',Overdue:'b-overdue'})[status] || 'b-notstarted';
+  function showToast(message) { toast.textContent = message; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 3000); }
+  function render() {
+    const query = document.getElementById('learner-search').value.trim().toLowerCase();
+    const department = document.getElementById('department-filter').value;
+    const status = document.getElementById('status-filter').value;
+    const all = data.getVisibleLearners(orgId);
+    visibleLearners = all.filter(person => `${person.first} ${person.last} ${person.email} ${person.employeeId || ''} ${person.designation} ${person.department}`.toLowerCase().includes(query) && (!department || person.department === department) && (!status || person.status === status));
+    rows.replaceChildren();
+    visibleLearners.forEach(person => {
+      const assigned = person.assignedCourseIds || data.assignedCourseIds(orgId);
+      const name = `${person.first} ${person.last}`;
+      const tr = document.createElement('tr');
+      tr.className = 'learner-row'; tr.tabIndex = 0; tr.setAttribute('aria-label', `View ${name}'s learner profile`);
+      tr.innerHTML = `<td><div class="flex aic gap3"><div class="av av-sm">${escape(`${person.first[0] || ''}${person.last[0] || ''}`.toUpperCase())}</div><div><div class="fw6">${escape(name)}</div><div class="fs-xs t-tm">${escape(person.email)}</div></div></div></td><td>${escape(person.employeeId || '—')}</td><td><span class="tag">${escape(person.department)}</span></td><td>${escape(person.designation)}</td><td>${assigned.length}</td><td><div class="flex aic gap2"><div class="pbar f1"><div class="pfill ${person.progress === 100 ? 'green' : ''}" style="width:${Math.min(100,Math.max(0,person.progress || 0))}%"></div></div><span class="fw6">${person.progress || 0}%</span></div></td><td><span class="badge ${badgeClass(person.status)}">${escape(person.status)}</span></td>`;
+      tr.addEventListener('click', () => openDetail(person));
+      tr.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openDetail(person); } });
+      rows.appendChild(tr);
+    });
+    const departments = [...new Set(all.map(person => person.department))].sort();
+    const deptSelect = document.getElementById('department-filter');
+    const selected = deptSelect.value;
+    deptSelect.innerHTML = '<option value="">All departments</option>' + departments.map(item => `<option>${escape(item)}</option>`).join('');
+    deptSelect.value = selected;
+    document.getElementById('result-count').textContent = `${visibleLearners.length} of ${all.length} sample learner records shown · ${org.activeLearners} active accounts`;
+    document.getElementById('learners-active').textContent = org.activeLearners;
+    document.getElementById('learners-licences').textContent = Math.max(0,org.licenceLimit-org.activeLearners);
+    document.getElementById('learners-assigned').textContent = data.assignedCourseIds(orgId).length;
+    document.getElementById('assignment-hint').textContent = `${data.assignedCourseIds(orgId).length} courses currently assigned. This learner will receive them automatically.`;
+  }
+  function openDetail(person) {
+    document.getElementById('detail-name').textContent = `${person.first} ${person.last}`;
+    document.getElementById('detail-subtitle').textContent = `${person.designation} · ${person.department} · ${person.email}`;
+    document.getElementById('detail-completion').textContent = `${person.progress || 0}%`;
+    const courseIds = person.assignedCourseIds || data.assignedCourseIds(orgId);
+    document.getElementById('detail-course-count').textContent = courseIds.length;
+    document.getElementById('detail-status').textContent = person.status;
+    document.getElementById('detail-courses').innerHTML = courseIds.length ? courseIds.map(id => { const course = courseMap.get(id); return `<div class="detail-course"><div class="flex aic jcb"><strong>${escape(course?.title || id)}</strong><span class="badge ${badgeClass(person.status)}">${escape(person.status)}</span></div><div class="pbar mt3"><div class="pfill ${person.progress === 100 ? 'green' : ''}" style="width:${Math.min(100,person.progress || 0)}%"></div></div></div>`; }).join('') : '<div class="empty"><h3>No courses assigned</h3><p>Courses assigned to this organisation will appear here.</p></div>';
+    document.getElementById('learner-detail').classList.add('open');
+    document.getElementById('learner-detail').setAttribute('aria-hidden','false');
+    document.getElementById('detail-overlay').classList.add('open');
+    document.getElementById('close-detail').focus();
+  }
+  function closeDetail() { document.getElementById('learner-detail').classList.remove('open'); document.getElementById('learner-detail').setAttribute('aria-hidden','true'); document.getElementById('detail-overlay').classList.remove('open'); }
+  function closeModal() { modal.style.display = 'none'; form.reset(); document.getElementById('form-error').textContent = ''; document.getElementById('open-add-learner').focus(); }
+  document.getElementById('open-add-learner').addEventListener('click', () => { modal.style.display = 'flex'; modal.querySelector('input[name="first"]').focus(); });
+  ['close-add','cancel-add'].forEach(id => document.getElementById(id).addEventListener('click', closeModal));
+  document.getElementById('close-detail').addEventListener('click', closeDetail);
+  document.getElementById('detail-overlay').addEventListener('click', closeDetail);
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeDetail(); if (modal.style.display === 'flex') closeModal(); } });
+  ['learner-search','department-filter','status-filter'].forEach(id => document.getElementById(id).addEventListener(id === 'learner-search' ? 'input' : 'change', render));
+  document.getElementById('clear-filters').addEventListener('click', () => { document.getElementById('learner-search').value = ''; document.getElementById('department-filter').value = ''; document.getElementById('status-filter').value = ''; render(); });
+  document.getElementById('export-learners').addEventListener('click', () => {
+    const csv = [['Name','Employee ID','Department','Role','Email','Completion','Status'], ...visibleLearners.map(person => [`${person.first} ${person.last}`,person.employeeId || '',person.department,person.designation,person.email,`${person.progress || 0}%`,person.status])].map(row => row.map(value => `"${String(value).replaceAll('"','""')}"`).join(',')).join('\r\n');
+    const url = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'}));
+    const link = document.createElement('a'); link.href = url; link.download = 'empowerone-learners.csv'; link.click(); URL.revokeObjectURL(url);
+    showToast('Filtered learner roster exported.');
+  });
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+    const values = Object.fromEntries(new FormData(form).entries());
+    try { data.addLearner(values,orgId); closeModal(); render(); showToast('Learner added and organisation courses assigned.'); }
+    catch (error) { document.getElementById('form-error').textContent = error.message; }
+  });
+  render();
+  const requestedEmail=new URLSearchParams(location.search).get('email');
+  if(requestedEmail){document.getElementById('learner-search').value=requestedEmail;render();const person=visibleLearners.find(item=>item.email.toLowerCase()===requestedEmail.toLowerCase());if(person)openDetail(person);}
+})();
+</script>
+</body>
+</html>

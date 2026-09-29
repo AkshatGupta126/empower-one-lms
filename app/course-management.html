@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Management — EmpowerOne</title>
+  <link rel="stylesheet" href="../styles/app.css">
+</head>
+<body>
+<div class="shell">
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <img src="../Images and Files/LOGO PNG.png" alt="EmpowerOne">
+    </div>
+    <nav class="snav">
+      <a href="super-admin-dashboard.html" class="snav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <div class="snav-section">Management</div>
+      <a href="organisations.html" class="snav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        <span>Organisations</span>
+      </a>
+      <a href="course-management.html" class="snav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <span>Course Library</span>
+      </a>
+      <a href="course-approval.html" class="snav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        <span>Approvals</span><span class="snav-badge">3</span>
+      </a>
+      <div class="snav-section">Administration</div>
+      <a href="learners.html" class="snav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span>Learners</span></a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="suser"><div class="av av-md" style="background:var(--navy)">SA</div><div class="suser-info"><div class="suser-name">Super Admin</div><div class="suser-role">Platform Administrator</div></div></div>
+      <a href="login.html" class="snav-item mt2" style="color:var(--danger)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Sign Out</span></a>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="tb-left">
+        <div class="breadcrumb"><span class="cur">Course Library</span></div>
+      </div>
+      <div class="tb-right">
+        <div class="tb-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" placeholder="Search courses...">
+        </div>
+        <div class="av av-md" style="background:var(--navy);cursor:pointer">SA</div>
+      </div>
+    </div>
+
+    <div class="page">
+      <div class="ph">
+        <div class="ph-left">
+          <h1>Course Library</h1>
+          <p>All courses on the EmpowerOne platform</p>
+        </div>
+        <div class="ph-right">
+          <select class="form-select" id="course-status-filter" onchange="applyCourseFilters()" style="width:auto;min-height:36px">
+              <option value="all">All Status</option>
+              <option value="published">Published</option>
+              <option value="review">Pending Review</option>
+              <option value="draft">Draft</option>
+              <option value="rejected">Rejected</option>
+          </select>
+          <a href="content-creator.html?new=1" class="btn btn-primary" data-roles="superadmin,creator">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Create Course
+          </a>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="g4 mb6">
+        <div class="kpi"><div class="kpi-icon ki-blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div><div class="kpi-value">6</div><div class="kpi-label">Total Courses</div></div>
+        <div class="kpi"><div class="kpi-icon ki-green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="kpi-value">3</div><div class="kpi-label">Published</div></div>
+        <div class="kpi"><div class="kpi-icon ki-warn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="kpi-value">3</div><div class="kpi-label">Pending Approval</div></div>
+        <div class="kpi"><div class="kpi-icon ki-navy"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 01-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg></div><div class="kpi-value">37</div><div class="kpi-label">Total Modules</div></div>
+      </div>
+
+      <!-- TABS -->
+      <div class="tabs">
+          <div class="tab active" data-filter="all" onclick="switchTab(this,'all')">All Courses (6)</div>
+          <div class="tab" data-filter="published" onclick="switchTab(this,'published')">Published (3)</div>
+          <div class="tab" data-filter="review" onclick="switchTab(this,'review')">Pending Review (3)</div>
+          <div class="tab" data-filter="draft" onclick="switchTab(this,'draft')">Drafts (0)</div>
+      </div>
+
+      <!-- COURSE GRID -->
+      <div class="g3" id="course-grid">
+        <!-- Course 1 -->
+        <div class="cc-card" data-status="published">
+          <div class="cc-thumb" style="background:linear-gradient(135deg,#022670,#0050D8)">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+            <div style="position:absolute;top:10px;right:10px"><span class="badge b-published">Published</span></div>
+          </div>
+          <div class="cc-card-body">
+            <h4 style="margin-bottom:4px">Inventory Management</h4>
+            <div class="fs-xs t-tm mb3">by Ravi Kumar · 8 modules · 34 videos</div>
+            <div class="flex aic jcb">
+              <span class="tag">Materials</span>
+              <div class="flex gap2">
+                <button class="btn btn-secondary btn-sm">View</button>
+                <button class="btn btn-ghost btn-sm" data-roles="superadmin">Assign</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 2 -->
+        <div class="cc-card" data-status="published">
+          <div class="cc-thumb" style="background:linear-gradient(135deg,#0D4A8C,#1E7FD8)">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2"/></svg>
+            <div style="position:absolute;top:10px;right:10px"><span class="badge b-published">Published</span></div>
+          </div>
+          <div class="cc-card-body">
+            <h4 style="margin-bottom:4px">OEE &amp; OLE</h4>
+            <div class="fs-xs t-tm mb3">by Meena Pillai · 6 modules · 9 videos</div>
+            <div class="flex aic jcb">
+              <span class="tag">Manufacturing</span>
+              <div class="flex gap2">
+                <button class="btn btn-secondary btn-sm">View</button>
+                <button class="btn btn-ghost btn-sm" data-roles="superadmin">Assign</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 3 -->
+        <div class="cc-card" data-status="published">
+          <div class="cc-thumb" style="background:linear-gradient(135deg,#1A4A7A,#2196C8)">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <div style="position:absolute;top:10px;right:10px"><span class="badge b-published">Published</span></div>
+          </div>
+          <div class="cc-card-body">
+            <h4 style="margin-bottom:4px">Supplier Capacity Planning</h4>
+            <div class="fs-xs t-tm mb3">by Ravi Kumar · 5 modules · 5 videos</div>
+            <div class="flex aic jcb">
+              <span class="tag">Materials</span>
+              <div class="flex gap2">
+                <button class="btn btn-secondary btn-sm">View</button>
+                <button class="btn btn-ghost btn-sm" data-roles="superadmin">Assign</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pending Review 1 -->
+        <div class="cc-card" data-status="review">
+          <div class="cc-thumb" style="background:linear-gradient(135deg,#2D4A2D,#3D7A3D)">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+            <div style="position:absolute;top:10px;right:10px"><span class="badge b-review">Pending Review</span></div>
+          </div>
+          <div class="cc-card-body">
+            <h4 style="margin-bottom:4px">Resource Planning Fundamentals</h4>
+            <div class="fs-xs t-tm mb3">by Ravi Kumar · 7 modules · Submitted 2 days ago</div>
+            <div class="flex aic jcb">
+              <span class="tag">Manufacturing</span>
+              <div class="flex gap2">
+                <a href="course-approval.html" class="btn btn-primary btn-sm" data-roles="superadmin">Review</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pending Review 2 -->
+        <div class="cc-card" data-status="review">
+          <div class="cc-thumb" style="background:linear-gradient(135deg,#4A2D4A,#7A3D7A)">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <div style="position:absolute;top:10px;right:10px"><span class="badge b-review">Pending Review</span></div>
+          </div>
+          <div class="cc-card-body">
+            <h4 style="margin-bottom:4px">5S Workplace Organisation</h4>
+            <div class="fs-xs t-tm mb3">by Meena Pillai · 5 modules · Submitted 3 days ago</div>
+            <div class="flex aic jcb">
+              <span class="tag">All Departments</span>
+              <div class="flex gap2">
+                <a href="course-approval.html" class="btn btn-primary btn-sm" data-roles="superadmin">Review</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pending Review 3 -->
+        <div class="cc-card" data-status="review">
+          <div class="cc-thumb" style="background:linear-gradient(135deg,#4A3D2D,#8B6914)">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944"/></svg>
+            <div style="position:absolute;top:10px;right:10px"><span class="badge b-review">Pending Review</span></div>
+          </div>
+          <div class="cc-card-body">
+            <h4 style="margin-bottom:4px">Quality Systems Awareness</h4>
+            <div class="fs-xs t-tm mb3">by Ravi Kumar · 6 modules · Submitted 5 days ago</div>
+            <div class="flex aic jcb">
+              <span class="tag">Quality</span>
+              <div class="flex gap2">
+                <a href="course-approval.html" class="btn btn-primary btn-sm" data-roles="superadmin">Review</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Assign Modal -->
+<div class="modal-overlay" id="assign-modal" style="display:none" onclick="closeAssign(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Assign Course to Organisations</h3>
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('assign-modal').style.display='none'">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="mb4">Select which organisations should have access to <strong id="assign-course-name">this course</strong>. Learners added to these organisations will automatically receive this course.</p>
+      <div id="assign-org-list" style="display:flex;flex-direction:column;gap:10px">
+        <label class="assign-org-option" style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);cursor:pointer">
+          <input type="checkbox" data-organisation-id="jetex" style="width:16px;height:16px;accent-color:var(--blue)">
+          <div><div class="fw6 fs-sm">Jetex Manufacturing Pvt. Ltd.</div><div class="fs-xs t-tm">147 learners · 200 licences</div></div>
+        </label>
+        <label class="assign-org-option" style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);cursor:pointer">
+          <input type="checkbox" data-organisation-id="abc-auto" style="width:16px;height:16px;accent-color:var(--blue)">
+          <div><div class="fw6 fs-sm">ABC Auto Components</div><div class="fs-xs t-tm">86 learners · 120 licences</div></div>
+        </label>
+        <label class="assign-org-option" style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);cursor:pointer">
+          <input type="checkbox" data-organisation-id="shakti" style="width:16px;height:16px;accent-color:var(--blue)">
+          <div><div class="fw6 fs-sm">Shakti Precision Systems</div><div class="fs-xs t-tm">63 learners · 100 licences</div></div>
+        </label>
+        <label class="assign-org-option" style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);cursor:pointer">
+          <input type="checkbox" data-organisation-id="nova" style="width:16px;height:16px;accent-color:var(--blue)">
+          <div><div class="fw6 fs-sm">Nova Industrial Works</div><div class="fs-xs t-tm">Onboarding · 80 licences</div></div>
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="document.getElementById('assign-modal').style.display='none'">Cancel</button>
+      <button class="btn btn-primary" onclick="saveCourseAssignment()">Save Assignment</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/demo-store.js"></script>
+<script>
+let activeCourseFilter = 'all';
+function switchTab(el, status) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  activeCourseFilter = status;
+  document.getElementById('course-status-filter').value = status;
+  applyCourseFilters();
+}
+function applyCourseFilters() {
+  const statusFilter = document.getElementById('course-status-filter').value;
+  const query = document.querySelector('.tb-search input').value.trim().toLowerCase();
+  document.querySelectorAll('.tabs .tab').forEach(tab => tab.classList.toggle('active', tab.dataset.filter === statusFilter));
+  document.querySelectorAll('#course-grid .cc-card').forEach(card => {
+    const matchesStatus = statusFilter === 'all' || card.dataset.status === statusFilter;
+    const matchesText = !query || card.textContent.toLowerCase().includes(query);
+    card.hidden = !matchesStatus || !matchesText;
+  });
+}
+function openAssignModal(name, courseIdOverride = '') {
+  document.getElementById('assign-course-name').textContent = name;
+  const courseId = courseIdOverride || EmpowerOneData.courseIdForTitle(name);
+  document.getElementById('assign-modal').dataset.courseId = courseId;
+  const list=document.getElementById('assign-org-list');list.replaceChildren();
+  EmpowerOneData.getSnapshot().organisations.forEach(org=>{
+    const label=document.createElement('label');label.className='assign-org-option';label.style.cssText='display:flex;align-items:center;gap:10px;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);cursor:pointer';
+    const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.dataset.organisationId=org.id;checkbox.checked=org.courseIds.includes(courseId);checkbox.style.cssText='width:16px;height:16px;accent-color:var(--blue)';
+    const content=document.createElement('div');const title=document.createElement('div');title.className='fw6 fs-sm';title.textContent=org.name;const meta=document.createElement('div');meta.className='fs-xs t-tm';meta.textContent=`${org.activeLearners} learners · ${org.licenceLimit} licences · ${org.status}`;content.append(title,meta);label.append(checkbox,content);list.appendChild(label);
+  });
+  document.getElementById('assign-modal').style.display = 'flex';
+}
+function saveCourseAssignment() {
+  const courseId = document.getElementById('assign-modal').dataset.courseId;
+  const organisationIds = [...document.querySelectorAll('.assign-org-option input:checked')].map(input => input.dataset.organisationId);
+  try {
+    EmpowerOneData.assignCourses(courseId, organisationIds);
+    document.getElementById('assign-modal').style.display = 'none';
+    showCourseToast('Assignment saved. Learners added later receive this course automatically.');
+  } catch (error) {
+    showCourseToast(error.message);
+  }
+}
+function showCourseToast(message) {
+  let toast = document.getElementById('course-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'course-toast';
+    toast.className = 'app-toast';
+    toast.setAttribute('role', 'status');
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(window.courseToastTimer);
+  window.courseToastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
+}
+function closeAssign(e) {
+  if (e.target === document.getElementById('assign-modal')) document.getElementById('assign-modal').style.display = 'none';
+}
+function renderSavedCourses() {
+  const state=EmpowerOneData.getSnapshot();
+  const grid=document.getElementById('course-grid');
+  const existingTitles=new Set([...grid.querySelectorAll('.cc-card h4')].map(item=>EmpowerOneData.courseIdForTitle(item.textContent)));
+  const statusKey=status=>status==='Published'?'published':status==='In Review'?'review':status==='Rejected'?'rejected':'draft';
+  state.courses.forEach(course=>{
+    const key=statusKey(course.status);
+    if(existingTitles.has(course.id)){
+      const card=[...grid.querySelectorAll('.cc-card')].find(item=>EmpowerOneData.courseIdForTitle(item.querySelector('h4')?.textContent||'')===course.id);
+      if(card){card.dataset.courseId=course.id;card.dataset.status=key;const badge=card.querySelector('.badge');if(badge){badge.textContent=course.status==='In Review'?'Pending Review':course.status;badge.className=`badge ${course.status==='Published'?'b-published':course.status==='In Review'?'b-review':course.status==='Rejected'?'b-rejected':'b-draft'}`;}}
+      return;
+    }
+    const card=document.createElement('article');card.className='cc-card';card.dataset.courseId=course.id;card.dataset.status=key;
+    const thumb=document.createElement('div');thumb.className='cc-thumb';thumb.innerHTML='<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Zm-10 10 10 5 10-5M2 17l10 5 10-5"/></svg>';
+    const status=document.createElement('span');status.className=`badge ${course.status==='Published'?'b-published':course.status==='In Review'?'b-review':course.status==='Rejected'?'b-rejected':'b-draft'}`;status.textContent=course.status;thumb.appendChild(status);
+    const body=document.createElement('div');body.className='cc-card-body';const title=document.createElement('h4');title.textContent=course.title;const meta=document.createElement('p');meta.className='fs-xs t-tm mb3';meta.textContent=`${course.creator||'Content Creator'} · ${course.moduleCount||0} modules · ${course.duration||'Duration not set'}`;const actions=document.createElement('div');actions.className='flex aic jcb';const tag=document.createElement('span');tag.className='tag';tag.textContent=course.department||'All Departments';actions.appendChild(tag);
+    if(course.status==='In Review'){const review=document.createElement('a');review.className='btn btn-primary btn-sm';review.href='course-approval.html';review.textContent='Review';review.hidden=EmpowerOneData.currentRole()!=='superadmin';actions.appendChild(review);} else if(course.status==='Published'){const assign=document.createElement('button');assign.className='btn btn-secondary btn-sm';assign.type='button';assign.dataset.roles='superadmin';assign.hidden=EmpowerOneData.currentRole()!=='superadmin';assign.textContent='Assign';assign.addEventListener('click',()=>openAssignModal(course.title));actions.appendChild(assign);} else {const edit=document.createElement('a');edit.className='btn btn-secondary btn-sm';edit.href='content-creator.html';edit.hidden=EmpowerOneData.currentRole()!=='creator';edit.textContent='Continue editing';actions.appendChild(edit);}
+      if(course.status==='In Review'){const review=document.createElement('a');review.className='btn btn-primary btn-sm';review.href=`course-approval.html?course=${encodeURIComponent(course.id)}`;review.textContent='Review';review.hidden=EmpowerOneData.currentRole()!=='superadmin';actions.appendChild(review);} else if(course.status==='Published'){const assign=document.createElement('button');assign.className='btn btn-secondary btn-sm';assign.type='button';assign.dataset.roles='superadmin';assign.hidden=EmpowerOneData.currentRole()!=='superadmin';assign.textContent='Assign';assign.addEventListener('click',()=>openAssignModal(course.title,course.id));actions.appendChild(assign);} else {const edit=document.createElement('a');edit.className='btn btn-secondary btn-sm';edit.href='content-creator.html';edit.hidden=EmpowerOneData.currentRole()!=='creator';edit.textContent='Continue editing';actions.appendChild(edit);}
+    body.append(title,meta,actions);card.append(thumb,body);grid.appendChild(card);
+  });
+  const courses=state.courses;
+  const counts={all:courses.length,published:courses.filter(c=>c.status==='Published').length,review:courses.filter(c=>c.status==='In Review').length,draft:courses.filter(c=>c.status==='Draft').length};
+  document.querySelectorAll('.tabs .tab').forEach(tab=>{const key=tab.dataset.filter;const label=key==='all'?'All Courses':key==='review'?'Pending Review':key==='draft'?'Drafts':'Published';tab.textContent=`${label} (${counts[key]||0})`;});
+  document.querySelectorAll('.g4 .kpi-value').forEach((node,index)=>{node.textContent=[courses.length,counts.published,counts.review,courses.reduce((sum,c)=>sum+(c.moduleCount||0),0)][index];});
+  grid.querySelectorAll('.cc-card').forEach(card=>{
+    const title=card.querySelector('h4')?.textContent.trim();
+    const view=[...card.querySelectorAll('button')].find(button=>button.textContent.trim()==='View');
+    if(view&&!view.dataset.wired){view.dataset.wired='true';view.addEventListener('click',()=>openCoursePreview(title));}
+    const assign=[...card.querySelectorAll('button')].find(button=>button.textContent.trim()==='Assign');
+    if(assign&&!assign.dataset.wired){assign.dataset.wired='true';assign.dataset.roles='superadmin';assign.hidden=EmpowerOneData.currentRole()!=='superadmin';assign.addEventListener('click',event=>{event.stopPropagation();openAssignModal(title);});}
+    if(assign&&!assign.dataset.wired){assign.dataset.wired='true';assign.dataset.roles='superadmin';assign.hidden=EmpowerOneData.currentRole()!=='superadmin';assign.addEventListener('click',event=>{event.stopPropagation();openAssignModal(title,card.dataset.courseId||'');});}
+  });
+}
+function openCoursePreview(title) {
+  const course=EmpowerOneData.getCourse(EmpowerOneData.courseIdForTitle(title));
+  if(!course){showCourseToast('Course record is unavailable in this demo.');return;}
+  let dialog=document.getElementById('course-preview-dialog');
+  if(!dialog){dialog=document.createElement('div');dialog.id='course-preview-dialog';dialog.className='modal-overlay';dialog.innerHTML='<section class="modal" role="dialog" aria-modal="true" aria-labelledby="course-preview-title"><header class="modal-header"><h2 id="course-preview-title"></h2><button class="btn btn-ghost btn-sm" type="button" aria-label="Close course preview">×</button></header><div class="modal-body"><p class="preview-description"></p><div class="flex gap2 fw mt4 preview-meta"></div><h3 class="mt6 mb3">Course structure</h3><div class="preview-modules"></div></div><footer class="modal-footer"><button class="btn btn-secondary" type="button">Close</button></footer></section>';document.body.appendChild(dialog);dialog.addEventListener('click',event=>{if(event.target===dialog||event.target.closest('button'))dialog.style.display='none';});}
+  dialog.querySelector('#course-preview-title').textContent=course.title;
+  dialog.querySelector('.preview-description').textContent=course.description||'Course information and learning structure.';
+  dialog.querySelector('.preview-meta').innerHTML='';
+  [course.department,`${course.moduleCount||0} modules`,course.duration,course.status].filter(Boolean).forEach(text=>{const tag=document.createElement('span');tag.className='tag';tag.textContent=text;dialog.querySelector('.preview-meta').appendChild(tag);});
+  const modules=dialog.querySelector('.preview-modules');modules.replaceChildren();
+  (course.modules||[]).forEach((module,index)=>{const row=document.createElement('div');row.className='module-item';row.textContent=`${String(index+1).padStart(2,'0')} · ${module.title} · ${module.items?.length||0} content items`;modules.appendChild(row);});
+  if(!course.modules?.length){const note=document.createElement('p');note.className='fs-sm t-tm';note.textContent='Detailed module content is being maintained by the course creator.';modules.appendChild(note);}
+  dialog.style.display='flex';
+}
+document.querySelector('.tb-search input').addEventListener('input', applyCourseFilters);
+renderSavedCourses();
+applyCourseFilters();
+</script>
+</body>
+</html>

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPOC Dashboard — EmpowerOne</title>
+  <link rel="stylesheet" href="../styles/app.css">
+</head>
+<body>
+<div class="shell">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <img src="../Images and Files/LOGO PNG.png" alt="EmpowerOne">
+    </div>
+    <nav class="snav">
+      <a href="spoc-dashboard.html" class="snav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <div class="snav-section">Organisation</div>
+      <a href="learners.html" class="snav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        <span>Learners</span>
+      </a>
+      <a href="organisation-courses.html" class="snav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <span>Courses</span>
+      </a>
+      <a href="#reports" class="snav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>Reports</span>
+      </a>
+      <a href="settings.html" class="snav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
+        <span>Settings</span>
+      </a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="suser">
+        <div class="av av-md" style="background:#0D7A4E">PS</div>
+        <div class="suser-info">
+          <div class="suser-name">Priya Sharma</div>
+          <div class="suser-role">SPOC · Jetex Manufacturing</div>
+        </div>
+      </div>
+      <a href="login.html" class="snav-item mt2" style="color:var(--danger)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <span>Sign Out</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="tb-left">
+        <div class="breadcrumb">
+          <span class="t-tm">Jetex Manufacturing Pvt. Ltd.</span>
+          <span class="sep">/</span>
+          <span class="cur">Dashboard</span>
+        </div>
+      </div>
+      <div class="tb-right">
+        <div class="tb-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" placeholder="Search learners, courses...">
+        </div>
+        <button class="icon-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        </button>
+        <div class="av av-md" style="background:#0D7A4E;cursor:pointer">PS</div>
+      </div>
+    </div>
+
+    <div class="page">
+      <div class="ph">
+        <div class="ph-left">
+          <h1>Training Dashboard</h1>
+          <p>Jetex Manufacturing Pvt. Ltd. — Pune, Maharashtra</p>
+        </div>
+        <div class="ph-right">
+          <select class="form-select" id="overview-dept-filter" style="width:auto;min-height:36px" onchange="filterDept(this.value)">
+            <option>All Departments</option>
+            <option>Manufacturing</option>
+            <option>Materials</option>
+            <option>Quality</option>
+            <option>Maintenance</option>
+            <option>Engineering / R&amp;D</option>
+            <option>Tool Room</option>
+            <option>NPD</option>
+          </select>
+          <button class="btn btn-secondary" type="button" onclick="exportLearnersCsv()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export
+          </button>
+          <button class="btn btn-primary" onclick="openAddLearner()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Learner
+          </button>
+        </div>
+      </div>
+
+      <!-- LICENCE KPIs -->
+      <div class="kpi-grid spoc-kpi-grid mb6">
+        <div class="kpi">
+          <div class="kpi-icon ki-blue">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4m8-4v4M3 10h18"/></svg>
+          </div>
+          <div class="kpi-value" id="kpi-licences">200</div>
+          <div class="kpi-label">Total Learner Licences</div>
+          <div class="kpi-delta" style="color:var(--blue)">Jetex Manufacturing</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-icon ki-blue">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.9M16 3.1a4 4 0 010 7.8"/></svg>
+          </div>
+          <div class="kpi-value" id="kpi-active-learners">147</div>
+          <div class="kpi-label">Active Learners</div>
+          <div class="kpi-delta up">73% licence utilisation</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-icon ki-navy">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          </div>
+          <div class="kpi-value" id="kpi-remaining-licences">53</div>
+          <div class="kpi-label">Remaining Licences</div>
+          <div class="kpi-delta" style="color:var(--blue)">Available to assign</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-icon ki-warn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div class="kpi-value" id="kpi-not-started">0</div>
+          <div class="kpi-label">Not Started</div>
+          <div class="kpi-delta" style="color:var(--warn)">Assigned learning</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-icon ki-blue" style="background:#E8F0FE">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+          </div>
+          <div class="kpi-value">26</div>
+          <div class="kpi-label">In Progress</div>
+          <div class="kpi-delta" style="color:var(--blue)">18% of learners</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-icon ki-green">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <div class="kpi-value">109</div>
+          <div class="kpi-label">Completed</div>
+          <div class="kpi-delta up">74% completion rate</div>
+        </div>
+      </div>
+
+      <!-- OVERDUE ALERT -->
+      <div class="alert alert-danger mb5" style="margin-bottom:20px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <div>
+          <strong id="overdue-alert-count">12 learners are overdue</strong> — training deadline passed. Send reminders or extend deadlines.
+          <div class="flex gap2 fw mt3"><button class="btn btn-sm btn-danger" type="button" onclick="sendBulkReminder()">Send Reminder</button><button class="btn btn-sm btn-secondary" type="button" onclick="openOverdueAction('reassign')">Reassign</button><button class="btn btn-sm btn-secondary" type="button" onclick="openOverdueAction('extend')">Extend deadline</button></div>
+        </div>
+      </div>
+
+      <!-- CHARTS ROW -->
+      <div class="g2 mb6" id="reports">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Progress by Department</span>
+          </div>
+          <div class="chart-fallback" aria-label="Department completion rates">
+            <div class="fallback-row"><span>Manufacturing</span><div class="pbar"><div class="pfill" style="width:81%"></div></div><strong>81%</strong></div>
+            <div class="fallback-row"><span>Materials</span><div class="pbar"><div class="pfill" style="width:72%"></div></div><strong>72%</strong></div>
+            <div class="fallback-row"><span>Quality</span><div class="pbar"><div class="pfill" style="width:66%"></div></div><strong>66%</strong></div>
+            <div class="fallback-row"><span>Maintenance</span><div class="pbar"><div class="pfill warn" style="width:58%"></div></div><strong>58%</strong></div>
+            <div class="fallback-row"><span>Engineering</span><div class="pbar"><div class="pfill" style="width:74%"></div></div><strong>74%</strong></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Learner Status Breakdown</span>
+          </div>
+          <div class="status-fallback"><div class="status-total"><strong>147</strong><span>learners</span></div><div><div class="status-legend"><i style="background:#0D7A4E"></i>Completed <b>109</b></div><div class="status-legend"><i style="background:#0050D8"></i>In Progress <b>26</b></div><div class="status-legend"><i style="background:#C41A1A"></i>Overdue <b id="status-overdue-count">12</b></div></div></div>
+        </div>
+      </div>
+
+      <!-- LEARNER TABLE -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Learner Progress</span>
+          <div class="flex gap3 aic">
+            <div class="search-wrap">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input type="text" class="form-input" id="learner-search" placeholder="Search learners..." style="min-height:32px;padding:5px 12px 5px 32px;font-size:.8rem" oninput="filterLearners(this.value)">
+            </div>
+            <select class="form-select" id="table-dept-filter" style="width:auto;min-height:32px;padding:5px 10px;font-size:.8rem" onchange="filterDept(this.value)">
+              <option value="">All Departments</option>
+              <option>Manufacturing</option>
+              <option>Materials</option>
+              <option>Quality</option>
+              <option>Maintenance</option>
+              <option>Engineering / R&amp;D</option>
+              <option>Tool Room</option>
+              <option>NPD</option>
+            </select>
+            <select class="form-select" id="status-filter" style="width:auto;min-height:32px;padding:5px 10px;font-size:.8rem" onchange="filterStatus(this.value)">
+              <option value="">All Status</option>
+              <option>Completed</option>
+              <option>In Progress</option>
+              <option>Not Started</option>
+              <option>Overdue</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrap" style="border:none;box-shadow:none">
+          <table id="learners-table">
+            <thead>
+              <tr>
+                <th>Learner</th>
+                <th>Department</th>
+                <th>Designation</th>
+                <th>Inventory Mgmt</th>
+                <th>OEE &amp; OLE</th>
+                <th>Supplier Capacity</th>
+                <th>Overall</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-dept="Manufacturing" data-status="Completed">
+                <td>
+                  <div class="flex aic gap3">
+                    <div class="av av-sm" style="background:#0050D8">RK</div>
+                    <div>
+                      <div class="fw6">Rajesh Kumar</div>
+                      <div class="fs-xs t-tm">rajesh.k@jetex.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="tag">Manufacturing</span></td>
+                <td class="t-ts">Line Operator</td>
+                <td><span class="badge b-completed">Done</span></td>
+                <td><span class="badge b-completed">Done</span></td>
+                <td><span class="badge b-completed">Done</span></td>
+                <td>
+                  <div class="flex aic gap2">
+                    <div class="pbar f1"><div class="pfill green" style="width:100%"></div></div>
+                    <span class="fw7 t-success">100%</span>
+                  </div>
+                </td>
+                <td><span class="badge b-completed">Completed</span></td>
+                <td>
+                  <div class="flex gap2">
+                    <button class="btn btn-secondary btn-sm">Profile</button>
+                  </div>
+                </td>
+              </tr>
+              <tr data-dept="Materials" data-status="Completed">
+                <td>
+                  <div class="flex aic gap3">
+                    <div class="av av-sm" style="background:#0D7A4E">PS</div>
+                    <div>
+                      <div class="fw6">Priyanka Singh</div>
+                      <div class="fs-xs t-tm">priyanka.s@jetex.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="tag">Materials</span></td>
+                <td class="t-ts">Stores In-Charge</td>
+                <td><span class="badge b-completed">Done</span></td>
+                <td><span class="badge b-notstarted">N/A</span></td>
+                <td><span class="badge b-completed">Done</span></td>
+                <td>
+                  <div class="flex aic gap2">
+                    <div class="pbar f1"><div class="pfill green" style="width:100%"></div></div>
+                    <span class="fw7 t-success">100%</span>
+                  </div>
+                </td>
+                <td><span class="badge b-completed">Completed</span></td>
+                <td><button class="btn btn-secondary btn-sm">Profile</button></td>
+              </tr>
+              <tr data-dept="Quality" data-status="In Progress">
+                <td>
+                  <div class="flex aic gap3">
+                    <div class="av av-sm" style="background:#A05C00">AM</div>
+                    <div>
+                      <div class="fw6">Amit Mahajan</div>
+                      <div class="fs-xs t-tm">amit.m@jetex.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="tag">Quality</span></td>
+                <td class="t-ts">QC Inspector</td>
+                <td><span class="badge b-inprogress">60%</span></td>
+                <td><span class="badge b-notstarted">Not Started</span></td>
+                <td><span class="badge b-notstarted">Not Started</span></td>
+                <td>
+                  <div class="flex aic gap2">
+                    <div class="pbar f1"><div class="pfill" style="width:30%"></div></div>
+                    <span class="fw7 t-blue">30%</span>
+                  </div>
+                </td>
+                <td><span class="badge b-inprogress">In Progress</span></td>
+                <td>
+                  <div class="flex gap2">
+                    <button class="btn btn-secondary btn-sm">Profile</button>
+                    <button class="btn btn-sm" style="background:var(--warn-bg);color:var(--warn);border:none" onclick="sendReminder('Amit Mahajan')">Remind</button>
+                  </div>
+                </td>
+              </tr>
+              <tr data-dept="Manufacturing" data-status="Overdue">
+                <td>
+                  <div class="flex aic gap3">
+                    <div class="av av-sm" style="background:#C41A1A">VN</div>
+                    <div>
+                      <div class="fw6">Vijay Nair</div>
+                      <div class="fs-xs t-tm">vijay.n@jetex.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="tag">Manufacturing</span></td>
+                <td class="t-ts">Machine Operator</td>
+                <td><span class="badge b-notstarted">Not Started</span></td>
+                <td><span class="badge b-notstarted">Not Started</span></td>
+                <td><span class="badge b-notstarted">Not Started</span></td>
+                <td>
+                  <div class="flex aic gap2">
+                    <div class="pbar f1"><div class="pfill" style="width:0%"></div></div>
+                    <span class="fw7 t-danger">0%</span>
+                  </div>
+                </td>
+                <td><span class="badge b-overdue">Overdue</span></td>
+                <td>
+                  <div class="flex gap2">
+                    <button class="btn btn-secondary btn-sm">Profile</button>
+                    <button class="btn btn-danger btn-sm" onclick="sendReminder('Vijay Nair')">Remind</button>
+                  </div>
+                </td>
+              </tr>
+              <tr data-dept="Maintenance" data-status="In Progress">
+                <td>
+                  <div class="flex aic gap3">
+                    <div class="av av-sm" style="background:#5B21B6">SP</div>
+                    <div>
+                      <div class="fw6">Suresh Patil</div>
+                      <div class="fs-xs t-tm">suresh.p@jetex.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="tag">Maintenance</span></td>
+                <td class="t-ts">Maintenance Tech.</td>
+                <td><span class="badge b-completed">Done</span></td>
+                <td><span class="badge b-inprogress">45%</span></td>
+                <td><span class="badge b-notstarted">Not Started</span></td>
+                <td>
+                  <div class="flex aic gap2">
+                    <div class="pbar f1"><div class="pfill" style="width:55%"></div></div>
+                    <span class="fw7 t-blue">55%</span>
+                  </div>
+                </td>
+                <td><span class="badge b-inprogress">In Progress</span></td>
+                <td>
+                  <div class="flex gap2">
+                    <button class="btn btn-secondary btn-sm">Profile</button>
+                  </div>
+                </td>
+              </tr>
+              <tr data-dept="Materials" data-status="Completed">
+                <td>
+                  <div class="flex aic gap3">
+                    <div class="av av-sm" style="background:#0050D8">NK</div>
+                    <div>
+                      <div class="fw6">Neha Kulkarni</div>
+                      <div class="fs-xs t-tm">neha.k@jetex.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="tag">Materials</span></td>
+                <td class="t-ts">Purchase Officer</td>
+                <td><span class="badge b-completed">Done</span></td>
+                <td><span class="badge b-notstarted">N/A</span></td>
+                <td><span class="badge b-completed">Done</span></td>
+                <td>
+                  <div class="flex aic gap2">
+                    <div class="pbar f1"><div class="pfill green" style="width:100%"></div></div>
+                    <span class="fw7 t-success">100%</span>
+                  </div>
+                </td>
+                <td><span class="badge b-completed">Completed</span></td>
+                <td><button class="btn btn-secondary btn-sm">Profile</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-top:1px solid var(--border);background:var(--surface)">
+          <span class="fs-sm t-tm">Showing 6 of 147 learners</span>
+          <div class="flex gap2">
+            <button class="btn btn-secondary btn-sm">← Prev</button>
+            <button class="btn btn-primary btn-sm">Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Learner Modal -->
+<div class="modal-overlay" id="add-learner-modal" style="display:none" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Add Learner</h3>
+      <button class="btn btn-ghost btn-sm" onclick="closeAddLearner()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row fr-2 mb4">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-input" id="learner-first-name" placeholder="Rajesh" autocomplete="given-name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-input" id="learner-last-name" placeholder="Kumar" autocomplete="family-name" required>
+        </div>
+      </div>
+      <div class="form-group mb4">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-input" id="learner-email" placeholder="rajesh.kumar@company.com" autocomplete="email" required>
+      </div>
+      <div class="form-row fr-2 mb4">
+        <div class="form-group">
+          <label class="form-label">Department</label>
+          <select class="form-select" id="learner-department" required>
+            <option value="">Select department</option>
+            <option>Manufacturing</option>
+            <option>Materials</option>
+            <option>Quality</option>
+            <option>Maintenance</option>
+            <option>Engineering / R&amp;D</option>
+            <option>Tool Room</option>
+            <option>NPD</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Designation</label>
+          <input type="text" class="form-input" id="learner-designation" placeholder="e.g. Line Operator" required>
+        </div>
+      </div>
+      <div class="form-group mb4">
+        <label class="form-label">Employee ID (optional)</label>
+        <input type="text" class="form-input" placeholder="EMP001">
+      </div>
+      <div class="alert alert-info">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Learner will automatically receive all courses currently assigned to your organisation. A welcome email with login credentials will be sent.
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeAddLearner()">Cancel</button>
+      <button class="btn btn-primary" onclick="addLearner()">Add Learner</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="overdue-action-modal" style="display:none" role="presentation">
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="overdue-modal-title">
+    <header class="modal-header"><div><h2 id="overdue-modal-title">Follow up overdue learning</h2><p class="fs-xs t-tm mt2">This browser demo records the action but does not email learners.</p></div><button class="btn btn-ghost btn-sm" type="button" onclick="closeOverdueAction()" aria-label="Close overdue follow-up">×</button></header>
+    <form id="overdue-action-form"><div class="modal-body">
+      <label class="form-group" id="reassign-course-field"><span class="form-label">Course to reassign</span><select class="form-select" id="reassign-course" name="courseId"></select></label>
+      <label class="form-group" id="extend-date-field" hidden><span class="form-label">New deadline</span><input class="form-input" id="extend-date" name="deadline" type="date"></label>
+      <p class="form-hint mt4" id="overdue-action-error" role="alert"></p>
+    </div><footer class="modal-footer"><button class="btn btn-secondary" type="button" onclick="closeOverdueAction()">Cancel</button><button class="btn btn-primary" id="confirm-overdue-action" type="submit">Confirm action</button></footer></form>
+  </section>
+</div>
+
+<!-- Reminder Toast -->
+<div id="toast" style="position:fixed;bottom:28px;right:28px;background:var(--navy);color:#fff;padding:12px 20px;border-radius:10px;font-size:.82rem;font-weight:500;font-family:var(--fb);box-shadow:0 8px 24px rgba(2,38,112,.3);z-index:9999;display:none;align-items:center;gap:8px">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A8D5BE" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+  <span id="toast-msg">Reminder sent!</span>
+</div>
+
+<script src="../js/demo-store.js"></script>
+<script>
+function openAddLearner() {
+  document.getElementById('add-learner-modal').style.display = 'flex';
+}
+function closeAddLearner() {
+  document.getElementById('add-learner-modal').style.display = 'none';
+}
+function closeModal(e) {
+  if (e.target === document.getElementById('add-learner-modal')) closeAddLearner();
+}
+function addLearner() {
+  const first = document.getElementById('learner-first-name');
+  const last = document.getElementById('learner-last-name');
+  const email = document.getElementById('learner-email');
+  const department = document.getElementById('learner-department');
+  const designation = document.getElementById('learner-designation');
+  if (![first, last, email, department, designation].every(input => input.reportValidity())) return;
+
+  let learner;
+  try {
+    learner = EmpowerOneData.addLearner({ first: first.value, last: last.value, email: email.value, department: department.value, designation: designation.value, employeeId: document.querySelector('#add-learner-modal input[placeholder="EMP001"]').value });
+  } catch (error) {
+    if (error.message.includes('email')) {
+      email.setCustomValidity(error.message);
+      email.reportValidity();
+      email.addEventListener('input', () => email.setCustomValidity(''), { once: true });
+      return;
+    }
+    showToast(error.message);
+    return;
+  }
+  appendLearnerRow(learner);
+  updateLearnerTotal();
+  document.getElementById('add-learner-modal').querySelectorAll('input').forEach(input => input.value = '');
+  department.value = '';
+  closeAddLearner();
+  applyLearnerFilters();
+  showToast('Learner added. Current organisation courses are assigned automatically.');
+}
+function appendLearnerRow(learner) {
+  const name = `${learner.first} ${learner.last}`;
+  const initials = `${learner.first[0] || ''}${learner.last[0] || ''}`.toUpperCase();
+  const row = document.createElement('tr');
+  row.dataset.dept = learner.department;
+  row.dataset.status = learner.status || 'Not Started';
+  row.innerHTML = '<td><div class="flex aic gap3"><div class="av av-sm learner-initials"></div><div><div class="fw6 learner-name"></div><div class="fs-xs t-tm learner-email"></div></div></div></td><td><span class="tag learner-dept"></span></td><td class="t-ts learner-designation"></td><td><span class="badge b-notstarted">Not Started</span></td><td><span class="badge b-notstarted">Not Started</span></td><td><span class="badge b-notstarted">Not Started</span></td><td><div class="flex aic gap2"><div class="pbar f1"><div class="pfill" style="width:0%"></div></div><span class="fw7 t-tm">0%</span></div></td><td><span class="badge b-notstarted">Not Started</span></td><td><button class="btn btn-secondary btn-sm profile-btn" type="button">Profile</button></td>';
+  row.querySelector('.learner-initials').textContent = initials;
+  row.querySelector('.learner-name').textContent = name;
+  row.querySelector('.learner-email').textContent = learner.email;
+  row.querySelector('.learner-dept').textContent = learner.department;
+  row.querySelector('.learner-designation').textContent = learner.designation;
+  row.querySelector('.profile-btn').addEventListener('click', () => openLearnerProfile(learner.email));
+  document.querySelector('#learners-table tbody').appendChild(row);
+}
+function openLearnerProfile(email){window.location.href=`learners.html?email=${encodeURIComponent(email)}`;}
+function updateLearnerTotal() {
+  const org = EmpowerOneData.getOrganisation(EmpowerOneData.currentOrganisationId());
+  const active = org?.activeLearners ?? 147;
+  const limit = org?.licenceLimit ?? 200;
+  const added = Math.max(0, active - 147);
+  document.getElementById('kpi-active-learners').textContent = active;
+  document.getElementById('kpi-remaining-licences').textContent = limit - active;
+  document.getElementById('kpi-not-started').textContent = added;
+  document.getElementById('kpi-licences').textContent = limit;
+  const usage = document.querySelector('.spoc-kpi-grid .kpi:nth-child(2) .kpi-delta');
+  if (usage) usage.textContent = `${Math.round(active / limit * 100)}% licence utilisation`;
+  const foot = document.querySelector('.table-wrap + div .fs-sm');
+  if (foot) foot.textContent = `Showing ${document.querySelectorAll('#learners-table tbody tr').length} of ${active} learners`;
+}
+function sendReminder(name) {
+  EmpowerOneData.addNotification({ title: 'Reminder queued', body: `Learning follow-up recorded for ${name}. Email delivery is disabled in this browser demo.`, organisationId: EmpowerOneData.currentOrganisationId() });
+  showToast('Demo reminder recorded for ' + name + '. No email was sent.');
+}
+function sendBulkReminder() {
+  const count=EmpowerOneData.getOrganisation()?.overdueLearners||0;
+  EmpowerOneData.addNotification({ title: 'Bulk follow-up queued', body: `Follow-up queued for ${count} overdue learners shown in this sample dashboard. No emails were sent.`, organisationId: EmpowerOneData.currentOrganisationId() });
+  showToast(`Demo follow-up recorded for ${count} overdue learners. No email was sent.`);
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.style.display = 'flex';
+  setTimeout(() => { t.style.display = 'none'; }, 3000);
+}
+function filterLearners(q) {
+  applyLearnerFilters();
+}
+function filterDept(dept) {
+  document.getElementById('table-dept-filter').value = dept;
+  document.getElementById('overview-dept-filter').value = dept || 'All Departments';
+  applyLearnerFilters();
+}
+function filterStatus(status) {
+  applyLearnerFilters();
+}
+function applyLearnerFilters() {
+  const query = document.getElementById('learner-search').value.trim().toLowerCase();
+  const department = document.getElementById('table-dept-filter').value || document.getElementById('overview-dept-filter').value;
+  const status = document.getElementById('status-filter').value;
+  document.querySelectorAll('#learners-table tbody tr').forEach(row => {
+    const matchesQuery = !query || row.textContent.toLowerCase().includes(query);
+    const matchesDepartment = !department || department === 'All Departments' || row.dataset.dept === department;
+    const matchesStatus = !status || row.dataset.status === status;
+    row.style.display = matchesQuery && matchesDepartment && matchesStatus ? '' : 'none';
+  });
+}
+function restoreLearners() {
+  const rows = document.querySelectorAll('#learners-table tbody tr');
+  const existingEmails = new Set([...rows].map(row => row.querySelector('.fs-xs.t-tm')?.textContent.trim().toLowerCase()));
+  EmpowerOneData.getVisibleLearners().filter(learner => !existingEmails.has(learner.email.toLowerCase())).forEach(appendLearnerRow);
+  updateLearnerTotal();
+}
+let overdueAction='reassign';
+function openOverdueAction(action){
+  overdueAction=action;const modal=document.getElementById('overdue-action-modal');
+  document.getElementById('overdue-modal-title').textContent=action==='reassign'?'Reassign overdue learning':'Extend overdue deadline';
+  document.getElementById('reassign-course-field').hidden=action!=='reassign';
+  document.getElementById('extend-date-field').hidden=action!=='extend';
+  document.getElementById('confirm-overdue-action').textContent=action==='reassign'?'Reassign course':'Extend deadline';
+  document.getElementById('overdue-action-error').textContent='';
+  const select=document.getElementById('reassign-course');select.replaceChildren();
+  EmpowerOneData.assignedCourseIds().forEach(id=>{const course=EmpowerOneData.getCourse(id);if(!course)return;const option=document.createElement('option');option.value=id;option.textContent=course.title;select.appendChild(option);});
+  const date=document.getElementById('extend-date');const later=new Date();later.setDate(later.getDate()+7);date.min=new Date().toISOString().slice(0,10);date.value=later.toISOString().slice(0,10);
+  modal.style.display='flex';(action==='reassign'?select:date).focus();
+}
+function closeOverdueAction(){document.getElementById('overdue-action-modal').style.display='none';}
+document.getElementById('overdue-action-form').addEventListener('submit',event=>{
+  event.preventDefault();const form=event.currentTarget;if(!form.reportValidity())return;
+  const values=Object.fromEntries(new FormData(form).entries());
+  try{
+    const affected=EmpowerOneData.applyOverdueAction(overdueAction,values);
+    if(overdueAction==='extend')affected.forEach(learner=>{const row=[...document.querySelectorAll('#learners-table tbody tr')].find(item=>item.querySelector('.fs-xs.t-tm')?.textContent.trim().toLowerCase()===learner.email.toLowerCase());if(row){row.dataset.status=learner.status;const statusCell=row.querySelector('td:nth-child(8) .badge');if(statusCell){statusCell.className='badge b-inprogress';statusCell.textContent='In Progress';}}});
+    const remainingOverdue=EmpowerOneData.getOrganisation()?.overdueLearners||0;document.getElementById('overdue-alert-count').textContent=`${remainingOverdue} learners are overdue`;document.getElementById('status-overdue-count').textContent=remainingOverdue;
+    closeOverdueAction();showToast(`${overdueAction==='reassign'?'Reassignment':'Deadline extension'} saved for ${affected.length} overdue sample learner record${affected.length===1?'':'s'}.`);applyLearnerFilters();
+  }catch(error){document.getElementById('overdue-action-error').textContent=error.message;}
+});
+restoreLearners();
+const overdueCount=EmpowerOneData.getOrganisation()?.overdueLearners||0;document.getElementById('overdue-alert-count').textContent=`${overdueCount} learners are overdue`;document.getElementById('status-overdue-count').textContent=overdueCount;
+document.querySelectorAll('#learners-table tbody tr').forEach(row=>{const button=[...row.querySelectorAll('button')].find(item=>item.textContent.trim()==='Profile');const email=row.querySelector('.fs-xs.t-tm')?.textContent.trim();if(button&&email)button.addEventListener('click',()=>openLearnerProfile(email));});
+function exportLearnersCsv(){
+  const rows=[...document.querySelectorAll('#learners-table tbody tr')].filter(row=>getComputedStyle(row).display!=='none');
+  const csv=[['Name','Email','Department','Designation','Inventory Management','OEE & OLE','Supplier Capacity','Completion','Status'],...rows.map(row=>[row.querySelector('.fw6')?.textContent.trim(),row.querySelector('.fs-xs.t-tm')?.textContent.trim(),row.dataset.dept,row.children[2]?.textContent.trim(),row.children[3]?.textContent.trim(),row.children[4]?.textContent.trim(),row.children[5]?.textContent.trim(),row.children[6]?.textContent.trim(),row.dataset.status])].map(line=>line.map(value=>`"${String(value||'').replaceAll('"','""')}"`).join(',')).join('\r\n');
+  const link=document.createElement('a');link.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));link.download='empowerone-learner-progress.csv';link.click();URL.revokeObjectURL(link.href);showToast('Visible learner rows exported.');
+}
+</script>
+</body>
+</html>

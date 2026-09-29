@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Course — EmpowerOne</title>
+  <link rel="stylesheet" href="../styles/app.css">
+  <style>
+    .creator-shell{display:grid;grid-template-columns:minmax(0,1fr) minmax(270px,340px);gap:0;height:calc(100vh - 58px);overflow:hidden;min-width:0}
+    .creator-main{overflow-y:auto;padding:32px;min-width:0}
+    .creator-sidebar{background:#fff;border-left:1px solid var(--border);overflow-y:auto;min-width:0}
+    .cs-head{padding:20px;border-bottom:1px solid var(--border);background:var(--surface)}
+    .cs-body{padding:16px}
+    .module-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);margin-bottom:10px;overflow:hidden}
+    .module-card-head{display:flex;align-items:center;gap:8px;padding:12px 14px;cursor:pointer}
+    .module-card-head:hover{background:#EBF0F8}
+    .module-handle{color:var(--tm);cursor:grab}
+    .module-title-edit{font-size:.875rem;font-weight:700;color:var(--navy);background:none;border:none;outline:none;font-family:var(--fh);flex:1;cursor:text}
+    .module-title-edit:focus{background:#fff;border-radius:4px;padding:0 4px}
+    .module-content-list{padding:0 14px 12px}
+    .content-row{display:flex;align-items:center;gap:8px;padding:7px 10px;background:#fff;border:1px solid var(--border);border-radius:6px;margin-bottom:6px;font-size:.8rem}
+    .content-row-icon{width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.6rem}
+    .cri-vid{background:#E8F0FE;color:var(--blue)}
+    .cri-pdf{background:#FEF3E2;color:var(--warn)}
+    .content-row-name{flex:1;font-weight:500;color:var(--tp)}
+    .content-row-del{background:none;border:none;cursor:pointer;color:var(--tm);padding:2px;display:flex;transition:color .1s}
+    .content-row-del:hover{color:var(--danger)}
+    .add-content-row{display:flex;gap:6px;margin-top:8px}
+    .thumb-preview{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#022670,#0050D8);border-radius:var(--rad);display:flex;align-items:center;justify-content:center;margin-bottom:12px;position:relative;overflow:hidden;cursor:pointer}
+    .thumb-preview svg{opacity:.4}
+    .thumb-change{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.4);opacity:0;transition:opacity .2s;font-size:.78rem;color:#fff;font-weight:600;font-family:var(--fb)}
+    .thumb-preview:hover .thumb-change{opacity:1}
+    .save-bar{position:sticky;bottom:0;background:#fff;border-top:1px solid var(--border);padding:14px 20px;display:flex;gap:10px;justify-content:flex-end}
+    .content-row-name{min-width:0;overflow-wrap:anywhere}
+    @media(max-width:1100px){.creator-main{padding:24px}.creator-shell{grid-template-columns:minmax(0,1fr) 300px;height:auto;min-height:calc(100vh - 116px);overflow:visible}.creator-sidebar{position:sticky;top:64px;align-self:start;max-height:calc(100vh - 64px)}}
+    @media(max-width:900px){.creator-shell{grid-template-columns:minmax(0,1fr);height:auto;overflow:visible;min-height:0}.creator-main{overflow:visible;padding:20px 16px}.creator-sidebar{position:static;max-height:none;border-left:0;border-top:1px solid var(--border);overflow:visible}.save-bar{position:static;flex-wrap:wrap}.add-content-row{flex-wrap:wrap}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <img src="../Images and Files/LOGO PNG.png" alt="EmpowerOne">
+    </div>
+    <nav class="snav">
+      <a href="content-creator.html" class="snav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <div class="snav-section">My Content</div>
+      <a href="content-creator.html" class="snav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <span>Create Course</span>
+      </a>
+      <a href="course-management.html" class="snav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <span>My Courses</span>
+      </a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="suser"><div class="av av-md" style="background:#5B21B6">RK</div><div class="suser-info"><div class="suser-name">Ravi Kumar</div><div class="suser-role">Content Creator</div></div></div>
+      <a href="login.html" class="snav-item mt2" style="color:var(--danger)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Sign Out</span></a>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="tb-left">
+        <div class="breadcrumb">
+          <span class="t-tm">My Courses</span>
+          <span class="sep">/</span>
+          <span class="cur">New Course</span>
+        </div>
+      </div>
+      <div class="tb-right">
+        <span class="badge b-draft">Draft</span>
+        <a class="btn btn-ghost" href="content-creator.html?new=1">New course</a>
+        <button class="btn btn-secondary" type="button" onclick="saveDraft()">Save Draft</button>
+        <button class="btn btn-primary" onclick="submitForReview()">Submit for Review</button>
+      </div>
+    </div>
+
+    <div class="creator-shell">
+      <!-- MAIN FORM -->
+      <div class="creator-main">
+        <h2 style="margin-bottom:6px">Course Details</h2>
+        <p style="margin-bottom:28px">Fill in the course information and build your module structure below.</p>
+
+        <!-- COURSE INFO -->
+        <div class="card mb6">
+          <div class="card-title mb5">Basic Information</div>
+          <div class="form-group mb4">
+            <label class="form-label">Course Title *</label>
+            <input type="text" class="form-input" placeholder="e.g. Inventory Management" value="Inventory Management" id="course-title-input" oninput="updatePreview()">
+          </div>
+          <div class="form-group mb4">
+            <label class="form-label">Course Description *</label>
+            <textarea class="form-textarea" id="course-description" placeholder="Describe what learners will learn in this course...">A comprehensive course on inventory management covering stock control, FIFO/FEFO principles, cycle counting, shortage prevention and warehouse organisation. Built for manufacturing and materials teams.</textarea>
+          </div>
+          <div class="form-row fr-3 mb4">
+            <div class="form-group">
+              <label class="form-label">Department</label>
+              <select class="form-select" id="course-department">
+                <option>Materials</option>
+                <option>Manufacturing</option>
+                <option>Quality</option>
+                <option>All Departments</option>
+                <option>Maintenance</option>
+                <option>Engineering / R&amp;D</option>
+                <option>Tool Room</option>
+                <option>NPD</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Estimated Duration</label>
+              <input type="text" class="form-input" id="course-duration" placeholder="e.g. 8 hours" value="8 hours">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Difficulty Level</label>
+              <select class="form-select" id="course-level">
+                <option>Beginner</option>
+                <option selected>Intermediate</option>
+                <option>Advanced</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- THUMBNAIL -->
+        <div class="card mb6">
+          <div class="card-title mb5">Course Thumbnail</div>
+          <div class="thumb-preview" id="thumb-preview" onclick="document.getElementById('thumb-upload').click()" role="button" tabindex="0" aria-label="Choose a course thumbnail">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <div class="thumb-change">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Upload Thumbnail
+            </div>
+          </div>
+          <input type="file" id="thumb-upload" style="display:none" accept="image/png,image/jpeg,image/webp">
+          <p class="form-hint">Recommended: 1280×720px JPG or PNG. Will appear as course cover image.</p>
+        </div>
+
+        <!-- MODULES -->
+        <div class="card mb6">
+          <div class="card-header">
+            <span class="card-title">Course Modules</span>
+            <button class="btn btn-primary btn-sm" onclick="addModule()">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Module
+            </button>
+          </div>
+          <div class="alert alert-info mb5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Drag modules to reorder. Each module can have multiple videos, PDFs and case study documents.
+          </div>
+          <div class="alert alert-warn mb5">Demo uploads store file names only in this browser. Connect the secure media service before using real videos, PDFs or subtitles.</div>
+
+          <div id="modules-container">
+            <!-- MODULE 1 -->
+            <div class="module-card" data-module="1" draggable="true">
+              <div class="module-card-head" onclick="toggleModuleCard(this)">
+                <div class="module-handle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="9" y1="5" x2="9" y2="19"/><line x1="15" y1="5" x2="15" y2="19"/></svg>
+                </div>
+                <span style="font-size:.75rem;color:var(--tm);flex-shrink:0;font-family:var(--fh);font-weight:700">M1</span>
+                <input type="text" class="module-title-edit" value="Introduction to Inventory" onclick="event.stopPropagation()">
+                <span class="fs-xs t-tm" style="flex-shrink:0">4 items</span>
+                <button class="btn btn-ghost btn-sm" style="padding:4px 8px" onclick="event.stopPropagation();removeModule(this)">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+                </button>
+              </div>
+              <div class="module-content-list">
+                <div class="content-row"><div class="content-row-icon cri-vid"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><span class="content-row-name">What is Inventory?</span><span class="fs-xs t-tm">8 min</span><button class="content-row-del" onclick="this.closest('.content-row').remove()"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                <div class="content-row"><div class="content-row-icon cri-vid"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><span class="content-row-name">Types of Inventory</span><span class="fs-xs t-tm">12 min</span><button class="content-row-del" onclick="this.closest('.content-row').remove()"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                <div class="content-row"><div class="content-row-icon cri-vid"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><span class="content-row-name">Cost of Inventory</span><span class="fs-xs t-tm">10 min</span><button class="content-row-del" onclick="this.closest('.content-row').remove()"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                <div class="content-row"><div class="content-row-icon cri-pdf"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg></div><span class="content-row-name">Module 1 Summary.pdf</span><span class="fs-xs t-tm">PDF</span><button class="content-row-del" onclick="this.closest('.content-row').remove()"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                <div class="add-content-row">
+                  <button class="btn btn-secondary btn-sm" onclick="addContent(this,'video')">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                    Add Video
+                  </button>
+                  <button class="btn btn-secondary btn-sm" onclick="addContent(this,'pdf')">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg>
+                    Add PDF
+                  </button>
+                  <button class="btn btn-secondary btn-sm" onclick="addContent(this,'document')">Add Document</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- MODULE 2 -->
+            <div class="module-card" data-module="2" draggable="true">
+              <div class="module-card-head" onclick="toggleModuleCard(this)">
+                <div class="module-handle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="9" y1="5" x2="9" y2="19"/><line x1="15" y1="5" x2="15" y2="19"/></svg></div>
+                <span style="font-size:.75rem;color:var(--tm);flex-shrink:0;font-family:var(--fh);font-weight:700">M2</span>
+                <input type="text" class="module-title-edit" value="FIFO &amp; FEFO Principles" onclick="event.stopPropagation()">
+                <span class="fs-xs t-tm" style="flex-shrink:0">3 items</span>
+                <button class="btn btn-ghost btn-sm" style="padding:4px 8px" onclick="event.stopPropagation();removeModule(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></button>
+              </div>
+              <div class="module-content-list" style="display:none">
+                <div class="content-row"><div class="content-row-icon cri-vid"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><span class="content-row-name">FIFO Explained</span><span class="fs-xs t-tm">9 min</span><button class="content-row-del" onclick="this.closest('.content-row').remove()"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                <div class="content-row"><div class="content-row-icon cri-vid"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><span class="content-row-name">FEFO in Practice</span><span class="fs-xs t-tm">11 min</span><button class="content-row-del" onclick="this.closest('.content-row').remove()"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                <div class="content-row"><div class="content-row-icon cri-pdf"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg></div><span class="content-row-name">FIFO &amp; FEFO Case Study.pdf</span><span class="fs-xs t-tm">PDF</span><button class="content-row-del" onclick="this.closest('.content-row').remove()"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+                <div class="add-content-row">
+                  <button class="btn btn-secondary btn-sm" onclick="addContent(this,'video')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Add Video</button>
+                  <button class="btn btn-secondary btn-sm" onclick="addContent(this,'pdf')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg>Add PDF</button>
+                  <button class="btn btn-secondary btn-sm" onclick="addContent(this,'document')">Add Document</button>
+                  <button class="btn btn-secondary btn-sm" onclick="addSubtitle(this)">Add Subtitles</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ASSESSMENT -->
+        <div class="card mb6">
+          <div class="card-header">
+            <span class="card-title">Final Assessment (MCQ)</span>
+            <span class="badge b-blue">1 assessment per course</span>
+          </div>
+          <div class="alert alert-info mb5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+            Assessment is shown after all modules are completed. Learners need 70% to pass. Unlimited attempts allowed.
+          </div>
+          <div class="form-row fr-2 mb4">
+            <div class="form-group">
+              <label class="form-label">Passing Score (%)</label>
+              <input type="number" class="form-input" id="assessment-pass" value="70" min="0" max="100">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Total Questions</label>
+              <input type="number" class="form-input" id="assessment-count" value="20" min="1">
+            </div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);padding:16px;margin-bottom:12px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+              <span class="fw6 fs-sm">Q1. What does ABC classification prioritise?</span>
+              <button class="btn btn-ghost btn-sm" type="button" onclick="editQuestion(0)">Edit</button>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:5px">
+              <div style="padding:6px 10px;background:#fff;border:1px solid var(--border);border-radius:6px;font-size:.78rem">A. Items by alphabetical order</div>
+              <div style="padding:6px 10px;background:var(--suc-bg);border:1px solid var(--success);border-radius:6px;font-size:.78rem;color:var(--success);font-weight:600">B. Items by annual consumption value ✓</div>
+              <div style="padding:6px 10px;background:#fff;border:1px solid var(--border);border-radius:6px;font-size:.78rem">C. Items by physical size</div>
+              <div style="padding:6px 10px;background:#fff;border:1px solid var(--border);border-radius:6px;font-size:.78rem">D. Items by purchase date</div>
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-sm" id="add-question" type="button">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Question
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDEBAR: PREVIEW -->
+      <div class="creator-sidebar">
+        <div class="cs-head">
+          <div class="card-title mb3">Course Preview</div>
+          <div class="fs-xs t-tm">How it appears to learners</div>
+        </div>
+        <div class="cs-body">
+          <div style="background:linear-gradient(135deg,#022670,#0050D8);border-radius:var(--rad);height:110px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;position:relative;overflow:hidden">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+          </div>
+          <h4 id="preview-title" style="margin-bottom:6px">Inventory Management</h4>
+          <div class="flex gap2 fw mb3">
+            <span class="tag">Materials</span>
+            <span class="tag">Intermediate</span>
+          </div>
+          <p style="font-size:.78rem;margin-bottom:14px">A comprehensive course on inventory management covering stock control, FIFO/FEFO principles and warehouse organisation.</p>
+          <div class="divider"></div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+            <div class="flex aic jcb fs-sm"><span class="t-tm">Modules</span><span class="fw6">2 modules</span></div>
+            <div class="flex aic jcb fs-sm"><span class="t-tm">Dept.</span><span class="fw6">Materials</span></div>
+            <div class="flex aic jcb fs-sm"><span class="t-tm">Duration</span><span class="fw6">8 hours</span></div>
+            <div class="flex aic jcb fs-sm"><span class="t-tm">Assessment</span><span class="fw6 t-success">20 MCQs</span></div>
+            <div class="flex aic jcb fs-sm"><span class="t-tm">Pass Mark</span><span class="fw6">70%</span></div>
+          </div>
+          <div class="divider"></div>
+          <div class="fs-xs t-tm mb3">Submission Checklist</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div class="flex aic gap2 fs-xs"><span style="color:var(--success)">✓</span> Course title added</div>
+            <div class="flex aic gap2 fs-xs"><span style="color:var(--success)">✓</span> Description added</div>
+            <div class="flex aic gap2 fs-xs"><span style="color:var(--warn)">○</span> Thumbnail uploaded</div>
+            <div class="flex aic gap2 fs-xs"><span style="color:var(--success)">✓</span> At least 1 module</div>
+            <div class="flex aic gap2 fs-xs"><span style="color:var(--success)">✓</span> Assessment added</div>
+          </div>
+        </div>
+        <div class="save-bar">
+          <span id="creator-save-state" class="fs-xs t-tm" role="status" aria-live="polite">Unsaved changes</span>
+          <button class="btn btn-secondary btn-sm" type="button" onclick="saveDraft()">Save Draft</button>
+          <button class="btn btn-primary btn-sm" onclick="submitForReview()">Submit for Review</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Submit Confirmation -->
+<div class="modal-overlay" id="submit-modal" style="display:none" onclick="closeSubmit(event)">
+  <div class="modal">
+    <div class="modal-body" style="text-align:center;padding:40px">
+      <div style="width:64px;height:64px;border-radius:50%;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;margin:0 auto 20px">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+      </div>
+      <h3 style="margin-bottom:8px">Submit for Review?</h3>
+      <p style="margin-bottom:28px">Your course <strong>Inventory Management</strong> will be sent to the Super Admin for review. You'll be notified when it's approved or if changes are needed.</p>
+      <div class="flex gap3 jcc">
+        <button class="btn btn-secondary" onclick="document.getElementById('submit-modal').style.display='none'">Cancel</button>
+        <button class="btn btn-primary" onclick="confirmSubmit()">Submit for Review</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="question-modal" style="display:none" role="presentation">
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="question-modal-title">
+    <header class="modal-header"><h3 id="question-modal-title">Add assessment question</h3><button class="btn btn-ghost btn-sm" type="button" onclick="closeQuestionEditor()" aria-label="Close question editor">×</button></header>
+    <form id="question-form"><div class="modal-body">
+      <label class="form-group mb4"><span class="form-label">Question</span><textarea class="form-textarea" name="question" rows="2" required></textarea></label>
+      <div class="form-row fr-2 mb4"><label class="form-group"><span class="form-label">Option A</span><input class="form-input" name="option0" required></label><label class="form-group"><span class="form-label">Option B</span><input class="form-input" name="option1" required></label></div>
+      <div class="form-row fr-2 mb4"><label class="form-group"><span class="form-label">Option C</span><input class="form-input" name="option2" required></label><label class="form-group"><span class="form-label">Option D</span><input class="form-input" name="option3" required></label></div>
+      <label class="form-group mb4"><span class="form-label">Correct answer</span><select class="form-select" name="answer"><option value="0">Option A</option><option value="1">Option B</option><option value="2">Option C</option><option value="3">Option D</option></select></label>
+      <label class="form-group"><span class="form-label">Explanation</span><textarea class="form-textarea" name="explanation" rows="2" placeholder="Explain the correct answer for the course creator's reference."></textarea></label>
+    </div><footer class="modal-footer"><button class="btn btn-secondary" type="button" onclick="closeQuestionEditor()">Cancel</button><button class="btn btn-primary" type="submit">Save question</button></footer></form>
+  </section>
+</div>
+
+<script src="../js/demo-store.js"></script>
+<script>
+let moduleCount = 2;
+const startNewCourse = new URLSearchParams(location.search).get('new') === '1';
+if(startNewCourse)sessionStorage.removeItem('empowerone.editorDraftId');
+let currentCourseId = startNewCourse ? '' : (sessionStorage.getItem('empowerone.editorDraftId') || '');
+let editingQuestionIndex = -1;
+let autosaveTimer;
+let creatorToastTimer;
+
+function showCreatorStatus(message, isError = false) {
+  const status = document.getElementById('creator-save-state');
+  status.textContent = message;
+  status.classList.toggle('t-danger', isError);
+  status.classList.toggle('t-success', !isError);
+  clearTimeout(creatorToastTimer);
+  if (!isError) creatorToastTimer = setTimeout(() => status.classList.remove('t-success'), 2400);
+}
+
+function collectCourse() {
+  const modules = [...document.querySelectorAll('#modules-container .module-card')].map((card, index) => ({
+    title: card.querySelector('.module-title-edit').value.trim(),
+    order: index + 1,
+    subtitles: [...card.querySelectorAll('.subtitle-name')].map(item => item.dataset.fileName || item.textContent),
+    items: [...card.querySelectorAll('.content-row:not(.subtitle-name)')].map((row, itemIndex) => ({ id: row.dataset.contentId || `${index + 1}-${itemIndex + 1}`, title: row.querySelector('.content-row-name').textContent.trim(), type: row.dataset.contentType || (row.querySelector('.cri-vid') ? 'video' : row.querySelector('.cri-pdf') ? 'pdf' : 'document'), fileName: row.dataset.fileName || '', size: Number(row.dataset.fileSize) || 0, required: true }))
+  }));
+  return {
+    id: currentCourseId || undefined,
+    title: document.getElementById('course-title-input').value.trim(),
+    description: document.getElementById('course-description').value.trim(),
+    department: document.getElementById('course-department').value,
+    duration: document.getElementById('course-duration').value.trim(),
+    difficulty: document.getElementById('course-level').value,
+    creator: 'Devika Shah',
+    modules,
+    moduleCount: modules.length,
+    requiredItemCount: modules.reduce((sum, module) => sum + module.items.length, 0),
+    assessment: { passPercent: Number(document.getElementById('assessment-pass').value) || 70, questionCount: Number(document.getElementById('assessment-count').value) || 20, questions: window.courseQuestions || [] },
+    thumbnailName: document.getElementById('thumb-upload').files[0]?.name || ''
+  };
+}
+
+function saveDraft(options = {}) {
+  clearTimeout(autosaveTimer);
+  const course = collectCourse();
+  if (!course.title) { document.getElementById('course-title-input').focus(); showCreatorStatus('Add a course title before saving.', true); return null; }
+  try {
+    const saved = EmpowerOneData.saveCourse(course);
+    currentCourseId = saved.id;
+    sessionStorage.setItem('empowerone.editorDraftId', currentCourseId);
+    document.querySelectorAll('.topbar .badge').forEach(badge => { badge.textContent = 'Draft'; badge.className = 'badge b-draft'; });
+    showCreatorStatus('Saved just now');
+    if (!options.silent) showCreatorToast('Draft saved in this browser.');
+    return saved;
+  } catch (error) { showCreatorStatus(error.message, true); return null; }
+}
+
+function showCreatorToast(message) {
+  let toast = document.getElementById('creator-toast');
+  if (!toast) { toast = document.createElement('div'); toast.id = 'creator-toast'; toast.className = 'app-toast'; toast.setAttribute('role','status'); document.body.appendChild(toast); }
+  toast.textContent = message; toast.classList.add('show'); clearTimeout(window.creatorToastTimeout); window.creatorToastTimeout = setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+function toggleModuleCard(head) {
+  const content = head.nextElementSibling;
+  const isHidden = content.style.display === 'none' || !content.style.display;
+  content.style.display = isHidden ? 'block' : 'none';
+}
+
+function addModule() {
+  moduleCount++;
+  const mc = document.createElement('div');
+  mc.className = 'module-card';
+  mc.draggable = true;
+  mc.dataset.module = moduleCount;
+  mc.innerHTML = `
+    <div class="module-card-head" onclick="toggleModuleCard(this)">
+      <div class="module-handle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="9" y1="5" x2="9" y2="19"/><line x1="15" y1="5" x2="15" y2="19"/></svg></div>
+      <span style="font-size:.75rem;color:var(--tm);flex-shrink:0;font-family:var(--fh);font-weight:700">M${moduleCount}</span>
+      <input type="text" class="module-title-edit" placeholder="Module title..." onclick="event.stopPropagation()">
+      <span class="fs-xs t-tm" style="flex-shrink:0">0 items</span>
+      <button class="btn btn-ghost btn-sm" style="padding:4px 8px" onclick="event.stopPropagation();removeModule(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></button>
+    </div>
+    <div class="module-content-list">
+      <div class="empty" style="padding:24px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/></svg>
+        <p style="font-size:.78rem;margin-bottom:12px">No content yet</p>
+      </div>
+      <div class="add-content-row">
+        <button class="btn btn-secondary btn-sm" onclick="addContent(this,'video')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Add Video</button>
+        <button class="btn btn-secondary btn-sm" onclick="addContent(this,'pdf')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg>Add PDF</button>
+        <button class="btn btn-secondary btn-sm" onclick="addContent(this,'document')">Add Document</button>
+        <button class="btn btn-secondary btn-sm" onclick="addSubtitle(this)">Add Subtitles</button>
+      </div>
+    </div>`;
+  document.getElementById('modules-container').appendChild(mc);
+  mc.querySelector('.module-title-edit').addEventListener('input',scheduleDraftSave);
+  mc.querySelectorAll('.add-content-row button').forEach(button=>button.addEventListener('click',()=>scheduleDraftSave()));
+  scheduleDraftSave();
+}
+
+function removeModule(btn) {
+  if (confirm('Remove this module?')) { btn.closest('.module-card').remove(); updateModuleNumbers(); scheduleDraftSave(); }
+}
+
+function addContent(btn, type) {
+  const input = document.createElement('input');
+  input.type = 'file'; input.accept = type === 'video' ? 'video/mp4,video/webm,video/quicktime' : type === 'pdf' ? 'application/pdf' : '.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx';
+  input.setAttribute('aria-label', `Choose ${type} file`);
+  input.addEventListener('change', () => {
+    const file = input.files[0]; if (!file) return;
+    const list = btn.closest('.module-content-list');
+    const empty = list.querySelector('.empty'); if (empty) empty.remove();
+    const row = document.createElement('div'); row.className = 'content-row'; row.dataset.contentType = type; row.dataset.fileName = file.name; row.dataset.fileSize = file.size; row.dataset.contentId = `content-${Date.now()}-${Math.random().toString(36).slice(2,5)}`;
+    const icon = document.createElement('div'); icon.className = `content-row-icon ${type === 'video' ? 'cri-vid' : 'cri-pdf'}`; icon.textContent = type === 'video' ? '▶' : type === 'pdf' ? 'PDF' : 'DOC';
+    const title = document.createElement('span'); title.className = 'content-row-name'; title.textContent = file.name;
+    const meta = document.createElement('span'); meta.className = 'fs-xs t-tm'; meta.textContent = `${(file.size / (1024 * 1024)).toFixed(1)} MB`;
+    const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'content-row-del'; remove.setAttribute('aria-label',`Remove ${file.name}`); remove.textContent = '×'; remove.addEventListener('click', () => { row.remove(); scheduleDraftSave(); });
+    row.append(icon,title,meta,remove); list.insertBefore(row, btn.closest('.add-content-row')); scheduleDraftSave();
+  }, { once: true });
+  input.click();
+}
+
+function addSubtitle(btn) {
+  const input = document.createElement('input'); input.type = 'file'; input.accept = '.vtt,.srt,text/vtt,application/x-subrip'; input.setAttribute('aria-label','Choose subtitle file');
+  input.addEventListener('change', () => { const file=input.files[0]; if(!file)return; const list=btn.closest('.module-content-list'); const row=document.createElement('div');row.className='content-row subtitle-name';row.dataset.fileName=file.name;const label=document.createElement('span');label.className='content-row-name';label.textContent=`Subtitles · ${file.name}`;const meta=document.createElement('span');meta.className='fs-xs t-tm';meta.textContent='Subtitle track';row.append(label,meta);list.insertBefore(row,btn.closest('.add-content-row'));scheduleDraftSave();},{once:true}); input.click();
+}
+
+function scheduleDraftSave() { clearTimeout(autosaveTimer); showCreatorStatus('Saving changes…'); autosaveTimer = setTimeout(() => saveDraft({silent:true}), 700); }
+
+function wireModuleReordering() {
+  const container = document.getElementById('modules-container'); let dragged = null;
+  container.querySelectorAll('.module-card').forEach(card => { card.draggable = true; });
+  container.addEventListener('dragstart', event => { const card=event.target.closest('.module-card'); if(!card)return; dragged=card; event.dataTransfer.effectAllowed='move'; event.dataTransfer.setData('text/plain',card.dataset.module); card.classList.add('dragging'); });
+  container.addEventListener('dragend', () => { if(dragged)dragged.classList.remove('dragging'); dragged=null; updateModuleNumbers(); });
+  container.addEventListener('dragover', event => { event.preventDefault(); const target=event.target.closest('.module-card'); if(!target||!dragged||target===dragged)return; const box=target.getBoundingClientRect(); container.insertBefore(dragged,event.clientY<box.top+box.height/2?target:target.nextSibling); });
+  container.addEventListener('drop', event => { event.preventDefault(); updateModuleNumbers(); scheduleDraftSave(); });
+}
+
+function updateModuleNumbers() {
+  document.querySelectorAll('#modules-container .module-card').forEach((card,index) => { card.dataset.module=index+1; const label=card.querySelector('.module-card-head>span'); if(label)label.textContent=`M${index+1}`; });
+}
+
+function updatePreview() {
+  const t = document.getElementById('course-title-input').value;
+  document.getElementById('preview-title').textContent = t || 'Course Title';
+  scheduleDraftSave();
+}
+
+function submitForReview() {
+  const course = collectCourse();
+  if (!course.title) { document.getElementById('course-title-input').focus(); showCreatorStatus('Add a title before submitting.', true); return; }
+  if (!course.modules.length || course.modules.some(module => !module.title || !module.items.length)) { showCreatorStatus('Every module needs a title and at least one content item.', true); return; }
+  saveDraft({silent:true});
+  document.querySelector('#submit-modal p strong').textContent = course.title;
+  document.getElementById('submit-modal').style.display = 'flex';
+}
+
+function confirmSubmit() {
+  clearTimeout(autosaveTimer);
+  const saved = saveDraft({silent:true}); if(!saved)return;
+  try { EmpowerOneData.submitCourse(saved.id); sessionStorage.removeItem('empowerone.editorDraftId'); document.getElementById('submit-modal').style.display='none'; showCreatorToast('Course submitted. Approval is required before publishing.'); setTimeout(()=>window.location.href='course-management.html',800); }
+  catch(error) { showCreatorStatus(error.message,true); }
+}
+
+function closeSubmit(e) {
+  if (e.target === document.getElementById('submit-modal')) document.getElementById('submit-modal').style.display = 'none';
+}
+
+function restoreDraft(draft) {
+  if(!draft)return;
+  document.getElementById('course-title-input').value=draft.title||'';
+  document.getElementById('course-description').value=draft.description||'';
+  document.getElementById('course-department').value=draft.department||'Materials';
+  document.getElementById('course-duration').value=draft.duration||'';
+  document.getElementById('course-level').value=draft.difficulty||'Intermediate';
+  document.getElementById('assessment-pass').value=draft.assessment?.passPercent||70;
+  document.getElementById('assessment-count').value=draft.assessment?.questionCount||20;
+  window.courseQuestions=draft.assessment?.questions||window.courseQuestions;
+  document.getElementById('modules-container').replaceChildren();
+  moduleCount=0;
+  (draft.modules||[]).forEach(module=>{
+    addModule();
+    const card=document.querySelector('#modules-container .module-card:last-child');
+    card.querySelector('.module-title-edit').value=module.title||'';
+    const list=card.querySelector('.module-content-list');
+    const empty=list.querySelector('.empty');if(empty)empty.remove();
+    (module.items||[]).forEach(item=>appendContentRow(list,item));
+    (module.subtitles||[]).forEach(name=>{const row=document.createElement('div');row.className='content-row subtitle-name';row.dataset.fileName=name;const label=document.createElement('span');label.className='content-row-name';label.textContent=`Subtitles · ${name}`;row.append(label);list.insertBefore(row,list.querySelector('.add-content-row'));});
+  });
+  document.getElementById('preview-title').textContent=draft.title||'Course Title';
+  updateModuleNumbers();
+}
+
+function appendContentRow(list,item) {
+  const row=document.createElement('div');row.className='content-row';row.dataset.contentType=item.type||'document';row.dataset.contentId=item.id||`content-${Date.now()}`;row.dataset.fileName=item.fileName||item.title;row.dataset.fileSize=String(item.size||0);
+  const icon=document.createElement('div');icon.className=`content-row-icon ${item.type==='video'?'cri-vid':'cri-pdf'}`;icon.textContent=item.type==='video'?'▶':item.type==='pdf'?'PDF':'DOC';
+  const title=document.createElement('span');title.className='content-row-name';title.textContent=item.title;
+  const meta=document.createElement('span');meta.className='fs-xs t-tm';meta.textContent=`${((item.size||0)/(1024*1024)).toFixed(1)} MB`;
+  const remove=document.createElement('button');remove.type='button';remove.className='content-row-del';remove.setAttribute('aria-label',`Remove ${item.title}`);remove.textContent='×';remove.addEventListener('click',()=>{row.remove();scheduleDraftSave();});
+  row.append(icon,title,meta,remove);list.insertBefore(row,list.querySelector('.add-content-row'));
+}
+
+window.courseQuestions = [{question:'What does ABC classification prioritise?',options:['Items by alphabetical order','Items by annual consumption value','Items by physical size','Items by purchase date'],answer:1,explanation:'ABC analysis prioritises stock by its annual consumption value.'}];
+function editQuestion(index) {
+  editingQuestionIndex=index;
+  const question=window.courseQuestions[index]||{question:'',options:['','','',''],answer:0,explanation:''};
+  const form=document.getElementById('question-form'); form.elements.question.value=question.question;
+  question.options.forEach((value,i)=>form.elements[`option${i}`].value=value);
+  form.elements.answer.value=question.answer; form.elements.explanation.value=question.explanation||'';
+  document.getElementById('question-modal-title').textContent=index<window.courseQuestions.length?'Edit assessment question':'Add assessment question';
+  document.getElementById('question-modal').style.display='flex'; form.elements.question.focus();
+}
+function closeQuestionEditor(){document.getElementById('question-modal').style.display='none'}
+document.getElementById('add-question').addEventListener('click',()=>editQuestion(window.courseQuestions.length));
+document.getElementById('question-form').addEventListener('submit',event=>{event.preventDefault();if(!event.currentTarget.reportValidity())return;const form=event.currentTarget,q={question:form.elements.question.value.trim(),options:[0,1,2,3].map(i=>form.elements[`option${i}`].value.trim()),answer:Number(form.elements.answer.value),explanation:form.elements.explanation.value.trim()};if(editingQuestionIndex<window.courseQuestions.length)window.courseQuestions[editingQuestionIndex]=q;else window.courseQuestions.push(q);document.getElementById('assessment-count').value=window.courseQuestions.length;closeQuestionEditor();scheduleDraftSave();showCreatorToast('Assessment question saved to the course draft.');});
+document.getElementById('thumb-upload').addEventListener('change',event=>{const file=event.target.files[0];if(!file)return;if(file.size>5*1024*1024){showCreatorStatus('Choose a thumbnail smaller than 5 MB.',true);event.target.value='';return;}const reader=new FileReader();reader.onload=()=>{const preview=document.getElementById('thumb-preview');preview.style.backgroundImage=`url("${reader.result}")`;preview.style.backgroundSize='cover';preview.style.backgroundPosition='center';showCreatorToast('Thumbnail preview updated. Media is not uploaded from this browser demo.');scheduleDraftSave();};reader.readAsDataURL(file);});
+document.querySelectorAll('#course-description,#course-department,#course-duration,#course-level,#assessment-pass,#assessment-count').forEach(field=>field.addEventListener('input',scheduleDraftSave));
+wireModuleReordering();
+if(currentCourseId){const draft=EmpowerOneData.getCourse(currentCourseId);if(draft){document.getElementById('course-title-input').value=draft.title||'';document.getElementById('course-description').value=draft.description||'';document.getElementById('course-department').value=draft.department||'Materials';document.getElementById('course-duration').value=draft.duration||'';document.getElementById('course-level').value=draft.difficulty||'Intermediate';}}
+if(currentCourseId)restoreDraft(EmpowerOneData.getCourse(currentCourseId));
+document.getElementById('modules-container').addEventListener('input',scheduleDraftSave);
+document.getElementById('modules-container').addEventListener('click',event=>{if(event.target.closest('.content-row-del'))setTimeout(scheduleDraftSave,0);});
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manage EmpowerOne account, organisation and notification preferences.">
+  <title>Settings — EmpowerOne</title><link rel="stylesheet" href="../styles/app.css">
+  <style>
+    .settings-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:22px;align-items:start}
+    .settings-nav{padding:8px}.settings-tab{display:flex;width:100%;gap:10px;align-items:center;padding:11px 12px;border:0;border-radius:8px;background:transparent;color:var(--ts);text-align:left;font:500 .83rem var(--fb);cursor:pointer}
+    .settings-tab:hover{background:var(--surface)}.settings-tab.active{background:var(--blue-pale);color:var(--blue);font-weight:700}
+    .settings-panel[hidden]{display:none}.settings-panel h2{font-size:1.1rem;margin-bottom:6px}.settings-panel>p{margin-bottom:22px}
+    .settings-footer{display:flex;justify-content:flex-end;margin-top:22px;padding-top:18px;border-top:1px solid var(--border)}
+    .setting-switch{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:16px 0;border-bottom:1px solid var(--border)}
+    .setting-switch:last-child{border-bottom:0}.setting-switch strong{display:block;font-size:.83rem}.setting-switch span{display:block;font-size:.74rem;color:var(--tm);margin-top:3px}
+    .setting-switch input{width:18px;height:18px;accent-color:var(--blue)}
+    .settings-notice{padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:9px;color:var(--ts);font-size:.78rem}
+    @media(max-width:760px){.settings-layout{grid-template-columns:1fr}.settings-nav{display:flex;overflow-x:auto;gap:4px}.settings-tab{width:auto;white-space:nowrap}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar"><div class="sidebar-logo"><img src="../Images and Files/LOGO PNG.png" alt="EmpowerOne"></div>
+    <nav class="snav" aria-label="Platform navigation">
+      <a href="spoc-dashboard.html" class="snav-item"><span>▦</span><span>Dashboard</span></a>
+      <div class="snav-section">Organisation</div><a href="learners.html" class="snav-item"><span>♙</span><span>Learners</span></a><a href="organisation-courses.html" class="snav-item"><span>▱</span><span>Courses</span></a>
+      <div class="snav-section">Account</div><a href="settings.html" class="snav-item active" aria-current="page"><span>⚙</span><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-foot"><div class="suser"><div class="av av-md" style="background:var(--blue)">PS</div><div class="suser-info"><div class="suser-name">Priya Sharma</div><div class="suser-role">SPOC · Jetex Manufacturing</div></div></div><a href="login.html" class="snav-item mt2" style="color:var(--danger)">Sign Out</a></div>
+  </aside>
+  <main class="main"><header class="topbar"><div class="tb-left"><div class="breadcrumb"><span class="t-tm">Jetex Manufacturing Pvt. Ltd.</span><span class="sep">/</span><span class="cur">Settings</span></div></div><div class="tb-right"><div class="av av-md">PS</div></div></header>
+    <div class="page"><div class="ph"><div class="ph-left"><h1>Settings</h1><p>Manage your account and organisation preferences.</p></div></div>
+      <div class="settings-layout">
+        <nav class="card settings-nav" aria-label="Settings sections">
+          <button class="settings-tab active" type="button" data-panel="profile" aria-selected="true">My profile</button>
+          <button class="settings-tab" type="button" data-panel="organisation" aria-selected="false" id="organisation-tab">Organisation</button>
+          <button class="settings-tab" type="button" data-panel="notifications" aria-selected="false">Notifications</button>
+          <button class="settings-tab" type="button" data-panel="platform" aria-selected="false" id="platform-tab" hidden>Platform</button>
+        </nav>
+        <section class="card settings-content">
+          <section class="settings-panel" data-settings-panel="profile"><h2>Profile information</h2><p>Details shown to colleagues in this demo environment.</p>
+            <form id="profile-form"><div class="form-row fr-2 mb4"><label class="form-group"><span class="form-label">Full name</span><input class="form-input" name="name" required></label><label class="form-group"><span class="form-label">Work email</span><input class="form-input" name="email" type="email" required readonly></label></div>
+              <div class="settings-notice">Authentication and password changes are managed by the production identity service; this browser demo does not change credentials.</div><div class="settings-footer"><button class="btn btn-primary" type="submit">Save profile</button></div></form>
+          </section>
+          <section class="settings-panel" data-settings-panel="organisation" hidden><h2>Organisation profile</h2><p>Organisation details are only available within your assigned tenant.</p>
+            <form id="organisation-form"><label class="form-group mb4"><span class="form-label">Organisation name</span><input class="form-input" name="name" required></label><label class="form-group"><span class="form-label">Departments</span><textarea class="form-textarea" name="departments" rows="4" aria-describedby="department-hint"></textarea><span class="form-hint" id="department-hint">Enter one department per line. Used for learner roster filters.</span></label><div class="settings-footer"><button class="btn btn-primary" type="submit">Save organisation</button></div></form>
+          </section>
+          <section class="settings-panel" data-settings-panel="notifications" hidden><h2>Notification preferences</h2><p>Choose which learning events you want to see in the product.</p>
+            <form id="notifications-form"><label class="setting-switch"><div><strong>Course review updates</strong><span>Approval and change requests on your submitted courses</span></div><input type="checkbox" name="courseReviews" checked></label><label class="setting-switch"><div><strong>Learner progress alerts</strong><span>Overdue learning and assessment outcomes</span></div><input type="checkbox" name="learnerProgress" checked></label><label class="setting-switch"><div><strong>Organisation assignments</strong><span>When courses are added or updated for your organisation</span></div><input type="checkbox" name="courseAssignments" checked></label><div class="settings-footer"><button class="btn btn-primary" type="submit">Save preferences</button></div></form>
+          </section>
+          <section class="settings-panel" data-settings-panel="platform" hidden><h2>Platform configuration</h2><p>Branding and platform defaults for the demo preview.</p><form id="platform-form"><label class="form-group mb4"><span class="form-label">Platform name</span><input class="form-input" name="platformName" value="EmpowerOne" required></label><label class="form-group"><span class="form-label">Default passing score</span><select class="form-select" name="passScore"><option value="70">70% — Phase 1 standard</option></select></label><div class="settings-footer"><button class="btn btn-primary" type="submit">Save platform settings</button></div></form></section>
+        </section>
+      </div>
+    </div>
+  </main>
+</div><div class="app-toast" id="settings-toast" role="status" aria-live="polite"></div>
+<script src="../js/demo-store.js"></script>
+<script>
+(() => {
+  const data = window.EmpowerOneData, role = data.currentRole(), snapshot = data.getSnapshot();
+  const userId = sessionStorage.getItem('empowerone.demoUserId') || 'user-spoc';
+  const user = snapshot.users.find(item => item.id === userId) || snapshot.users.find(item => item.id === 'user-spoc');
+  const org = data.getOrganisation(data.currentOrganisationId());
+  const prefs = snapshot.settings[user.id] || {};
+  if (role === 'superadmin') document.getElementById('platform-tab').hidden = false;
+  if (role === 'learner' || role === 'creator') document.getElementById('organisation-tab').hidden = true;
+  const nav = document.querySelector('.sidebar .snav');
+  const roleLinks = {
+    superadmin: [['super-admin-dashboard.html','Dashboard'],['organisations.html','Organisations'],['course-management.html','Courses'],['course-approval.html','Approvals'],['learners.html','Learners'],['settings.html','Settings']],
+    creator: [['content-creator.html','Course builder'],['course-management.html','My courses'],['settings.html','Settings']],
+    learner: [['learner-dashboard.html','My learning'],['learner-dashboard.html#assigned-courses','Assigned courses'],['settings.html','Profile & settings']],
+    spoc: [['spoc-dashboard.html','Dashboard'],['learners.html','Learners'],['organisation-courses.html','Courses'],['spoc-dashboard.html#reports','Reports'],['settings.html','Settings']]
+  };
+  nav.innerHTML = (roleLinks[role] || roleLinks.spoc).map((item,index) => `${index===0?'<div class="snav-section">Workspace</div>':''}<a href="${item[0]}" class="snav-item ${item[0]==='settings.html'?'active':''}">${item[1]}</a>`).join('');
+  document.querySelector('.sidebar .suser-name').textContent = user.name;
+  document.querySelector('.sidebar .suser-role').textContent = role === 'learner' ? `${user.designation || 'Learner'} · ${user.department || 'Manufacturing'}` : role === 'superadmin' ? 'Platform Administrator' : role === 'creator' ? 'Content Creator' : `SPOC · ${org.name}`;
+  document.querySelector('.sidebar-foot .av').textContent = user.name.split(/\s+/).map(part => part[0]).join('').slice(0,2).toUpperCase();
+  document.querySelector('.breadcrumb .t-tm').textContent = role === 'superadmin' ? 'Platform' : role === 'creator' ? 'Creator workspace' : role === 'learner' ? 'My Learning' : org.name;
+  document.querySelector('#profile-form [name="name"]').value = user.name;
+  document.querySelector('#profile-form [name="email"]').value = user.email;
+  document.querySelector('#organisation-form [name="name"]').value = org.name;
+  document.querySelector('#organisation-form [name="departments"]').value = org.departments.join('\n');
+  Object.entries(prefs.notifications || {}).forEach(([name,value]) => { const field = document.querySelector(`#notifications-form [name="${name}"]`); if (field) field.checked = Boolean(value); });
+  document.querySelectorAll('.settings-tab').forEach(tab => tab.addEventListener('click', () => {
+    document.querySelectorAll('.settings-tab').forEach(item => { item.classList.toggle('active',item===tab); item.setAttribute('aria-selected',String(item===tab)); });
+    document.querySelectorAll('.settings-panel').forEach(panel => panel.hidden = panel.dataset.settingsPanel !== tab.dataset.panel);
+  }));
+  const toast = document.getElementById('settings-toast'); let timer;
+  function saved(message) { toast.textContent = message; toast.classList.add('show'); clearTimeout(timer); timer = setTimeout(() => toast.classList.remove('show'),2800); }
+  document.getElementById('profile-form').addEventListener('submit', event => { event.preventDefault(); if(!event.currentTarget.reportValidity()) return; const name=event.currentTarget.elements.name.value.trim(); try { data.saveUserSettings(user.id,{ name }); saved('Profile display name saved in this browser.'); } catch(error) { saved(error.message); } });
+  document.getElementById('organisation-form').addEventListener('submit', event => { event.preventDefault(); if(!event.currentTarget.reportValidity()) return; try { data.saveOrganisationProfile({name:event.currentTarget.elements.name.value,departments:event.currentTarget.elements.departments.value.split('\n')},org.id); saved('Organisation profile updated for this demo.'); } catch(error) { saved(error.message); } });
+  document.getElementById('notifications-form').addEventListener('submit', event => { event.preventDefault(); const values=Object.fromEntries([...new FormData(event.currentTarget).entries()].map(([key,value])=>[key,value==='on'])); try { data.saveUserSettings(user.id,{notifications:values}); saved('Notification preferences saved.'); } catch(error) { saved(error.message); } });
+  document.getElementById('platform-form').addEventListener('submit', event => { event.preventDefault(); const values=Object.fromEntries(new FormData(event.currentTarget)); try { data.saveUserSettings(user.id,{platform:values}); saved('Platform defaults saved for this demo.'); } catch(error) { saved(error.message); } });
+})();
+</script></body></html>

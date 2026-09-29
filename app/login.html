@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — EmpowerOne</title>
+  <link rel="stylesheet" href="../styles/app.css">
+  <style>
+    body{background:var(--bg);display:flex;min-height:100vh;margin:0}
+    .login-left{flex:0 0 420px;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px;position:relative;overflow:hidden}
+    .login-left::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:rgba(0,80,216,.25)}
+    .login-left::after{content:'';position:absolute;bottom:-60px;left:-60px;width:220px;height:220px;border-radius:50%;background:rgba(0,80,216,.15)}
+    .login-brand{position:relative;z-index:1;text-align:center;margin-bottom:48px}
+    .login-brand img{height:44px;margin:0 auto 16px}
+    .login-tagline{font-size:.8rem;color:rgba(255,255,255,.6);font-family:var(--fb);letter-spacing:1px;text-transform:uppercase;font-weight:500}
+    .login-features{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;gap:14px}
+    .lf-item{display:flex;align-items:center;gap:12px;padding:14px 16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px}
+    .lf-icon{width:32px;height:32px;border-radius:8px;background:rgba(0,80,216,.4);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .lf-icon svg{width:15px;height:15px;color:#fff}
+    .lf-text strong{display:block;font-size:.78rem;font-weight:600;color:#fff;font-family:var(--fh)}
+    .lf-text span{font-size:.72rem;color:rgba(255,255,255,.55);font-family:var(--fb)}
+    .login-right{flex:1;display:flex;align-items:center;justify-content:center;padding:48px}
+    .login-box{background:#fff;border-radius:20px;border:1px solid var(--border);box-shadow:var(--sh3);padding:48px;width:100%;max-width:420px}
+    .login-box h2{margin-bottom:6px;font-size:1.5rem}
+    .login-box p{margin-bottom:32px;color:var(--tm);font-size:.875rem}
+    .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+    .form-label{font-size:.72rem;font-weight:700;color:var(--ts);text-transform:uppercase;letter-spacing:.4px}
+    .form-input{font-family:var(--fb);font-size:.875rem;color:var(--tp);background:#fff;border:1.5px solid var(--border);border-radius:var(--rad);padding:10px 14px;width:100%;transition:all .15s;outline:none;min-height:42px}
+    .form-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,80,216,.1)}
+    .form-input::placeholder{color:var(--tl)}
+    .pw-wrap{position:relative}
+    .pw-wrap .form-input{padding-right:40px}
+    .pw-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--tm);display:flex;align-items:center}
+    .btn-login{width:100%;padding:12px;font-size:.95rem;min-height:44px;border-radius:10px;border:none;background:var(--blue);color:#fff;font-family:var(--fh);font-weight:700;cursor:pointer;transition:all .15s;margin-top:8px}
+    .btn-login:hover{background:#003FB5;box-shadow:0 4px 16px rgba(0,80,216,.35)}
+    .login-sep{display:flex;align-items:center;gap:12px;margin:20px 0}
+    .login-sep::before,.login-sep::after{content:'';flex:1;height:1px;background:var(--border)}
+    .login-sep span{font-size:.72rem;color:var(--tm);font-weight:500}
+    .otp-inputs{display:flex;gap:10px;justify-content:center;margin:20px 0}
+    .otp-input{width:48px;height:54px;text-align:center;font-size:1.25rem;font-weight:700;font-family:var(--fh);border:2px solid var(--border);border-radius:var(--rad);outline:none;transition:all .15s;color:var(--navy);background:#fff}
+    .otp-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,80,216,.1)}
+    .otp-input.filled{border-color:var(--blue);background:var(--blue-pale)}
+    .forgot-link{font-size:.8rem;color:var(--blue);font-weight:500;text-align:right;display:block;margin-top:-8px;margin-bottom:16px;cursor:pointer}
+    .role-select{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+    .role-opt{display:flex;align-items:center;gap:8px;padding:10px 12px;border:2px solid var(--border);border-radius:var(--rad);cursor:pointer;transition:all .15s;font-size:.8rem;font-weight:500;color:var(--ts)}
+    .role-opt:hover{border-color:var(--blue);color:var(--blue)}
+    .role-opt.active{border-color:var(--blue);background:var(--blue-pale);color:var(--blue);font-weight:600}
+    .screen{display:none}
+    .screen.visible{display:block}
+    .back-link{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--blue);cursor:pointer;margin-bottom:24px;font-weight:500}
+    .back-link:hover{opacity:.8}
+    .resend-timer{font-size:.78rem;color:var(--tm);text-align:center;margin-top:12px}
+    .resend-timer .resend-btn{color:var(--blue);font-weight:600;cursor:pointer;background:none;border:none;font-family:var(--fb);font-size:.78rem}
+    .demo-roles{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);padding:14px;margin-top:16px}
+    .demo-roles-title{font-size:.7rem;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+    .demo-role-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:.78rem}
+    .demo-role-row:last-child{border-bottom:none}
+    .demo-role-badge{padding:2px 8px;border-radius:999px;font-size:.65rem;font-weight:700}
+    @media(max-width:760px){body{display:block}.login-left{width:100%;min-height:auto;flex:0 0 auto;padding:28px 20px}.login-brand{margin-bottom:0}.login-brand img{height:36px}.login-features{display:none}.login-right{padding:20px;min-height:calc(100vh - 100px)}.login-box{padding:28px 22px;border-radius:16px}}
+    @media(max-width:420px){.otp-inputs{gap:6px}.otp-input{width:40px;height:48px}.role-select{gap:7px}.role-opt{padding:9px 8px;font-size:.74rem}.demo-roles{padding:12px}}
+  </style>
+</head>
+<body>
+  <div class="login-left">
+    <div class="login-brand">
+      <img src="../Images and Files/LOGO PNG.png" alt="EmpowerOne">
+      <div class="login-tagline">Skill Today. Impact Tomorrow.</div>
+    </div>
+    <div class="login-features">
+      <div class="lf-item">
+        <div class="lf-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="lf-text">
+          <strong>Industrial Courses</strong>
+          <span>Inventory, OEE &amp; OLE, Supplier Capacity</span>
+        </div>
+      </div>
+      <div class="lf-item">
+        <div class="lf-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div class="lf-text">
+          <strong>Tracked Completion</strong>
+          <span>Per learner, per department, per plant</span>
+        </div>
+      </div>
+      <div class="lf-item">
+        <div class="lf-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="lf-text">
+          <strong>HR Dashboard</strong>
+          <span>See gaps, send reminders, act on data</span>
+        </div>
+      </div>
+      <div class="lf-item">
+        <div class="lf-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="lf-text">
+          <strong>Multi-Org Platform</strong>
+          <span>Isolated access per organisation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="login-right">
+    <div class="login-box">
+
+      <!-- Screen 1: Email/Password Login -->
+      <div class="screen visible" id="screen-login">
+        <h2>Welcome back</h2>
+        <p>Sign in to your EmpowerOne account</p>
+
+        <div class="form-group">
+          <label class="form-label" for="email-input">Email address</label>
+          <input type="email" class="form-input" id="email-input" placeholder="yourname@company.com" value="hr@jetexmfg.com" autocomplete="username" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="pw-input">Password</label>
+          <div class="pw-wrap">
+            <input type="password" class="form-input" id="pw-input" placeholder="Enter your password" value="••••••••" autocomplete="current-password" required>
+            <button class="pw-toggle" type="button" aria-label="Show password" onclick="togglePw()">
+              <svg id="pw-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin:-4px 0 18px">
+          <label style="display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--ts);cursor:pointer"><input type="checkbox" id="remember-email" style="accent-color:var(--blue)"> Remember this email</label>
+          <a class="forgot-link" style="margin:0" onclick="showScreen('screen-forgot')">Forgot password?</a>
+        </div>
+        <button class="btn-login" onclick="handleLogin()">Sign In</button>
+
+        <div class="demo-roles mt6">
+          <div class="demo-roles-title">Demo — Click a role to sign in as</div>
+          <div class="fs-xs t-tm mb2">Prototype only · Demo OTP: 123456 · Not connected to production authentication</div>
+          <div class="demo-role-row">
+            <span>Super Admin</span>
+            <button class="btn btn-sm btn-ghost" onclick="demoLogin('superadmin')">Sign in</button>
+          </div>
+          <div class="demo-role-row">
+            <span>Content Creator</span>
+            <button class="btn btn-sm btn-ghost" onclick="demoLogin('creator')">Sign in</button>
+          </div>
+          <div class="demo-role-row">
+            <span>SPOC / HR Admin</span>
+            <button class="btn btn-sm btn-ghost" onclick="demoLogin('spoc')">Sign in</button>
+          </div>
+          <div class="demo-role-row">
+            <span>Learner</span>
+            <button class="btn btn-sm btn-ghost" onclick="demoLogin('learner')">Sign in</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen 2: OTP Verification -->
+      <div class="screen" id="screen-otp">
+        <div class="back-link" onclick="showScreen('screen-login')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          Back to login
+        </div>
+        <h2>Verify your identity</h2>
+        <p>We sent a 6-digit OTP to <strong id="otp-email">hr@jetex.com</strong>. Demo code: <strong>123456</strong></p>
+        <div class="otp-inputs" id="otp-inputs">
+          <input class="otp-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="1" aria-label="OTP digit 1" oninput="otpInput(this,0)">
+          <input class="otp-input" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 2" oninput="otpInput(this,1)">
+          <input class="otp-input" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 3" oninput="otpInput(this,2)">
+          <input class="otp-input" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 4" oninput="otpInput(this,3)">
+          <input class="otp-input" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 5" oninput="otpInput(this,4)">
+          <input class="otp-input" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 6" oninput="otpInput(this,5)">
+        </div>
+        <button class="btn-login" onclick="verifyOtp()">Verify &amp; Continue</button>
+        <div class="resend-timer">
+          Didn't receive it? <button class="resend-btn" id="resend-btn" onclick="resendOtp()">Resend OTP</button> <span id="timer-txt"></span>
+        </div>
+      </div>
+
+      <!-- Screen 3: Forgot Password -->
+      <div class="screen" id="screen-forgot">
+        <div class="back-link" onclick="showScreen('screen-login')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          Back to login
+        </div>
+        <h2>Reset password</h2>
+        <p>Enter the email address linked to your account and we'll send you a reset link.</p>
+        <div class="form-group" style="margin-top:24px">
+          <label class="form-label">Email address</label>
+          <input type="email" class="form-input" placeholder="yourname@company.com">
+        </div>
+        <button class="btn-login" onclick="showScreen('screen-reset-sent')">Send Reset Link</button>
+      </div>
+
+      <!-- Screen 4: Reset sent confirmation -->
+      <div class="screen" id="screen-reset-sent" style="text-align:center;padding:20px 0">
+        <div style="width:64px;height:64px;border-radius:50%;background:var(--suc-bg);display:flex;align-items:center;justify-content:center;margin:0 auto 20px">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h2>Check your email</h2>
+        <p style="margin:12px 0 28px">We sent a password reset link to your email. Click the link to create a new password.</p>
+        <button class="btn-login" onclick="showScreen('screen-login')">Back to Login</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('visible'));
+      document.getElementById(id).classList.add('visible');
+    }
+
+    const rememberedEmail = localStorage.getItem('empowerone.rememberedEmail');
+    if (rememberedEmail) { document.getElementById('email-input').value = rememberedEmail; document.getElementById('remember-email').checked = true; }
+
+    function togglePw() {
+      const inp = document.getElementById('pw-input');
+      inp.type = inp.type === 'password' ? 'text' : 'password';
+      document.querySelector('.pw-toggle').setAttribute('aria-label', inp.type === 'password' ? 'Show password' : 'Hide password');
+    }
+
+    function handleLogin() {
+      const emailInput = document.getElementById('email-input');
+      const passwordInput = document.getElementById('pw-input');
+      if (!emailInput.reportValidity() || !passwordInput.reportValidity()) return;
+      const email = emailInput.value.trim();
+      if (document.getElementById('remember-email').checked) localStorage.setItem('empowerone.rememberedEmail', email);
+      else localStorage.removeItem('empowerone.rememberedEmail');
+      sessionStorage.setItem('empowerone.demoEmail', email);
+      document.getElementById('otp-email').textContent = email;
+      showScreen('screen-otp');
+      startTimer();
+      document.querySelector('.otp-input').focus();
+    }
+
+    function otpInput(el, idx) {
+      el.value = el.value.replace(/\D/g, '').slice(-1);
+      el.classList.toggle('filled', el.value.length > 0);
+      if (el.value.length >= 1) {
+        const inputs = document.querySelectorAll('.otp-input');
+        if (idx < inputs.length - 1) inputs[idx + 1].focus();
+      }
+    }
+
+    function verifyOtp() {
+      const code = [...document.querySelectorAll('.otp-input')].map(input => input.value).join('');
+      if (code !== '123456') {
+        document.querySelectorAll('.otp-error').forEach(error => error.remove());
+        document.getElementById('otp-email').parentElement.insertAdjacentHTML('afterend', '<p class="otp-error" role="alert" style="color:var(--danger);text-align:center;margin:-8px 0 16px">Enter the 6-digit demo code shown above.</p>');
+        return;
+      }
+      const email = (sessionStorage.getItem('empowerone.demoEmail') || '').toLowerCase();
+      const role = email.includes('admin') ? 'superadmin' : email.includes('creator') ? 'creator' : email.includes('learner') ? 'learner' : 'spoc';
+      demoLogin(role);
+    }
+
+    let timerInterval;
+    function startTimer() {
+      let secs = 30;
+      const btn = document.getElementById('resend-btn');
+      const txt = document.getElementById('timer-txt');
+      btn.disabled = true;
+      btn.style.opacity = '0.4';
+      function tick() {
+        txt.textContent = `(${secs}s)`;
+        secs--;
+        if (secs < 0) {
+          clearInterval(timerInterval);
+          btn.disabled = false;
+          btn.style.opacity = '1';
+          txt.textContent = '';
+        }
+      }
+      tick();
+      timerInterval = setInterval(tick, 1000);
+    }
+
+    function resendOtp() {
+      document.querySelectorAll('.otp-input').forEach(i => { i.value = ''; i.classList.remove('filled'); });
+      document.querySelectorAll('.otp-error').forEach(error => error.remove());
+      startTimer();
+    }
+
+    function demoLogin(role) {
+      const routes = {
+        superadmin: 'super-admin-dashboard.html',
+        creator: 'content-creator.html',
+        spoc: 'spoc-dashboard.html',
+        learner: 'learner-dashboard.html'
+      };
+      const userIds = { superadmin: 'user-admin', creator: 'user-creator', spoc: 'user-spoc', learner: 'user-learner' };
+      sessionStorage.setItem('empowerone.demoRole', role);
+      sessionStorage.setItem('empowerone.demoUserId', userIds[role] || userIds.spoc);
+      sessionStorage.setItem('empowerone.demoOrganisationId', 'jetex');
+      window.location.href = routes[role] || 'spoc-dashboard.html';
+    }
+  </script>
+</body>
+</html>

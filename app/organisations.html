@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organisations — EmpowerOne</title>
+  <link rel="stylesheet" href="../styles/app.css">
+  <style>
+    .org-detail-panel{display:none;position:fixed;right:0;top:58px;bottom:0;width:min(480px,100vw);background:#fff;border-left:1px solid var(--border);z-index:200;overflow-y:auto;box-shadow:-4px 0 20px rgba(2,38,112,.1);animation:slideLeft .2s ease}
+    @keyframes slideLeft{from{transform:translateX(100%)}to{transform:translateX(0)}}
+    .odp-head{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;background:var(--surface);position:sticky;top:0;z-index:1}
+    .odp-body{padding:24px}
+    .stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
+    .stat-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);padding:14px;text-align:center}
+    .stat-val{font-family:var(--fh);font-size:1.5rem;font-weight:800;color:var(--navy);line-height:1}
+    .stat-lbl{font-size:.68rem;color:var(--tm);font-weight:500;margin-top:4px}
+    .spoc-chip{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);margin-bottom:8px}
+    .assigned-course-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);font-size:.82rem}
+    .assigned-course-row:last-child{border-bottom:none}
+    .ac-thumb{width:32px;height:32px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <div class="sidebar">
+    <div class="sidebar-logo"><img src="../Images and Files/LOGO PNG.png" alt="EmpowerOne"></div>
+    <nav class="snav">
+      <a href="super-admin-dashboard.html" class="snav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Dashboard</span></a>
+      <div class="snav-section">Management</div>
+      <a href="organisations.html" class="snav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Organisations</span></a>
+      <a href="course-management.html" class="snav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg><span>Course Library</span></a>
+      <a href="course-approval.html" class="snav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><span>Approvals</span><span class="snav-badge">3</span></a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="suser"><div class="av av-md" style="background:var(--navy)">SA</div><div class="suser-info"><div class="suser-name">Super Admin</div><div class="suser-role">Platform Administrator</div></div></div>
+      <a href="login.html" class="snav-item mt2" style="color:var(--danger)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Sign Out</span></a>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="tb-left">
+        <div class="breadcrumb"><span class="cur">Organisations</span></div>
+      </div>
+      <div class="tb-right">
+        <div class="tb-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="search" id="org-search" placeholder="Search organisations..." oninput="applyOrgFilters()">
+        </div>
+        <div class="av av-md" style="background:var(--navy);cursor:pointer">SA</div>
+      </div>
+    </div>
+
+    <div class="page">
+      <div class="ph">
+        <div class="ph-left">
+          <h1>Organisations</h1>
+          <p>All manufacturing clients on the EmpowerOne platform</p>
+        </div>
+        <div class="ph-right">
+          <select class="form-select" id="org-status-filter" onchange="applyOrgFilters()" style="width:auto;min-height:36px">
+            <option value="">All Status</option>
+            <option>Active</option>
+            <option>Onboarding</option>
+            <option>Expired</option>
+          </select>
+          <button class="btn btn-primary" data-roles="superadmin" onclick="openAddOrg()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Organisation
+          </button>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="g4 mb6">
+        <div class="kpi"><div class="kpi-icon ki-blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><div class="kpi-value" id="org-total-count">4</div><div class="kpi-label">Total Organisations</div></div>
+        <div class="kpi"><div class="kpi-icon ki-green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="kpi-value" id="org-active-count">3</div><div class="kpi-label">Active</div></div>
+        <div class="kpi"><div class="kpi-icon ki-warn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/></svg></div><div class="kpi-value" id="org-learner-count">296</div><div class="kpi-label">Active Learners</div></div>
+        <div class="kpi"><div class="kpi-icon ki-navy"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg></div><div class="kpi-value" id="org-licence-count">500</div><div class="kpi-label">Total Licences</div></div>
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-wrap" id="org-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Organisation</th>
+              <th>Status</th>
+              <th>Learners / Limit</th>
+              <th>Completion</th>
+              <th>SPOCs</th>
+              <th>Courses</th>
+              <th>Contract Until</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="org-tbody">
+            <tr>
+              <td>
+                <div class="flex aic gap3">
+                  <div class="av av-md" style="background:#022670">JM</div>
+                  <div>
+                    <div class="fw6">Jetex Manufacturing Pvt. Ltd.</div>
+                    <div class="fs-xs t-tm">Pune, Maharashtra · Automotive</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge b-active">Active</span></td>
+              <td>
+                <div class="fw6">147 / 200</div>
+                <div class="pbar pbar-sm mt2"><div class="pfill" style="width:73%"></div></div>
+                <div class="fs-xs t-tm mt1">53 remaining</div>
+              </td>
+              <td>
+                <div class="flex aic gap2">
+                  <div class="pbar f1"><div class="pfill green" style="width:74%"></div></div>
+                  <span class="fw6 t-success">74%</span>
+                </div>
+              </td>
+              <td><div class="fs-sm">Priya Sharma</div><div class="fs-xs t-tm">1 SPOC</div></td>
+              <td><span class="fw6">3</span></td>
+              <td class="t-ts">31 Mar 2027</td>
+              <td>
+                <div class="flex gap2">
+                  <button class="btn btn-secondary btn-sm" onclick="openOrgDetail('Jetex Manufacturing')">View</button>
+                  <button class="btn btn-ghost btn-sm">Edit</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="flex aic gap3">
+                  <div class="av av-md" style="background:#0050D8">PI</div>
+                  <div>
+                    <div class="fw6">Precision Industries Ltd.</div>
+                    <div class="fs-xs t-tm">Chennai, Tamil Nadu · Machine Tools</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge b-active">Active</span></td>
+              <td>
+                <div class="fw6">89 / 150</div>
+                <div class="pbar pbar-sm mt2"><div class="pfill" style="width:59%"></div></div>
+                <div class="fs-xs t-tm mt1">61 remaining</div>
+              </td>
+              <td>
+                <div class="flex aic gap2">
+                  <div class="pbar f1"><div class="pfill" style="width:61%"></div></div>
+                  <span class="fw6 t-blue">61%</span>
+                </div>
+              </td>
+              <td><div class="fs-sm">Karthik Menon</div><div class="fs-xs t-tm">1 SPOC</div></td>
+              <td><span class="fw6">3</span></td>
+              <td class="t-ts">30 Jun 2027</td>
+              <td>
+                <div class="flex gap2">
+                  <button class="btn btn-secondary btn-sm" onclick="openOrgDetail('Precision Industries')">View</button>
+                  <button class="btn btn-ghost btn-sm">Edit</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="flex aic gap3">
+                  <div class="av av-md" style="background:#A05C00">SL</div>
+                  <div>
+                    <div class="fw6">Sigma Logistics &amp; Packaging</div>
+                    <div class="fs-xs t-tm">Ahmedabad, Gujarat · Packaging</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge b-active">Active</span></td>
+              <td>
+                <div class="fw6">210 / 250</div>
+                <div class="pbar pbar-sm mt2"><div class="pfill" style="width:84%"></div></div>
+                <div class="fs-xs t-tm mt1">40 remaining</div>
+              </td>
+              <td>
+                <div class="flex aic gap2">
+                  <div class="pbar f1"><div class="pfill green" style="width:82%"></div></div>
+                  <span class="fw6 t-success">82%</span>
+                </div>
+              </td>
+              <td><div class="fs-sm">Anita Desai</div><div class="fs-xs t-tm">2 SPOCs</div></td>
+              <td><span class="fw6">3</span></td>
+              <td class="t-ts">31 Dec 2026</td>
+              <td>
+                <div class="flex gap2">
+                  <button class="btn btn-secondary btn-sm" onclick="openOrgDetail('Sigma Logistics')">View</button>
+                  <button class="btn btn-ghost btn-sm">Edit</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="flex aic gap3">
+                  <div class="av av-md" style="background:#0D7A4E">AT</div>
+                  <div>
+                    <div class="fw6">AutoTech Components Pvt. Ltd.</div>
+                    <div class="fs-xs t-tm">Gurugram, Haryana · Auto Components</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge b-pending">Onboarding</span></td>
+              <td>
+                <div class="fw6">0 / 100</div>
+                <div class="pbar pbar-sm mt2"><div class="pfill" style="width:0%"></div></div>
+                <div class="fs-xs t-tm mt1">Setup in progress</div>
+              </td>
+              <td>
+                <div class="flex aic gap2">
+                  <div class="pbar f1"><div class="pfill" style="width:0%"></div></div>
+                  <span class="fw6 t-tm">—</span>
+                </div>
+              </td>
+              <td><div class="fs-sm">Vikram Singh</div><div class="fs-xs t-tm">1 SPOC</div></td>
+              <td><span class="fw6">3</span></td>
+              <td class="t-ts">31 Mar 2027</td>
+              <td>
+                <div class="flex gap2">
+                  <button class="btn btn-secondary btn-sm" onclick="openOrgDetail('AutoTech Components')">View</button>
+                  <button class="btn btn-ghost btn-sm">Edit</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="flex aic gap3">
+                  <div class="av av-md" style="background:#5B21B6">MP</div>
+                  <div>
+                    <div class="fw6">Mahindra Plastics &amp; Rubber</div>
+                    <div class="fs-xs t-tm">Nashik, Maharashtra · Plastics</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge b-active">Active</span></td>
+              <td>
+                <div class="fw6">178 / 200</div>
+                <div class="pbar pbar-sm mt2"><div class="pfill" style="width:89%"></div></div>
+                <div class="fs-xs t-tm mt1">22 remaining</div>
+              </td>
+              <td>
+                <div class="flex aic gap2">
+                  <div class="pbar f1"><div class="pfill" style="width:69%"></div></div>
+                  <span class="fw6 t-blue">69%</span>
+                </div>
+              </td>
+              <td><div class="fs-sm">Sunita Rao</div><div class="fs-xs t-tm">1 SPOC</div></td>
+              <td><span class="fw6">2</span></td>
+              <td class="t-ts">31 Dec 2027</td>
+              <td>
+                <div class="flex gap2">
+                  <button class="btn btn-secondary btn-sm" onclick="openOrgDetail('Mahindra Plastics')">View</button>
+                  <button class="btn btn-ghost btn-sm">Edit</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ORG DETAIL PANEL -->
+<div class="org-detail-panel" id="org-detail">
+  <div class="odp-head">
+    <button class="btn btn-ghost btn-sm" onclick="closeOrgDetail()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="av av-md" style="background:#022670">JM</div>
+    <div class="f1">
+      <div class="fw7 fs-base" id="detail-org-name">Jetex Manufacturing Pvt. Ltd.</div>
+      <div class="fs-xs t-tm" id="detail-org-location">Pune, Maharashtra · Active since Sep 2025</div>
+    </div>
+    <span class="badge b-active" id="detail-org-status">Active</span>
+  </div>
+  <div class="odp-body">
+    <!-- Stats -->
+    <div class="stat-grid">
+      <div class="stat-box"><div class="stat-val" id="detail-active-learners">147</div><div class="stat-lbl">Active Learners</div></div>
+      <div class="stat-box"><div class="stat-val" id="detail-licence-limit">200</div><div class="stat-lbl">Licence Limit</div></div>
+      <div class="stat-box"><div class="stat-val t-success" id="detail-completion-rate">74%</div><div class="stat-lbl">Completion Rate</div></div>
+      <div class="stat-box"><div class="stat-val t-danger">12</div><div class="stat-lbl">Overdue</div></div>
+    </div>
+
+    <!-- Dept Chart -->
+    <div class="card mb4">
+      <div class="card-title mb3">Completion by Department</div>
+      <div class="chart-fallback">
+        <div class="fallback-row"><span>Manufacturing</span><div class="pbar"><div class="pfill" style="width:81%"></div></div><strong>81%</strong></div>
+        <div class="fallback-row"><span>Materials</span><div class="pbar"><div class="pfill" style="width:72%"></div></div><strong>72%</strong></div>
+        <div class="fallback-row"><span>Quality</span><div class="pbar"><div class="pfill" style="width:66%"></div></div><strong>66%</strong></div>
+        <div class="fallback-row"><span>Maintenance</span><div class="pbar"><div class="pfill warn" style="width:58%"></div></div><strong>58%</strong></div>
+        <div class="fallback-row"><span>Engineering</span><div class="pbar"><div class="pfill" style="width:74%"></div></div><strong>74%</strong></div>
+      </div>
+    </div>
+
+    <!-- SPOCs -->
+    <div class="card-title mb3">SPOCs</div>
+    <div class="mb4" id="org-spoc-list">
+      <div class="spoc-chip">
+        <div class="av av-sm" style="background:#0D7A4E">PS</div>
+        <div class="f1">
+          <div class="fw6 fs-sm">Priya Sharma</div>
+          <div class="fs-xs t-tm">priya.s@jetex.com · Primary SPOC</div>
+        </div>
+        <button class="btn btn-ghost btn-sm">Edit</button>
+      </div>
+    </div>
+
+    <!-- Assigned Courses -->
+    <div class="card-title mb3">Assigned Courses</div>
+    <div class="mb4" id="org-course-list">
+      <div class="assigned-course-row">
+        <div class="ac-thumb" style="background:linear-gradient(135deg,#022670,#0050D8)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/></svg></div>
+        <div class="f1"><div class="fw6 fs-sm">Inventory Management</div><div class="fs-xs t-tm">Materials · 147 assigned</div></div>
+        <span class="badge b-published">Published</span>
+      </div>
+      <div class="assigned-course-row">
+        <div class="ac-thumb" style="background:linear-gradient(135deg,#0D4A8C,#1E7FD8)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg></div>
+        <div class="f1"><div class="fw6 fs-sm">OEE &amp; OLE</div><div class="fs-xs t-tm">Manufacturing · 82 assigned</div></div>
+        <span class="badge b-published">Published</span>
+      </div>
+      <div class="assigned-course-row">
+        <div class="ac-thumb" style="background:linear-gradient(135deg,#1A4A7A,#2196C8)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/></svg></div>
+        <div class="f1"><div class="fw6 fs-sm">Supplier Capacity Planning</div><div class="fs-xs t-tm">Materials · 38 assigned</div></div>
+        <span class="badge b-published">Published</span>
+      </div>
+    </div>
+    <a class="btn btn-secondary btn-sm" data-roles="superadmin" href="course-management.html">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Manage Course Assignments
+    </a>
+
+    <div class="divider"></div>
+    <div class="flex gap3">
+      <a href="spoc-dashboard.html" class="btn btn-primary f1">View HR Dashboard</a>
+      <button class="btn btn-secondary" onclick="closeOrgDetail()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Org Modal -->
+<div class="modal-overlay" id="add-org-modal" style="display:none" onclick="closeAddOrg(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Add Organisation</h3>
+      <button class="btn btn-ghost btn-sm" onclick="closeOrgModal()">✕</button>
+    </div>
+    <div class="modal-body" id="org-form-fields">
+      <div class="form-group mb4">
+        <label class="form-label">Organisation Name *</label>
+        <input type="text" class="form-input" id="new-org-name" name="name" placeholder="e.g. Apex Manufacturing" required>
+      </div>
+      <div class="form-row fr-2 mb4">
+        <div class="form-group">
+          <label class="form-label">City</label>
+          <input type="text" class="form-input" id="new-org-city" name="city" placeholder="Pune">
+        </div>
+        <div class="form-group">
+          <label class="form-label">State</label>
+          <input type="text" class="form-input" id="new-org-state" name="state" placeholder="Maharashtra">
+        </div>
+      </div>
+      <div class="form-row fr-2 mb4">
+        <div class="form-group">
+          <label class="form-label">Industry</label>
+          <select class="form-select" id="new-org-industry" name="industry">
+            <option value="">Select industry</option>
+            <option>Automotive</option>
+            <option>Machine Tools</option>
+            <option>Packaging</option>
+            <option>Plastics &amp; Rubber</option>
+            <option>Electronics</option>
+            <option>Pharmaceuticals</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Licence Limit</label>
+          <input type="number" class="form-input" id="new-org-licences" name="licenceLimit" placeholder="100" min="1" required>
+        </div>
+      </div>
+      <div class="form-row fr-2 mb4">
+        <div class="form-group">
+          <label class="form-label">Contract Start</label>
+          <input type="date" class="form-input" id="new-org-start" name="contractStart">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Contract End</label>
+          <input type="date" class="form-input" id="new-org-end" name="contractEnd">
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="card-title mb3">Primary SPOC</div>
+      <div class="form-row fr-2 mb4">
+        <div class="form-group">
+          <label class="form-label">SPOC Name</label>
+          <input type="text" class="form-input" id="new-org-spoc" name="spocName" placeholder="Full Name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">SPOC Email</label>
+          <input type="email" class="form-input" id="new-org-spoc-email" name="spocEmail" placeholder="spoc@company.com">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeOrgModal()">Cancel</button>
+      <button class="btn btn-primary" id="create-org-button" type="button" onclick="createOrganisation()">Create Organisation</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/demo-store.js"></script>
+<script>
+let editingOrgId='';
+function openOrgDetail(id) {
+  const org=EmpowerOneData.getOrganisation(id);
+  if(!org)return;
+  document.getElementById('detail-org-name').textContent=org.name;
+  document.getElementById('detail-org-location').textContent=`${org.city||'Location not set'}${org.state?', '+org.state:''} · ${org.status}`;
+  const badge=document.getElementById('detail-org-status');badge.textContent=org.status;badge.className=`badge ${org.status==='Active'?'b-active':'b-pending'}`;
+  document.getElementById('detail-active-learners').textContent=org.activeLearners;
+  document.getElementById('detail-licence-limit').textContent=org.licenceLimit;
+  document.getElementById('detail-completion-rate').textContent=`${org.completionRate||0}%`;
+  document.querySelector('#org-spoc-list').innerHTML=org.spocs.length?org.spocs.map(name=>`<div class="spoc-chip"><div class="av av-sm">${escapeText(name.split(/\s+/).map(part=>part[0]).join('').slice(0,2))}</div><div class="f1"><div class="fw6 fs-sm">${escapeText(name)}</div><div class="fs-xs t-tm">${escapeText(org.spocEmail||'Email not set')} · Primary SPOC</div></div></div>`).join(''):'<p class="fs-sm t-tm">No SPOC assigned yet.</p>';
+  const courses=EmpowerOneData.getSnapshot().courses.filter(course=>org.courseIds.includes(course.id));
+  document.querySelector('#org-course-list').innerHTML=courses.length?courses.map(course=>`<div class="assigned-course-row"><div class="ac-thumb" aria-hidden="true"><span>▱</span></div><div class="f1"><div class="fw6 fs-sm">${escapeText(course.title)}</div><div class="fs-xs t-tm">${escapeText(course.department)} · ${org.activeLearners} learner accounts</div></div><span class="badge b-published">${escapeText(course.status)}</span></div>`).join(''):'<p class="fs-sm t-tm">No courses assigned. Use Manage Course Assignments to add learning.</p>';
+  document.getElementById('org-detail').style.display = 'block';
+}
+
+function escapeText(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+
+function closeOrgDetail() {
+  document.getElementById('org-detail').style.display = 'none';
+}
+
+function openAddOrg() {
+  editingOrgId='';
+  document.querySelector('#add-org-modal h3').textContent='Add Organisation';
+  document.getElementById('create-org-button').textContent='Create Organisation';
+  document.querySelectorAll('#org-form-fields input').forEach(input=>input.value='');
+  document.getElementById('add-org-modal').style.display = 'flex';
+}
+
+function openEditOrg(id){
+  const org=EmpowerOneData.getOrganisation(id);if(!org)return;editingOrgId=id;openAddOrg();editingOrgId=id;
+  document.querySelector('#add-org-modal h3').textContent='Edit Organisation';document.getElementById('create-org-button').textContent='Save Organisation';
+  const values={name:org.name,city:org.city,state:org.state,industry:org.industry,licenceLimit:org.licenceLimit,contractStart:org.contractStart,contractEnd:org.contractEnd,spocName:org.spocs[0]||'',spocEmail:org.spocEmail||''};
+  Object.entries(values).forEach(([key,value])=>{const input=document.querySelector(`#org-form-fields [name="${key}"]`);if(input)input.value=value;});
+}
+
+function closeOrgModal(){document.getElementById('add-org-modal').style.display='none';}
+
+function createOrganisation(){
+  const fields=document.getElementById('org-form-fields');
+  const required=[fields.querySelector('[name="name"]'),fields.querySelector('[name="licenceLimit"]')];
+  if(!required.every(field=>field.reportValidity()))return;
+  const values=Object.fromEntries([...fields.querySelectorAll('input,select')].map(field=>[field.name,field.value]));
+  try{
+    if(editingOrgId)EmpowerOneData.saveOrganisationProfile(values,editingOrgId);
+    else EmpowerOneData.addOrganisation(values);
+    closeOrgModal();renderOrganisations();
+  }catch(error){window.alert(error.message);}
+}
+
+function closeAddOrg(e) {
+  if (e.target === document.getElementById('add-org-modal')) document.getElementById('add-org-modal').style.display = 'none';
+}
+
+function filterOrgs(q) {
+  document.getElementById('org-search').value=q;applyOrgFilters();
+}
+function applyOrgFilters(){
+  const query=document.getElementById('org-search').value.trim().toLowerCase();const status=document.getElementById('org-status-filter').value;
+  document.querySelectorAll('#org-tbody tr').forEach(row=>{row.hidden=(!row.textContent.toLowerCase().includes(query))||(status&&row.dataset.status!==status);});
+}
+function renderOrganisations(){
+  const orgs=EmpowerOneData.getSnapshot().organisations;const tbody=document.getElementById('org-tbody');tbody.replaceChildren();
+  orgs.forEach(org=>{
+    const row=document.createElement('tr');row.dataset.status=org.status;
+    const used=Math.round(org.activeLearners/Math.max(1,org.licenceLimit)*100);const contract=org.contractEnd?new Date(`${org.contractEnd}T00:00:00`).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}):'Not set';
+    row.innerHTML=`<td><div class="flex aic gap3"><div class="av av-md"></div><div><div class="fw6 org-name"></div><div class="fs-xs t-tm org-location"></div></div></div></td><td><span class="badge ${org.status==='Active'?'b-active':'b-pending'}">${escapeText(org.status)}</span></td><td><div class="fw6">${org.activeLearners} / ${org.licenceLimit}</div><div class="pbar pbar-sm mt2"><div class="pfill" style="width:${Math.min(100,used)}%"></div></div><div class="fs-xs t-tm mt1">${Math.max(0,org.licenceLimit-org.activeLearners)} remaining</div></td><td><div class="flex aic gap2"><div class="pbar f1"><div class="pfill green" style="width:${Math.min(100,org.completionRate||0)}%"></div></div><span class="fw6">${org.completionRate?`${org.completionRate}%`:'—'}</span></div></td><td><div class="fs-sm org-spoc"></div><div class="fs-xs t-tm">${org.spocs.length} SPOC${org.spocs.length===1?'':'s'}</div></td><td><span class="fw6">${org.courseIds.length}</span></td><td class="t-ts">${contract}</td><td><div class="flex gap2"><button class="btn btn-secondary btn-sm org-view" type="button">View</button><button class="btn btn-ghost btn-sm org-edit" type="button">Edit</button></div></td>`;
+    row.querySelector('.av').textContent=org.name.split(/\s+/).map(part=>part[0]).join('').slice(0,2).toUpperCase();row.querySelector('.org-name').textContent=org.name;row.querySelector('.org-location').textContent=`${org.city||'Location not set'}${org.state?', '+org.state:''} · ${org.industry||'Industry not set'}`;row.querySelector('.org-spoc').textContent=org.spocs[0]||'Not assigned';row.querySelector('.org-view').addEventListener('click',()=>openOrgDetail(org.id));const edit=row.querySelector('.org-edit');edit.hidden=EmpowerOneData.currentRole()!=='superadmin';edit.addEventListener('click',()=>openEditOrg(org.id));tbody.appendChild(row);
+  });
+  const active=orgs.filter(org=>org.status==='Active').length;document.getElementById('org-total-count').textContent=orgs.length;document.getElementById('org-active-count').textContent=active;document.getElementById('org-learner-count').textContent=orgs.reduce((sum,org)=>sum+org.activeLearners,0).toLocaleString();document.getElementById('org-licence-count').textContent=orgs.reduce((sum,org)=>sum+org.licenceLimit,0).toLocaleString();applyOrgFilters();
+}
+renderOrganisations();
+const requestedOrg=new URLSearchParams(location.search).get('org');if(requestedOrg)openOrgDetail(requestedOrg);
+</script>
+</body>
+</html>

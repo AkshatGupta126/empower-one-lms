@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assessment — Inventory Management | EmpowerOne</title>
+  <link rel="stylesheet" href="../styles/app.css">
+  <style>
+    .assess-shell{max-width:780px;margin:0 auto;padding:40px 24px}
+    .assess-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+    .assess-title{font-family:var(--fh);font-size:1.25rem;font-weight:800;color:var(--navy)}
+    .assess-meta{font-size:.8rem;color:var(--tm);margin-top:4px}
+    .assess-prog{display:flex;align-items:center;gap:12px;margin-bottom:32px;padding:16px 20px;background:#fff;border:1px solid var(--border);border-radius:var(--rad-lg);box-shadow:var(--sh1)}
+    .q-dots{display:flex;gap:6px;flex-wrap:wrap;flex:1}
+    .qdot{width:28px;height:28px;border-radius:50%;border:2px solid var(--border);font-size:.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;font-family:var(--fh);color:var(--tm)}
+    .qdot:hover{border-color:var(--blue);color:var(--blue)}
+    .qdot.answered{background:var(--blue-pale);border-color:var(--blue);color:var(--blue)}
+    .qdot.current{background:var(--blue);border-color:var(--blue);color:#fff}
+    .qdot.correct{background:var(--suc-bg);border-color:var(--success);color:var(--success)}
+    .qdot.wrong{background:var(--dan-bg);border-color:var(--danger);color:var(--danger)}
+    .q-card{background:#fff;border:1px solid var(--border);border-radius:var(--rad-lg);padding:28px;box-shadow:var(--sh1);margin-bottom:20px}
+    .q-num{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--blue);margin-bottom:10px}
+    .q-text{font-family:var(--fh);font-size:1.025rem;font-weight:700;color:var(--navy);line-height:1.45;margin-bottom:20px}
+    .q-opts{display:flex;flex-direction:column;gap:10px}
+    .q-actions{display:flex;justify-content:space-between;align-items:center;margin-top:24px}
+    .result-card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:48px;text-align:center;box-shadow:var(--sh2);max-width:520px;margin:0 auto}
+    .result-score-circle{width:120px;height:120px;position:relative;margin:0 auto 24px}
+    .result-score-circle svg{transform:rotate(-90deg)}
+    .score-val{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column}
+    .score-num{font-family:var(--fh);font-size:2.25rem;font-weight:800;line-height:1}
+    .score-lbl{font-size:.7rem;color:var(--tm);font-weight:500}
+    .result-badges{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:24px 0}
+    .rb{padding:12px 20px;border-radius:var(--rad);text-align:center;min-width:120px}
+    .rb-val{font-family:var(--fh);font-size:1.25rem;font-weight:800;margin-bottom:4px}
+    .rb-lbl{font-size:.72rem;color:var(--ts);font-weight:500}
+  </style>
+</head>
+<body style="background:var(--bg)">
+<div id="topbar-assess" style="height:54px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 32px;gap:16px;position:sticky;top:0;z-index:100">
+  <button onclick="window.location.href='learning-screen.html'" style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--blue);font-weight:600;font-family:var(--fb)">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to Course
+  </button>
+  <img src="../Images and Files/LOGO PNG.png" alt="EmpowerOne" style="height:28px;margin-left:auto">
+  <div class="av av-sm" style="background:#0050D8">RK</div>
+</div>
+
+<!-- QUIZ SCREEN -->
+<div id="quiz-screen">
+<div class="assess-shell">
+  <div class="assess-header">
+    <div>
+      <div class="assess-title">Final Assessment</div>
+      <div class="assess-meta">Inventory Management · 20 questions · Pass: 70% · Unlimited attempts</div>
+    </div>
+  </div>
+
+  <!-- Question Progress Dots -->
+  <div class="assess-prog">
+    <div class="q-dots" id="q-dots"></div>
+    <div style="font-size:.8rem;color:var(--tm);white-space:nowrap;margin-left:12px">
+      <span id="answered-count">0</span>/20 answered
+    </div>
+  </div>
+
+  <!-- Question Card -->
+  <div class="q-card">
+    <div class="q-num" id="q-num">Question 1 of 20</div>
+    <div class="q-text" id="q-text">Loading question...</div>
+    <div class="q-opts" id="q-opts"></div>
+    <div class="q-actions">
+      <button class="btn btn-secondary" id="prev-btn" onclick="prevQ()" style="display:none">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        Previous
+      </button>
+      <span></span>
+      <button class="btn btn-primary" id="next-btn" onclick="nextQ()">
+        Next Question
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:center">
+    <button class="btn btn-success btn-lg" onclick="submitAssessment()" id="submit-btn" style="display:none">
+      Submit Assessment
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+    </button>
+  </div>
+</div>
+</div>
+
+<!-- RESULT SCREEN -->
+<div id="result-screen" style="display:none;padding:40px 24px">
+  <div class="result-card">
+    <div id="result-icon"></div>
+    <div class="result-score-circle">
+      <svg width="120" height="120" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="50" fill="none" stroke="var(--border)" stroke-width="10"/>
+        <circle id="score-ring" cx="60" cy="60" r="50" fill="none" stroke-width="10" stroke-dasharray="314" stroke-dashoffset="94" stroke-linecap="round"/>
+      </svg>
+      <div class="score-val">
+        <span class="score-num" id="score-num">84%</span>
+        <span class="score-lbl">Score</span>
+      </div>
+    </div>
+    <div id="result-title" style="font-family:var(--fh);font-size:1.5rem;font-weight:800;margin-bottom:8px"></div>
+    <p id="attempt-number" class="fs-xs t-tm"></p>
+    <p id="result-msg"></p>
+    <div class="result-badges">
+      <div class="rb" style="background:var(--blue-pale)">
+        <div class="rb-val t-blue" id="res-correct">17/20</div>
+        <div class="rb-lbl">Correct</div>
+      </div>
+      <div class="rb" style="background:var(--dan-bg)">
+        <div class="rb-val t-danger" id="res-wrong">3/20</div>
+        <div class="rb-lbl">Incorrect</div>
+      </div>
+      <div class="rb" style="background:var(--suc-bg)">
+        <div class="rb-val t-success">70%</div>
+        <div class="rb-lbl">Pass Mark</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+      <button class="btn btn-secondary" onclick="retakeAssessment()">Retake Assessment</button>
+      <button class="btn btn-primary" onclick="window.location.href='learner-dashboard.html'">
+        Back to Dashboard
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/demo-store.js"></script>
+<script>
+const learnerId = sessionStorage.getItem('empowerone.demoUserId') || 'user-learner';
+const learningStorageKey = `empowerone.inventory.learning.${learnerId}`;
+const questions = [
+  { q: "What does ABC classification in inventory management prioritise?", opts: ["Items by alphabetical order of supplier names", "Items by their annual consumption value and importance", "Items by their physical size and weight", "Items by their purchase date"], ans: 1 },
+  { q: "Which inventory method ensures that goods received first are used or shipped first?", opts: ["LIFO (Last In First Out)", "FEFO (First Expired First Out)", "FIFO (First In First Out)", "Random allocation"], ans: 2 },
+  { q: "What is cycle counting in warehouse management?", opts: ["Counting all inventory once a year", "Counting inventory items in rotation throughout the year", "Counting items only when a discrepancy is reported", "Counting items when a new batch arrives"], ans: 1 },
+  { q: "In ABC analysis, which category typically represents the highest value but fewest items?", opts: ["Category C", "Category B", "Category A", "Category D"], ans: 2 },
+  { q: "What is the primary purpose of safety stock in inventory management?", opts: ["To increase revenue by holding more goods", "To protect against stockouts due to demand variability or supply delays", "To reduce storage costs", "To comply with FIFO requirements"], ans: 1 },
+  { q: "Which metric measures the number of times inventory is sold and replaced in a given period?", opts: ["Stock turnover ratio", "Lead time", "Reorder point", "Economic order quantity"], ans: 0 },
+  { q: "FEFO is most critical in which type of industry?", opts: ["Automotive manufacturing", "Software development", "Food processing and pharmaceuticals", "Heavy machinery"], ans: 2 },
+  { q: "What does 'lead time' refer to in inventory management?", opts: ["Time taken to deliver to the customer", "Time between placing an order and receiving it", "Time to count inventory", "Time to process a sales invoice"], ans: 1 },
+  { q: "Which of the following is NOT a typical goal of inventory management?", opts: ["Minimising stockouts", "Reducing holding costs", "Maximising warehouse space usage", "Ensuring on-time delivery"], ans: 2 },
+  { q: "What is the Economic Order Quantity (EOQ) model used for?", opts: ["Determining the optimal number of suppliers", "Finding the ideal order size to minimise total inventory costs", "Scheduling production runs", "Calculating warehouse capacity"], ans: 1 },
+  { q: "In a manufacturing context, 'dead stock' refers to:", opts: ["Items that have been discontinued from production", "Inventory that has not moved or sold in a defined period", "Damaged goods in transit", "Stock reserved for export"], ans: 1 },
+  { q: "Which document is used to record goods received from a supplier?", opts: ["Purchase Order (PO)", "Sales Invoice", "Goods Receipt Note (GRN)", "Bill of Lading"], ans: 2 },
+  { q: "The '5S' methodology in a warehouse primarily helps with:", opts: ["Financial reporting", "Workplace organisation and efficiency", "Supplier evaluation", "Customer relationship management"], ans: 1 },
+  { q: "What triggers a reorder in a reorder point (ROP) system?", opts: ["When stock expires", "When inventory level falls to a predefined minimum quantity", "When a customer complaint is received", "At the end of each financial quarter"], ans: 1 },
+  { q: "Which of the following is a consequence of overstocking?", opts: ["Frequent stockouts", "Higher holding and obsolescence costs", "Lower supplier reliability", "Reduced order fulfilment speed"], ans: 1 },
+  { q: "In an ERP system, a stock keeping unit (SKU) is used to:", opts: ["Track individual inventory items uniquely", "Calculate employee attendance", "Generate customer invoices", "Monitor production downtime"], ans: 0 },
+  { q: "What is 'consignment stock' in supply chain management?", opts: ["Stock owned by the buyer but stored at the supplier's facility", "Stock owned by the supplier but stored at the buyer's facility", "Stock held at a government warehouse", "Stock damaged and awaiting disposal"], ans: 1 },
+  { q: "Which of the following best describes a Kanban system?", opts: ["A financial planning tool", "A visual pull-based inventory replenishment system", "A supplier evaluation framework", "An ERP module for HR management"], ans: 1 },
+  { q: "When carrying out a stock count, which practice is considered best?", opts: ["Counting during peak production hours", "Counting without reference to existing records first", "Using only digital systems without physical verification", "Counting only high-value items"], ans: 1 },
+  { q: "What is the main benefit of an automated inventory management system over manual methods?", opts: ["It eliminates the need for warehouse staff", "It provides real-time visibility, reduces errors, and speeds up operations", "It requires no internet connectivity", "It works independently of supplier relationships"], ans: 1 }
+];
+
+let currentQ = 0;
+let answers = new Array(20).fill(null);
+let timerSecs = 1967;
+
+// Build dots
+const dotsEl = document.getElementById('q-dots');
+questions.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'qdot' + (i === 0 ? ' current' : '');
+  d.textContent = i + 1;
+  d.onclick = () => goToQ(i);
+  dotsEl.appendChild(d);
+});
+
+function renderQ() {
+  const q = questions[currentQ];
+  document.getElementById('q-num').textContent = `Question ${currentQ+1} of ${questions.length}`;
+  document.getElementById('q-text').textContent = q.q;
+  const opts = document.getElementById('q-opts');
+  opts.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const el = document.createElement('div');
+    el.className = 'mcq-opt' + (answers[currentQ] === i ? ' sel' : '');
+    el.innerHTML = `<div class="mcq-radio"></div><span>${opt}</span>`;
+    el.onclick = () => selectOpt(i);
+    opts.appendChild(el);
+  });
+  // Dots
+  document.querySelectorAll('.qdot').forEach((d, i) => {
+    d.className = 'qdot';
+    if (answers[i] !== null) d.classList.add('answered');
+    if (i === currentQ) d.classList.add('current');
+  });
+  document.getElementById('prev-btn').style.display = currentQ > 0 ? '' : 'none';
+  document.getElementById('next-btn').textContent = currentQ < questions.length - 1 ? 'Next Question' : 'Review Answers';
+  document.getElementById('next-btn').innerHTML = currentQ < questions.length - 1
+    ? 'Next Question <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>'
+    : 'Review Answers <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>';
+  const answered = answers.filter(a => a !== null).length;
+  document.getElementById('answered-count').textContent = answered;
+  document.getElementById('submit-btn').style.display = answered === questions.length ? 'inline-flex' : 'none';
+}
+
+function selectOpt(i) {
+  answers[currentQ] = i;
+  renderQ();
+}
+
+function nextQ() {
+  if (currentQ < questions.length - 1) { currentQ++; renderQ(); }
+}
+function prevQ() {
+  if (currentQ > 0) { currentQ--; renderQ(); }
+}
+function goToQ(i) { currentQ = i; renderQ(); }
+
+function submitAssessment() {
+  let learningState;
+  try { learningState = JSON.parse(localStorage.getItem(learningStorageKey) || '{}'); }
+  catch (error) { learningState = {}; }
+  if (!Array.isArray(learningState.completed) || learningState.completed.length < 27) {
+    alert('Complete all required course content before submitting the final assessment.');
+    return;
+  }
+  let correct = 0;
+  answers.forEach((a, i) => { if (a === questions[i].ans) correct++; });
+  const pct = Math.round((correct / questions.length) * 100);
+  const passed = pct >= 70;
+  let attemptRecord;
+  try {
+    attemptRecord=EmpowerOneData.submitAttempt(learnerId,'inventory-management',correct,questions.length);
+  } catch(error) {
+    document.getElementById('quiz-screen').insertAdjacentHTML('afterbegin',`<div class="alert alert-warn assessment-error" role="alert">${error.message.replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]))}</div>`);
+    return;
+  }
+  learningState.assessmentPassed = Boolean(learningState.assessmentPassed || attemptRecord.passed);
+  learningState.bestScore = Math.max(Number(learningState.bestScore) || 0, pct);
+  localStorage.setItem(learningStorageKey, JSON.stringify(learningState));
+  document.getElementById('quiz-screen').style.display = 'none';
+  document.getElementById('result-screen').style.display = 'block';
+  document.getElementById('score-num').textContent = pct + '%';
+  const ring = document.getElementById('score-ring');
+  const circumference = 314;
+  const offset = circumference - (circumference * pct / 100);
+  ring.style.strokeDashoffset = offset;
+  ring.style.stroke = passed ? 'var(--success)' : 'var(--danger)';
+  const iconEl = document.getElementById('result-icon');
+  if (passed) {
+    iconEl.innerHTML = `<div style="width:72px;height:72px;border-radius:50%;background:var(--suc-bg);display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>`;
+    document.getElementById('result-title').textContent = 'Assessment Passed!';
+    document.getElementById('result-title').style.color = 'var(--success)';
+    document.getElementById('result-msg').textContent = `Excellent work! You scored ${pct}% and have completed the Inventory Management course. Your completion has been recorded.`;
+  } else {
+    iconEl.innerHTML = `<div style="width:72px;height:72px;border-radius:50%;background:var(--dan-bg);display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>`;
+    document.getElementById('result-title').textContent = 'Not Passed';
+    document.getElementById('result-title').style.color = 'var(--danger)';
+    document.getElementById('result-msg').textContent = `You scored ${pct}%, just below the 70% pass mark. Don't worry — you have unlimited attempts. Review the course and try again.`;
+  }
+  document.getElementById('res-correct').textContent = correct + '/' + questions.length;
+  document.getElementById('res-wrong').textContent = (questions.length - correct) + '/' + questions.length;
+  document.getElementById('attempt-number').textContent = `Attempt ${attemptRecord.attemptNumber} · Unlimited attempts`;
+}
+
+function retakeAssessment() {
+  answers = new Array(20).fill(null);
+  currentQ = 0;
+  timerSecs = 1967;
+  document.getElementById('quiz-screen').style.display = 'block';
+  document.getElementById('result-screen').style.display = 'none';
+  renderQ();
+}
+
+renderQ();
+</script>
+</body>
+</html>

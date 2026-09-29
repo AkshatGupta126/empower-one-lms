@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learner Dashboard — EmpowerOne</title>
+  <link rel="stylesheet" href="../styles/app.css">
+  <style>.alert[hidden]{display:none!important}</style>
+</head>
+<body>
+<div class="shell">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <img src="../Images and Files/LOGO PNG.png" alt="EmpowerOne">
+    </div>
+    <nav class="snav">
+      <a href="learner-dashboard.html" class="snav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span>My Learning</span>
+      </a>
+      <a href="learner-dashboard.html#assigned-courses" class="snav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <span>All Courses</span>
+      </a>
+      <a href="learner-dashboard.html#completed-courses" class="snav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        <span>Completed</span>
+      </a>
+      <a href="settings.html" class="snav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
+        <span>Profile</span>
+      </a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="suser">
+        <div class="av av-md" style="background:#0050D8">RK</div>
+        <div class="suser-info">
+          <div class="suser-name">Rajesh Kumar</div>
+          <div class="suser-role">Line Operator · Manufacturing</div>
+        </div>
+      </div>
+      <a href="login.html" class="snav-item mt2" style="color:var(--danger)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <span>Sign Out</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="tb-left">
+        <div class="breadcrumb"><span class="cur">My Learning</span></div>
+      </div>
+      <div class="tb-right">
+        <button class="icon-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        </button>
+        <div class="av av-md" style="background:#0050D8;cursor:pointer">RK</div>
+      </div>
+    </div>
+
+    <div class="page">
+      <!-- WELCOME BANNER -->
+      <div style="background:linear-gradient(135deg,#022670 0%,#0050D8 100%);border-radius:var(--rad-lg);padding:32px 40px;margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden">
+        <div style="position:absolute;top:-40px;right:80px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.05)"></div>
+        <div style="position:absolute;bottom:-60px;right:-20px;width:250px;height:250px;border-radius:50%;background:rgba(255,255,255,.04)"></div>
+        <div style="position:relative;z-index:1">
+          <p style="color:rgba(255,255,255,.7);font-size:.8rem;font-weight:500;margin-bottom:6px">Good morning, Rajesh!</p>
+          <h2 style="color:#fff;margin-bottom:8px;font-size:1.375rem">Ready to continue learning?</h2>
+          <p id="learner-course-summary" style="color:rgba(255,255,255,.75);font-size:.875rem;margin:0">You've completed 2 of 3 assigned courses. Keep going!</p>
+        </div>
+        <div style="position:relative;z-index:1;display:flex;gap:20px;align-items:center">
+          <div style="text-align:center">
+            <div id="learner-overall-progress" style="font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:800;color:#fff;line-height:1">67%</div>
+            <div style="font-size:.72rem;color:rgba(255,255,255,.6);font-weight:500;margin-top:4px">Overall Progress</div>
+          </div>
+          <div style="width:80px;height:80px;position:relative">
+            <svg class="welcome-progress-ring" viewBox="0 0 80 80">
+              <circle cx="40" cy="40" r="34" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="8"/>
+              <circle cx="40" cy="40" r="34" fill="none" stroke="#fff" stroke-width="8" stroke-dasharray="213.6" stroke-dashoffset="70.5" stroke-linecap="round" transform="rotate(-90 40 40)"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTINUE LEARNING -->
+      <div class="ph" id="assigned-courses" style="margin-bottom:16px">
+        <div class="ph-left">
+          <h2 style="font-size:1.15rem">Continue Learning</h2>
+          <p>Pick up where you left off</p>
+        </div>
+      </div>
+
+      <!-- CURRENT COURSE CARD (big) -->
+      <div class="card mb6 resume-course-card" style="border-left:4px solid var(--blue)">
+        <div style="display:flex;align-items:center;gap:20px">
+          <div style="width:72px;height:72px;border-radius:var(--rad);background:linear-gradient(135deg,#022670,#0050D8);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="f1">
+            <div class="flex aic gap2 mb2">
+              <span class="badge b-inprogress">In Progress</span>
+              <span class="tag">Inventory Management</span>
+            </div>
+            <h3 style="margin-bottom:4px">Module 3: Cycle Counting Techniques</h3>
+            <p style="font-size:.8rem;margin-bottom:10px">Last watched: Lesson 3.2 — ABC Analysis in Inventory Control</p>
+            <div class="flex aic gap3">
+              <div class="pbar f1 pbar-lg"><div class="pfill" style="width:60%"></div></div>
+              <span class="fw7 t-blue">60%</span>
+            </div>
+          </div>
+          <a href="learning-screen.html" class="btn btn-primary btn-lg">Resume Course</a>
+        </div>
+      </div>
+
+      <!-- ALL ASSIGNED COURSES -->
+      <div class="ph" style="margin-bottom:16px">
+        <div class="ph-left">
+          <h2 style="font-size:1.15rem">Assigned Courses</h2>
+          <p>3 courses assigned to you</p>
+        </div>
+      </div>
+
+      <div class="g3 mb8">
+        <!-- Course 1 — In Progress -->
+        <div class="cc-card" onclick="window.location.href='learning-screen.html'">
+          <div class="cc-thumb" style="background:linear-gradient(135deg,#022670,#0050D8)">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+            <div style="position:absolute;top:10px;right:10px"><span class="badge b-inprogress">In Progress</span></div>
+          </div>
+          <div class="cc-card-body">
+            <h4 style="margin-bottom:6px">Inventory Management</h4>
+            <p style="font-size:.8rem;margin-bottom:12px">Module 3 of 8 · 12 min left this module</p>
+            <div class="flex aic gap2">
+              <div class="pbar f1"><div class="pfill" style="width:60%"></div></div>
+              <span class="fw7 t-blue" style="font-size:.8rem">60%</span>
+            </div>
+            <button class="btn btn-primary btn-sm" style="width:100%;margin-top:12px">Continue</button>
+          </div>
+        </div>
+
+        <!-- Course 2 — Completed -->
+        <div class="cc-card" id="completed-courses" onclick="window.location.href='learning-screen.html'">
+          <div class="cc-thumb" style="background:linear-gradient(135deg,#0D4A8C,#1E7FD8)">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2"/></svg>
+            <div style="position:absolute;top:10px;right:10px"><span class="badge b-completed">Completed</span></div>
+            <!-- Completion check overlay -->
+            <div style="position:absolute;inset:0;background:rgba(13,122,78,.15);display:flex;align-items:center;justify-content:center">
+              <div style="width:40px;height:40px;border-radius:50%;background:rgba(13,122,78,.9);display:flex;align-items:center;justify-content:center">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="cc-card-body">
+            <h4 style="margin-bottom:6px">OEE &amp; OLE</h4>
+            <p style="font-size:.8rem;margin-bottom:12px">All 6 modules · Assessment passed (84%)</p>
+            <div class="flex aic gap2">
+              <div class="pbar f1"><div class="pfill green" style="width:100%"></div></div>
+              <span class="fw7 t-success" style="font-size:.8rem">100%</span>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="width:100%;margin-top:12px">Review Course</button>
+          </div>
+        </div>
+
+        <!-- Course 3 — Not Started -->
+        <div class="cc-card" onclick="window.location.href='learning-screen.html'">
+          <div class="cc-thumb" style="background:linear-gradient(135deg,#1A4A7A,#2196C8)">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg>
+            <div style="position:absolute;top:10px;right:10px"><span class="badge b-notstarted">Not Started</span></div>
+          </div>
+          <div class="cc-card-body">
+            <h4 style="margin-bottom:6px">Supplier Capacity Planning</h4>
+            <p style="font-size:.8rem;margin-bottom:12px">5 modules · ~2 hrs</p>
+            <div class="flex aic gap2">
+              <div class="pbar f1"><div class="pfill" style="width:0%"></div></div>
+              <span class="fw7 t-tm" style="font-size:.8rem">0%</span>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="width:100%;margin-top:12px">Start Course</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ASSESSMENT REMINDER -->
+      <div class="alert alert-warn mb6" id="assessment-reminder">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <div>
+          <strong>Assessment pending for Inventory Management</strong> — Complete all modules to unlock the final assessment. Passing score: 70%. Unlimited attempts.
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="g3">
+        <div class="kpi">
+          <div class="kpi-icon ki-green">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <div class="kpi-value" id="learner-completed-courses">1</div>
+          <div class="kpi-label">Courses Completed</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-icon ki-blue">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div class="kpi-value">4.2 hrs</div>
+          <div class="kpi-label">Total Learning Time</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-icon ki-warn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+          </div>
+          <div class="kpi-value" id="learner-best-score">84%</div>
+          <div class="kpi-label">Best Assessment Score</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/demo-store.js"></script>
+<script>
+(() => {
+  const learnerId = sessionStorage.getItem('empowerone.demoUserId') || 'user-learner';
+  let state = {};
+  try { state = JSON.parse(localStorage.getItem(`empowerone.inventory.learning.${learnerId}`) || '{}'); } catch (error) { state = {}; }
+  const completed = Array.isArray(state.completed) ? state.completed.length : 8;
+  const inventoryProgress = Math.min(100, Math.round(completed / 27 * 100));
+  const inventoryPassed = completed >= 27 && state.assessmentPassed === true;
+  const completionCount = 1 + (inventoryPassed ? 1 : 0);
+  const overall = Math.round((inventoryProgress + 100) / 3);
+  const progressText = document.getElementById('learner-overall-progress');
+  progressText.textContent = overall + '%';
+  document.querySelector('.welcome-progress-ring circle:last-child')?.setAttribute('stroke-dashoffset', (213.6 - 213.6 * overall / 100).toFixed(1));
+  document.getElementById('learner-course-summary').textContent = `You've completed ${completionCount} of 3 assigned courses. Keep going!`;
+  document.getElementById('learner-completed-courses').textContent = completionCount;
+  document.getElementById('learner-best-score').textContent = (state.bestScore || 84) + '%';
+  const cards = document.querySelectorAll('.cc-card');
+  if (cards[0]) {
+    cards[0].querySelector('.pfill').style.width = inventoryProgress + '%';
+    cards[0].querySelector('.fw7').textContent = inventoryProgress + '%';
+    cards[0].querySelector('.cc-card-body p').textContent = inventoryPassed ? 'All 8 modules · Assessment passed (' + state.bestScore + '%)' : `${completed} of 27 content items complete · Pass mark: 70%`;
+    cards[0].querySelector('.badge').textContent = inventoryPassed ? 'Completed' : inventoryProgress ? 'In Progress' : 'Not Started';
+    cards[0].querySelector('.badge').className = 'badge ' + (inventoryPassed ? 'b-completed' : inventoryProgress ? 'b-inprogress' : 'b-notstarted');
+    cards[0].querySelector('.btn').textContent = inventoryPassed ? 'Review Course' : inventoryProgress ? 'Continue' : 'Start Course';
+  }
+  const resume = document.querySelector('.card.mb6');
+  if (resume) {
+    resume.querySelector('.pfill').style.width = inventoryProgress + '%';
+    resume.querySelector('.fw7').textContent = inventoryProgress + '%';
+    resume.querySelector('h3').textContent = inventoryPassed ? 'Inventory Management · Completed' : `Inventory Management · ${inventoryProgress}% complete`;
+    resume.querySelector('p').textContent = inventoryPassed ? `Assessment passed (${state.bestScore}%) · Course complete` : 'Resume from your last saved lesson and video position';
+    resume.querySelector('a').textContent = inventoryPassed ? 'Review Course' : 'Resume Course';
+  }
+  const reminder = document.getElementById('assessment-reminder');
+  if (reminder) {
+    if (inventoryPassed) reminder.hidden = true;
+    else if (completed >= 27) reminder.querySelector('div strong').textContent = 'Final assessment ready for Inventory Management';
+  }
+})();
+</script>
+</body>
+</html>

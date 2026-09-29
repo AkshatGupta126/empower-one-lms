@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Approval — EmpowerOne</title>
+  <link rel="stylesheet" href="../styles/app.css">
+  <style>
+    .approval-shell{display:grid;grid-template-columns:1fr 360px;gap:0;height:calc(100vh - 58px);overflow:hidden}
+    .ap-main{overflow-y:auto;padding:32px}
+    .ap-sidebar{background:#fff;border-left:1px solid var(--border);overflow-y:auto;display:flex;flex-direction:column}
+    .ap-sidebar-head{padding:20px;border-bottom:1px solid var(--border);background:var(--surface);flex-shrink:0}
+    .ap-sidebar-body{flex:1;padding:20px;overflow-y:auto}
+    .ap-sidebar-foot{padding:16px 20px;border-top:1px solid var(--border);background:var(--surface);flex-shrink:0}
+    .module-preview{background:var(--surface);border:1px solid var(--border);border-radius:var(--rad);margin-bottom:10px;overflow:hidden}
+    .mp-head{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;font-size:.85rem;font-weight:700;color:var(--navy);font-family:var(--fh)}
+    .mp-head:hover{background:#EBF0F8}
+    .mp-items{display:none;padding:4px 14px 12px}
+    .mp-items.open{display:block}
+    .mp-item{display:flex;align-items:center;gap:8px;padding:7px 10px;font-size:.8rem;border-bottom:1px solid var(--border)}
+    .mp-item:last-child{border-bottom:none}
+    .reject-form{background:var(--dan-bg);border:1px solid #F2B8B8;border-radius:var(--rad);padding:16px;margin-top:12px;display:none}
+    .queue-item{display:flex;align-items:center;gap:10px;padding:10px;border-radius:var(--rad);cursor:pointer;transition:background .1s;font-size:.82rem;border:1px solid transparent}
+    .queue-item:hover{background:var(--surface)}
+    .queue-item.active{background:var(--blue-pale);border-color:var(--blue)}
+    .qi-thumb{width:36px;height:36px;border-radius:var(--rad);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <div class="sidebar">
+    <div class="sidebar-logo"><img src="../Images and Files/LOGO PNG.png" alt="EmpowerOne"></div>
+    <nav class="snav">
+      <a href="super-admin-dashboard.html" class="snav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Dashboard</span></a>
+      <div class="snav-section">Management</div>
+      <a href="organisations.html" class="snav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span>Organisations</span></a>
+      <a href="course-management.html" class="snav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg><span>Course Library</span></a>
+      <a href="course-approval.html" class="snav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><span>Approvals</span><span class="snav-badge">3</span></a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="suser"><div class="av av-md" style="background:var(--navy)">SA</div><div class="suser-info"><div class="suser-name">Super Admin</div><div class="suser-role">Platform Administrator</div></div></div>
+      <a href="login.html" class="snav-item mt2" style="color:var(--danger)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Sign Out</span></a>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="tb-left">
+        <div class="breadcrumb"><span class="t-tm">Management</span><span class="sep">/</span><span class="cur">Course Approvals</span></div>
+      </div>
+      <div class="tb-right">
+        <span class="badge b-review">3 Pending</span>
+        <div class="av av-md" style="background:var(--navy);cursor:pointer">SA</div>
+      </div>
+    </div>
+
+    <div class="approval-shell">
+      <!-- MAIN: COURSE PREVIEW -->
+      <div class="ap-main">
+        <div class="ph" style="margin-bottom:24px">
+          <div class="ph-left">
+            <div class="flex aic gap3 mb2">
+              <div style="width:48px;height:48px;border-radius:var(--rad);background:linear-gradient(135deg,#2D4A2D,#3D7A3D);display:flex;align-items:center;justify-content:center">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+              </div>
+              <div>
+                <h1 id="approval-course-title" style="font-size:1.375rem;margin-bottom:2px">Resource Planning Fundamentals</h1>
+                <div class="flex aic gap2">
+                  <span class="badge b-review">Pending Review</span>
+                  <span class="fs-xs t-tm">Submitted by Ravi Kumar · 2 days ago</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COURSE DETAILS -->
+        <div class="card mb5">
+          <div class="card-header"><span class="card-title">Course Information</span></div>
+          <div class="g2 mb4">
+            <div>
+              <div class="form-label mb2">Description</div>
+              <p id="approval-course-description" style="font-size:.875rem">A comprehensive course on resource planning for manufacturing operations. Covers material requirements planning (MRP), capacity planning, production scheduling and demand forecasting techniques used in modern manufacturing environments.</p>
+            </div>
+            <div>
+              <div class="flex aic jcb mb3 fs-sm"><span class="t-tm">Department</span><span class="fw6" id="approval-department">Manufacturing</span></div>
+              <div class="flex aic jcb mb3 fs-sm"><span class="t-tm">Duration</span><span class="fw6" id="approval-duration">~6 hours</span></div>
+              <div class="flex aic jcb mb3 fs-sm"><span class="t-tm">Difficulty</span><span class="fw6" id="approval-difficulty">Intermediate</span></div>
+              <div class="flex aic jcb mb3 fs-sm"><span class="t-tm">Modules</span><span class="fw6" id="approval-module-count">7 modules</span></div>
+              <div class="flex aic jcb mb3 fs-sm"><span class="t-tm">Content Items</span><span class="fw6" id="approval-content-count">22 items</span></div>
+              <div class="flex aic jcb fs-sm"><span class="t-tm">Assessment</span><span class="fw6 t-success" id="approval-assessment-count">20 MCQs included</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODULES -->
+        <div class="card mb5">
+          <div class="card-header"><span class="card-title">Course Structure</span><span class="fs-xs t-tm">7 modules · 22 content items</span></div>
+
+          <div id="course-structure-preview">
+          <div class="module-preview">
+            <div class="mp-head" onclick="toggleMpItems(this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--tm)" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              Module 1: Introduction to Resource Planning
+              <span class="fs-xs t-tm" style="margin-left:auto">3 videos</span>
+            </div>
+            <div class="mp-items open">
+              <div class="mp-item"><div style="width:20px;height:20px;border-radius:4px;background:#E8F0FE;color:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><span class="f1">What is Resource Planning?</span><span class="fs-xs t-tm">10 min</span></div>
+              <div class="mp-item"><div style="width:20px;height:20px;border-radius:4px;background:#E8F0FE;color:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><span class="f1">Key Concepts and Terminology</span><span class="fs-xs t-tm">12 min</span></div>
+              <div class="mp-item"><div style="width:20px;height:20px;border-radius:4px;background:#FEF3E2;color:var(--warn);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg></div><span class="f1">Module Overview.pdf</span><span class="fs-xs t-tm">PDF</span></div>
+            </div>
+          </div>
+
+          <div class="module-preview">
+            <div class="mp-head" onclick="toggleMpItems(this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--tm)" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              Module 2: Material Requirements Planning (MRP)
+              <span class="fs-xs t-tm" style="margin-left:auto">4 videos</span>
+            </div>
+            <div class="mp-items">
+              <div class="mp-item"><div style="width:20px;height:20px;border-radius:4px;background:#E8F0FE;color:var(--blue);display:flex;align-items:center;justify-content:center"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><span class="f1">MRP Basics</span><span class="fs-xs t-tm">14 min</span></div>
+              <div class="mp-item"><div style="width:20px;height:20px;border-radius:4px;background:#E8F0FE;color:var(--blue);display:flex;align-items:center;justify-content:center"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div><span class="f1">BOM and MRP Calculation</span><span class="fs-xs t-tm">11 min</span></div>
+            </div>
+          </div>
+
+          <div class="mp-head" style="color:var(--tm);font-size:.78rem;padding:8px 14px">
+            + 5 more modules (Capacity Planning, Production Scheduling, Demand Forecasting, ERP Integration, Case Studies)
+          </div>
+          </div>
+        </div>
+
+        <!-- ASSESSMENT PREVIEW -->
+        <div class="card mb5">
+          <div class="card-header"><span class="card-title">Assessment Preview</span><span class="fs-xs t-tm">20 MCQ · Pass: 70% · Unlimited attempts</span></div>
+          <div style="background:var(--surface);border-radius:var(--rad);padding:14px;margin-bottom:10px">
+            <div class="fs-xs t-tm fw6 mb2">Q1.</div>
+            <div class="fw6 fs-sm mb3">What does MRP stand for in manufacturing planning?</div>
+            <div style="display:flex;flex-direction:column;gap:5px">
+              <div style="padding:6px 10px;background:#fff;border:1px solid var(--border);border-radius:6px;font-size:.78rem">A. Machine Requirement Process</div>
+              <div style="padding:6px 10px;background:var(--suc-bg);border:1px solid var(--success);border-radius:6px;font-size:.78rem;color:var(--success);font-weight:600">B. Material Requirements Planning ✓</div>
+              <div style="padding:6px 10px;background:#fff;border:1px solid var(--border);border-radius:6px;font-size:.78rem">C. Monthly Resource Planning</div>
+              <div style="padding:6px 10px;background:#fff;border:1px solid var(--border);border-radius:6px;font-size:.78rem">D. Manufacturing Resource Protocol</div>
+            </div>
+          </div>
+          <p class="fs-xs t-tm">+ 19 more questions in assessment</p>
+        </div>
+
+        <!-- REJECT FORM -->
+        <div class="reject-form" id="reject-form">
+          <div class="form-group">
+            <label class="form-label" style="color:var(--danger)">Rejection Reason *</label>
+            <textarea class="form-textarea" id="reject-reason" placeholder="Explain what needs to be changed or improved. The content creator will see this feedback." style="border-color:#F2B8B8"></textarea>
+          </div>
+          <div class="flex gap3 mt3">
+            <button class="btn btn-secondary btn-sm" data-roles="superadmin" onclick="document.getElementById('reject-form').style.display='none'">Cancel</button>
+            <button class="btn btn-danger btn-sm" data-roles="superadmin" onclick="confirmReject()">Confirm Rejection</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDEBAR -->
+      <div class="ap-sidebar">
+        <div class="ap-sidebar-head">
+          <div class="card-title mb2">Review Queue</div>
+          <div class="fs-xs t-tm">3 courses pending approval</div>
+        </div>
+        <div class="ap-sidebar-body">
+          <div class="queue-item active" data-course-id="resource-planning-fundamentals" onclick="selectCourse(this, 'Resource Planning Fundamentals')">
+            <div class="qi-thumb" style="background:linear-gradient(135deg,#2D4A2D,#3D7A3D)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8"/></svg></div>
+            <div class="f1">
+              <div class="fw6 fs-sm">Resource Planning Fundamentals</div>
+              <div class="fs-xs t-tm">Ravi Kumar · 2 days ago</div>
+              <div class="fs-xs t-tm">7 modules · 22 items</div>
+            </div>
+            <span class="badge b-review">Pending</span>
+          </div>
+          <div class="queue-item" data-course-id="5s-workplace-organisation" onclick="selectCourse(this, '5S Workplace Organisation')">
+            <div class="qi-thumb" style="background:linear-gradient(135deg,#4A2D4A,#7A3D7A)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/></svg></div>
+            <div class="f1">
+              <div class="fw6 fs-sm">5S Workplace Organisation</div>
+              <div class="fs-xs t-tm">Meena Pillai · 3 days ago</div>
+              <div class="fs-xs t-tm">5 modules · 18 items</div>
+            </div>
+            <span class="badge b-review">Pending</span>
+          </div>
+          <div class="queue-item" data-course-id="quality-systems-awareness" onclick="selectCourse(this, 'Quality Systems Awareness')">
+            <div class="qi-thumb" style="background:linear-gradient(135deg,#4A3D2D,#8B6914)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M9 12l2 2 4-4"/></svg></div>
+            <div class="f1">
+              <div class="fw6 fs-sm">Quality Systems Awareness</div>
+              <div class="fs-xs t-tm">Ravi Kumar · 5 days ago</div>
+              <div class="fs-xs t-tm">6 modules · 20 items</div>
+            </div>
+            <span class="badge b-review">Pending</span>
+          </div>
+
+          <div class="divider mt5"></div>
+          <div class="card-title mb3 mt3" style="font-size:.8rem">Recently Reviewed</div>
+          <div class="queue-item">
+            <div class="qi-thumb" style="background:linear-gradient(135deg,#022670,#0050D8)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/></svg></div>
+            <div class="f1">
+              <div class="fw6 fs-sm">Inventory Management</div>
+              <div class="fs-xs t-tm">Approved · 5 days ago</div>
+            </div>
+            <span class="badge b-approved">Approved</span>
+          </div>
+          <div class="queue-item">
+            <div class="qi-thumb" style="background:linear-gradient(135deg,#0D4A8C,#1E7FD8)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg></div>
+            <div class="f1">
+              <div class="fw6 fs-sm">OEE &amp; OLE</div>
+              <div class="fs-xs t-tm">Approved · 1 week ago</div>
+            </div>
+            <span class="badge b-approved">Approved</span>
+          </div>
+        </div>
+
+        <!-- APPROVE / REJECT -->
+        <div class="ap-sidebar-foot">
+          <div class="fs-xs t-tm mb3">Reviewing: <strong id="reviewing-title">Resource Planning Fundamentals</strong></div>
+          <div class="flex gap3">
+            <button class="btn btn-danger f1" data-roles="superadmin" onclick="showRejectForm()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              Reject
+            </button>
+            <button class="btn btn-success f1" data-roles="superadmin" onclick="approveCourse()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              Approve
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Approve Success Modal -->
+<div class="modal-overlay" id="approve-modal" style="display:none">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-body" style="text-align:center;padding:40px">
+      <div style="width:64px;height:64px;border-radius:50%;background:var(--suc-bg);display:flex;align-items:center;justify-content:center;margin:0 auto 20px">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h3 style="color:var(--success);margin-bottom:8px">Course Approved!</h3>
+      <p id="approve-msg" style="margin-bottom:24px">The course has been published and is now available for assignment to organisations.</p>
+      <button class="btn btn-primary" data-roles="superadmin" onclick="finishApproval()">Go to Course Library</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/demo-store.js"></script>
+<script>
+let currentCourseId = 'resource-planning-fundamentals';
+let approvalOutcomePending = '';
+
+function toggleMpItems(head) {
+  const items = head.nextElementSibling;
+  items.classList.toggle('open');
+  const icon = head.querySelector('svg');
+  icon.style.transform = items.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+
+function selectCourse(el, name) {
+  document.querySelectorAll('.queue-item').forEach(q => q.classList.remove('active'));
+  el.classList.add('active');
+  currentCourseId = el.dataset.courseId || EmpowerOneData.courseIdForTitle(name);
+  const course = EmpowerOneData.getCourse(currentCourseId);
+  document.getElementById('reviewing-title').textContent = course?.title || name;
+  document.getElementById('reject-form').style.display = 'none';
+  renderCoursePreview(course);
+}
+
+function renderCoursePreview(course) {
+  if (!course) return;
+  document.getElementById('approval-course-title').textContent = course.title;
+  document.getElementById('approval-course-description').textContent = course.description || 'No course description provided.';
+  document.getElementById('approval-department').textContent = course.department || '—';
+  document.getElementById('approval-duration').textContent = course.duration || '—';
+  document.getElementById('approval-difficulty').textContent = course.difficulty || 'Not specified';
+  document.getElementById('approval-module-count').textContent = `${course.moduleCount || course.modules?.length || 0} modules`;
+  const itemCount = course.requiredItemCount || course.modules?.reduce((sum,module)=>sum+(module.items?.length||0),0) || 0;
+  document.getElementById('approval-content-count').textContent = `${itemCount} items`;
+  document.getElementById('approval-assessment-count').textContent = `${course.assessment?.questionCount || 20} MCQs · ${course.assessment?.passPercent || 70}% pass`;
+  const structure = document.getElementById('course-structure-preview');
+  structure.replaceChildren();
+  const modules = course.modules || [];
+  if (!modules.length) { const empty=document.createElement('p');empty.className='empty';empty.textContent='No module structure was saved with this course.';structure.appendChild(empty);return; }
+  modules.forEach((module,index)=>{
+    const group=document.createElement('section');group.className='module-preview';
+    const head=document.createElement('div');head.className='mp-head';head.textContent=`Module ${index+1}: ${module.title || 'Untitled module'}`;
+    const count=document.createElement('span');count.className='fs-xs t-tm';count.style.marginLeft='auto';count.textContent=`${module.items?.length||0} items`;head.appendChild(count);
+    const items=document.createElement('div');items.className='mp-items open';
+    (module.items||[]).forEach(item=>{const row=document.createElement('div');row.className='mp-item';const name=document.createElement('span');name.className='f1';name.textContent=item.title;const type=document.createElement('span');type.className='fs-xs t-tm';type.textContent=item.type==='video'?'Video':item.type==='pdf'?'PDF':'Document';row.append(name,type);items.appendChild(row);});
+    if(!module.items?.length){const empty=document.createElement('div');empty.className='mp-item t-tm';empty.textContent='No content added';items.appendChild(empty);}
+    group.append(head,items);structure.appendChild(group);
+  });
+}
+
+function renderQueue() {
+  const pending=EmpowerOneData.getSnapshot().approvals.filter(item=>item.status==='Pending');
+  const container=document.querySelector('.ap-sidebar-body');
+  const queue=[...container.querySelectorAll('.queue-item[data-course-id]')];
+  const existing=new Set(queue.map(item=>item.dataset.courseId));
+  queue.forEach(item=>{const approval=pending.find(entry=>entry.courseId===item.dataset.courseId);if(!approval){item.hidden=true;return;}item.hidden=false;const course=EmpowerOneData.getCourse(item.dataset.courseId);const title=item.querySelector('.fw6');if(course&&title)title.textContent=course.title;});
+  pending.filter(item=>!existing.has(item.courseId)).forEach(approval=>{
+    const course=EmpowerOneData.getCourse(approval.courseId);if(!course)return;
+    const card=document.createElement('button');card.type='button';card.className='queue-item';card.dataset.courseId=course.id;card.style.width='100%';card.style.textAlign='left';
+    const details=document.createElement('span');details.className='f1';
+    const title=document.createElement('span');title.className='fw6 fs-sm';title.textContent=course.title;
+    const creator=document.createElement('span');creator.className='fs-xs t-tm';creator.textContent=`${course.creator || 'Content Creator'} · Submitted for review`;
+    const count=document.createElement('span');count.className='fs-xs t-tm';count.textContent=`${course.moduleCount||course.modules?.length||0} modules · ${course.requiredItemCount||0} items`;
+    details.append(title,creator,count);const badge=document.createElement('span');badge.className='badge b-review';badge.textContent='Pending';card.append(details,badge);card.addEventListener('click',()=>selectCourse(card,course.title));container.prepend(card);
+  });
+  document.querySelector('.ap-sidebar-head .fs-xs.t-tm').textContent=`${pending.length} course${pending.length===1?'':'s'} pending approval`;
+  document.querySelector('.tb-right .badge').textContent=`${pending.length} Pending`;
+  const active=container.querySelector('.queue-item.active:not([hidden])');
+  if(active)selectCourse(active,active.querySelector('.fw6')?.textContent||'');
+  else if(pending.length){const next=container.querySelector('.queue-item[data-course-id]:not([hidden])');if(next)selectCourse(next,next.querySelector('.fw6')?.textContent||'');}
+  else {document.getElementById('approval-course-title').textContent='No courses pending review';document.getElementById('reviewing-title').textContent='—';document.querySelector('.ap-sidebar-foot .flex').hidden=true;}
+}
+
+function showRejectForm() {
+  const rf = document.getElementById('reject-form');
+  rf.style.display = rf.style.display === 'none' ? 'block' : 'none';
+  if (rf.style.display === 'block') rf.scrollIntoView({ behavior: 'smooth' });
+}
+
+function confirmReject() {
+  const reason = document.getElementById('reject-reason').value.trim();
+  if (!reason) { document.getElementById('reject-reason').setCustomValidity('Add a rejection reason before continuing.'); document.getElementById('reject-reason').reportValidity(); return; }
+  document.getElementById('reject-reason').setCustomValidity('');
+  try { EmpowerOneData.reviewCourse(currentCourseId,'Rejected',reason); }
+  catch(error) { showApprovalToast(error.message); return; }
+  document.getElementById('reject-form').style.display = 'none';
+  const active = document.querySelector('.queue-item.active');
+  if (active) {
+    active.querySelector('.badge').className = 'badge b-rejected';
+    active.querySelector('.badge').textContent = 'Rejected';
+    active.classList.remove('active');
+  }
+  const snav = document.querySelector('.snav-badge');
+  const cur = parseInt(snav.textContent);
+  if (cur > 1) snav.textContent = cur - 1;
+  else snav.style.display = 'none';
+  document.getElementById('reject-reason').value='';
+  renderQueue();
+  showApprovalToast('Course rejected. The reason is saved with the review decision.');
+}
+
+function approveCourse() {
+  const title = document.getElementById('reviewing-title').textContent;
+  approvalOutcomePending='Approved';
+  document.getElementById('approve-msg').textContent = `"${title}" has been published and is now available for assignment to organisations.`;
+  document.getElementById('approve-modal').style.display = 'flex';
+}
+
+function finishApproval() {
+  try { EmpowerOneData.reviewCourse(currentCourseId,approvalOutcomePending); }
+  catch(error) { document.getElementById('approve-modal').style.display='none';showApprovalToast(error.message);return; }
+  document.getElementById('approve-modal').style.display='none';
+  showApprovalToast('Course approved and published.');
+  renderQueue();
+}
+function showApprovalToast(message) {
+  let toast=document.getElementById('approval-toast');if(!toast){toast=document.createElement('div');toast.id='approval-toast';toast.className='app-toast';toast.setAttribute('role','status');document.body.appendChild(toast);}
+  toast.textContent=message;toast.classList.add('show');clearTimeout(window.approvalToastTimer);window.approvalToastTimer=setTimeout(()=>toast.classList.remove('show'),3200);
+}
+document.querySelectorAll('.queue-item[data-course-id]').forEach(item=>item.addEventListener('click',()=>selectCourse(item,item.querySelector('.fw6')?.textContent||'')));
+renderQueue();
+const requestedCourseId=new URLSearchParams(location.search).get('course');
+if(requestedCourseId){const requested=document.querySelector(`.queue-item[data-course-id="${CSS.escape(requestedCourseId)}"]`);if(requested&&!requested.hidden)selectCourse(requested,requested.querySelector('.fw6')?.textContent||'');}
+</script>
+</body>
+</html>
