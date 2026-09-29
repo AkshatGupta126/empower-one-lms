@@ -173,15 +173,27 @@
 
   /* ── Hero entry sequence ────────────────────────────────────────── */
   function initHeroEntry() {
-    var items = document.querySelectorAll('.he');
-    if (!items.length) return;
+    var items   = document.querySelectorAll('.he');
+    var visuals = document.querySelectorAll('.he-v');
+    var hasAny  = items.length || visuals.length;
+    if (!hasAny) return;
+
     if (REDUCED) {
       items.forEach(function (el) { el.classList.add('he-in'); });
+      visuals.forEach(function (el) { el.classList.add('he-in'); });
       return;
     }
+
+    /* Left-side content: staggered 0–800ms */
     var delays = [0, 80, 200, 320, 460, 620, 800];
     items.forEach(function (el, i) {
-      setTimeout(function () { el.classList.add('he-in'); }, delays[i] !== undefined ? delays[i] : i * 120);
+      setTimeout(function () { el.classList.add('he-in'); },
+        delays[i] !== undefined ? delays[i] : i * 120);
+    });
+
+    /* Hero visual: enters ~300ms after page load */
+    visuals.forEach(function (el) {
+      setTimeout(function () { el.classList.add('he-in'); }, 300);
     });
   }
 
@@ -190,10 +202,11 @@
     if (REDUCED) return;
     var fills = document.querySelectorAll('.hero-mockup .mbar-fill, .hero-mockup .ml-fill');
     fills.forEach(function (fill) {
-      fill._t = fill.style.width;
+      fill._t = fill.style.width || '0%';
       fill.style.width = '0%';
       fill.style.transition = 'none';
     });
+    /* Animate bars after the visual has had time to appear */
     setTimeout(function () {
       fills.forEach(function (fill, i) {
         setTimeout(function () {
@@ -201,7 +214,7 @@
           fill.style.width = fill._t;
         }, i * 90);
       });
-    }, 1000);
+    }, 1100);
   }
 
   /* ── Hero parallax ──────────────────────────────────────────────── */

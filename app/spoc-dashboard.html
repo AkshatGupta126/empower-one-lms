@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SPOC Dashboard — EmpowerOne</title>
+  <title>SPOC Dashboard â€” EmpowerOne</title>
   <link rel="stylesheet" href="../styles/app.css">
 </head>
 <body>
@@ -11,7 +11,7 @@
   <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="sidebar-logo">
-      <img src="../Images and Files/LOGO PNG.png" alt="EmpowerOne">
+      <img src="../assets/images/empowerone-logo.png" alt="EmpowerOne">
     </div>
     <nav class="snav">
       <a href="spoc-dashboard.html" class="snav-item active">
@@ -41,7 +41,7 @@
         <div class="av av-md" style="background:#0D7A4E">PS</div>
         <div class="suser-info">
           <div class="suser-name">Priya Sharma</div>
-          <div class="suser-role">SPOC · Jetex Manufacturing</div>
+          <div class="suser-role">SPOC Â· Jetex Manufacturing</div>
         </div>
       </div>
       <a href="login.html" class="snav-item mt2" style="color:var(--danger)">
@@ -76,7 +76,7 @@
       <div class="ph">
         <div class="ph-left">
           <h1>Training Dashboard</h1>
-          <p>Jetex Manufacturing Pvt. Ltd. — Pune, Maharashtra</p>
+          <p>Jetex Manufacturing Pvt. Ltd. â€” Pune, Maharashtra</p>
         </div>
         <div class="ph-right">
           <select class="form-select" id="overview-dept-filter" style="width:auto;min-height:36px" onchange="filterDept(this.value)">
@@ -154,7 +154,7 @@
       <div class="alert alert-danger mb5" style="margin-bottom:20px">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         <div>
-          <strong id="overdue-alert-count">12 learners are overdue</strong> — training deadline passed. Send reminders or extend deadlines.
+          <strong id="overdue-alert-count">12 learners are overdue</strong> â€” training deadline passed. Send reminders or extend deadlines.
           <div class="flex gap2 fw mt3"><button class="btn btn-sm btn-danger" type="button" onclick="sendBulkReminder()">Send Reminder</button><button class="btn btn-sm btn-secondary" type="button" onclick="openOverdueAction('reassign')">Reassign</button><button class="btn btn-sm btn-secondary" type="button" onclick="openOverdueAction('extend')">Extend deadline</button></div>
         </div>
       </div>
@@ -393,8 +393,8 @@
         <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-top:1px solid var(--border);background:var(--surface)">
           <span class="fs-sm t-tm">Showing 6 of 147 learners</span>
           <div class="flex gap2">
-            <button class="btn btn-secondary btn-sm">← Prev</button>
-            <button class="btn btn-primary btn-sm">Next →</button>
+            <button class="btn btn-secondary btn-sm">â† Prev</button>
+            <button class="btn btn-primary btn-sm">Next â†’</button>
           </div>
         </div>
       </div>
@@ -407,7 +407,7 @@
   <div class="modal">
     <div class="modal-header">
       <h3>Add Learner</h3>
-      <button class="btn btn-ghost btn-sm" onclick="closeAddLearner()">✕</button>
+      <button class="btn btn-ghost btn-sm" onclick="closeAddLearner()">âœ•</button>
     </div>
     <div class="modal-body">
       <div class="form-row fr-2 mb4">
@@ -461,7 +461,7 @@
 
 <div class="modal-overlay" id="overdue-action-modal" style="display:none" role="presentation">
   <section class="modal" role="dialog" aria-modal="true" aria-labelledby="overdue-modal-title">
-    <header class="modal-header"><div><h2 id="overdue-modal-title">Follow up overdue learning</h2><p class="fs-xs t-tm mt2">This browser demo records the action but does not email learners.</p></div><button class="btn btn-ghost btn-sm" type="button" onclick="closeOverdueAction()" aria-label="Close overdue follow-up">×</button></header>
+    <header class="modal-header"><div><h2 id="overdue-modal-title">Follow up overdue learning</h2><p class="fs-xs t-tm mt2">This browser demo records the action but does not email learners.</p></div><button class="btn btn-ghost btn-sm" type="button" onclick="closeOverdueAction()" aria-label="Close overdue follow-up">Ã—</button></header>
     <form id="overdue-action-form"><div class="modal-body">
       <label class="form-group" id="reassign-course-field"><span class="form-label">Course to reassign</span><select class="form-select" id="reassign-course" name="courseId"></select></label>
       <label class="form-group" id="extend-date-field" hidden><span class="form-label">New deadline</span><input class="form-input" id="extend-date" name="deadline" type="date"></label>

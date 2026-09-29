@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Assessment — Inventory Management | EmpowerOne</title>
+  <title>Assessment â€” Inventory Management | EmpowerOne</title>
   <link rel="stylesheet" href="../styles/app.css">
   <style>
     .assess-shell{max-width:780px;margin:0 auto;padding:40px 24px}
@@ -41,7 +41,7 @@
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
     Back to Course
   </button>
-  <img src="../Images and Files/LOGO PNG.png" alt="EmpowerOne" style="height:28px;margin-left:auto">
+  <img src="../assets/images/empowerone-logo.png" alt="EmpowerOne" style="height:28px;margin-left:auto">
   <div class="av av-sm" style="background:#0050D8">RK</div>
 </div>
 
@@ -51,7 +51,7 @@
   <div class="assess-header">
     <div>
       <div class="assess-title">Final Assessment</div>
-      <div class="assess-meta">Inventory Management · 20 questions · Pass: 70% · Unlimited attempts</div>
+      <div class="assess-meta">Inventory Management Â· 20 questions Â· Pass: 70% Â· Unlimited attempts</div>
     </div>
   </div>
 
@@ -254,11 +254,11 @@ function submitAssessment() {
     iconEl.innerHTML = `<div style="width:72px;height:72px;border-radius:50%;background:var(--dan-bg);display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>`;
     document.getElementById('result-title').textContent = 'Not Passed';
     document.getElementById('result-title').style.color = 'var(--danger)';
-    document.getElementById('result-msg').textContent = `You scored ${pct}%, just below the 70% pass mark. Don't worry — you have unlimited attempts. Review the course and try again.`;
+    document.getElementById('result-msg').textContent = `You scored ${pct}%, just below the 70% pass mark. Don't worry â€” you have unlimited attempts. Review the course and try again.`;
   }
   document.getElementById('res-correct').textContent = correct + '/' + questions.length;
   document.getElementById('res-wrong').textContent = (questions.length - correct) + '/' + questions.length;
-  document.getElementById('attempt-number').textContent = `Attempt ${attemptRecord.attemptNumber} · Unlimited attempts`;
+  document.getElementById('attempt-number').textContent = `Attempt ${attemptRecord.attemptNumber} Â· Unlimited attempts`;
 }
 
 function retakeAssessment() {

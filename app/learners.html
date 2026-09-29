@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Manage your organisation's workforce learning roster in EmpowerOne.">
-  <title>Learners — EmpowerOne</title>
+  <title>Learners â€” EmpowerOne</title>
   <link rel="stylesheet" href="../styles/app.css">
   <style>
     .learner-row{cursor:pointer}.learner-row:focus-visible{outline:3px solid rgba(0,80,216,.35);outline-offset:-3px}
@@ -20,19 +20,19 @@
 <body>
 <div class="shell">
   <aside class="sidebar">
-    <div class="sidebar-logo"><img src="../Images and Files/LOGO PNG.png" alt="EmpowerOne"></div>
+    <div class="sidebar-logo"><img src="../assets/images/empowerone-logo.png" alt="EmpowerOne"></div>
     <nav class="snav" aria-label="Organisation navigation">
-      <a href="spoc-dashboard.html" class="snav-item"><span>▦</span><span>Dashboard</span></a>
+      <a href="spoc-dashboard.html" class="snav-item"><span>â–¦</span><span>Dashboard</span></a>
       <div class="snav-section">Organisation</div>
-      <a href="learners.html" class="snav-item active" aria-current="page"><span>♙</span><span>Learners</span></a>
-      <a href="course-management.html" class="snav-item"><span>▱</span><span>Courses</span></a>
-      <a href="spoc-dashboard.html#reports" class="snav-item"><span>▥</span><span>Reports</span></a>
-      <a href="settings.html" class="snav-item"><span>⚙</span><span>Settings</span></a>
+      <a href="learners.html" class="snav-item active" aria-current="page"><span>â™™</span><span>Learners</span></a>
+      <a href="course-management.html" class="snav-item"><span>â–±</span><span>Courses</span></a>
+      <a href="spoc-dashboard.html#reports" class="snav-item"><span>â–¥</span><span>Reports</span></a>
+      <a href="settings.html" class="snav-item"><span>âš™</span><span>Settings</span></a>
     </nav>
-    <div class="sidebar-foot"><div class="suser"><div class="av av-md" style="background:#0D7A4E">PS</div><div class="suser-info"><div class="suser-name">Priya Sharma</div><div class="suser-role">SPOC · Jetex Manufacturing</div></div></div><a href="login.html" class="snav-item mt2" style="color:var(--danger)">Sign Out</a></div>
+    <div class="sidebar-foot"><div class="suser"><div class="av av-md" style="background:#0D7A4E">PS</div><div class="suser-info"><div class="suser-name">Priya Sharma</div><div class="suser-role">SPOC Â· Jetex Manufacturing</div></div></div><a href="login.html" class="snav-item mt2" style="color:var(--danger)">Sign Out</a></div>
   </aside>
   <main class="main">
-    <header class="topbar"><div class="tb-left"><div class="breadcrumb"><span class="t-tm">Jetex Manufacturing Pvt. Ltd.</span><span class="sep">/</span><span class="cur">Learners</span></div></div><div class="tb-right"><label class="tb-search"><span class="sr-only">Search learners</span><input id="learner-search" type="search" placeholder="Search learners…" autocomplete="off"></label><div class="av av-md" aria-label="Priya Sharma">PS</div></div></header>
+    <header class="topbar"><div class="tb-left"><div class="breadcrumb"><span class="t-tm">Jetex Manufacturing Pvt. Ltd.</span><span class="sep">/</span><span class="cur">Learners</span></div></div><div class="tb-right"><label class="tb-search"><span class="sr-only">Search learners</span><input id="learner-search" type="search" placeholder="Search learnersâ€¦" autocomplete="off"></label><div class="av av-md" aria-label="Priya Sharma">PS</div></div></header>
     <div class="page">
       <div class="ph"><div class="ph-left"><h1>Learners</h1><p>Manage your organisation's people and assigned learning.</p></div><div class="ph-right"><button class="btn btn-secondary" id="export-learners" type="button">Export CSV</button><button class="btn btn-primary" id="open-add-learner" type="button">+ Add Learner</button></div></div>
       <div class="g3 mb6">
@@ -51,13 +51,13 @@
 <div class="screen-overlay" id="detail-overlay"></div>
 <aside class="learner-detail" id="learner-detail" aria-labelledby="detail-name" aria-hidden="true" role="dialog">
   <div class="learner-detail-head"><div><div class="eyebrow">Learner profile</div><h2 id="detail-name">Learner</h2><p id="detail-subtitle"></p></div><button class="btn btn-secondary btn-sm" id="close-detail" type="button" aria-label="Close learner profile">Close</button></div>
-  <div class="detail-progress"><div><strong id="detail-completion">0%</strong><span>Course completion</span></div><div><strong id="detail-course-count">0</strong><span>Assigned courses</span></div><div><strong id="detail-status">—</strong><span>Learning status</span></div></div>
+  <div class="detail-progress"><div><strong id="detail-completion">0%</strong><span>Course completion</span></div><div><strong id="detail-course-count">0</strong><span>Assigned courses</span></div><div><strong id="detail-status">â€”</strong><span>Learning status</span></div></div>
   <h3 class="mt6 mb3">Assigned learning</h3><div id="detail-courses"></div>
   <p class="form-hint mt5">Course assignments follow the current organisation policy. New learners automatically receive courses assigned to this organisation.</p>
 </aside>
 <div class="modal-overlay" id="add-modal" style="display:none" role="presentation">
   <section class="modal" role="dialog" aria-modal="true" aria-labelledby="add-title">
-    <header class="modal-header"><div><h2 id="add-title">Add learner</h2><p class="fs-xs t-tm mt2">The learner will receive courses assigned to Jetex Manufacturing.</p></div><button class="btn btn-ghost btn-sm" id="close-add" type="button" aria-label="Close add learner form">×</button></header>
+    <header class="modal-header"><div><h2 id="add-title">Add learner</h2><p class="fs-xs t-tm mt2">The learner will receive courses assigned to Jetex Manufacturing.</p></div><button class="btn btn-ghost btn-sm" id="close-add" type="button" aria-label="Close add learner form">Ã—</button></header>
     <form id="add-form"><div class="modal-body">
       <div class="form-row fr-2 mb4"><label class="form-group"><span class="form-label">First name</span><input class="form-input" name="first" autocomplete="given-name" required></label><label class="form-group"><span class="form-label">Last name</span><input class="form-input" name="last" autocomplete="family-name" required></label></div>
       <label class="form-group mb4"><span class="form-label">Work email</span><input class="form-input" name="email" type="email" autocomplete="email" required></label>
@@ -96,7 +96,7 @@
       const name = `${person.first} ${person.last}`;
       const tr = document.createElement('tr');
       tr.className = 'learner-row'; tr.tabIndex = 0; tr.setAttribute('aria-label', `View ${name}'s learner profile`);
-      tr.innerHTML = `<td><div class="flex aic gap3"><div class="av av-sm">${escape(`${person.first[0] || ''}${person.last[0] || ''}`.toUpperCase())}</div><div><div class="fw6">${escape(name)}</div><div class="fs-xs t-tm">${escape(person.email)}</div></div></div></td><td>${escape(person.employeeId || '—')}</td><td><span class="tag">${escape(person.department)}</span></td><td>${escape(person.designation)}</td><td>${assigned.length}</td><td><div class="flex aic gap2"><div class="pbar f1"><div class="pfill ${person.progress === 100 ? 'green' : ''}" style="width:${Math.min(100,Math.max(0,person.progress || 0))}%"></div></div><span class="fw6">${person.progress || 0}%</span></div></td><td><span class="badge ${badgeClass(person.status)}">${escape(person.status)}</span></td>`;
+      tr.innerHTML = `<td><div class="flex aic gap3"><div class="av av-sm">${escape(`${person.first[0] || ''}${person.last[0] || ''}`.toUpperCase())}</div><div><div class="fw6">${escape(name)}</div><div class="fs-xs t-tm">${escape(person.email)}</div></div></div></td><td>${escape(person.employeeId || 'â€”')}</td><td><span class="tag">${escape(person.department)}</span></td><td>${escape(person.designation)}</td><td>${assigned.length}</td><td><div class="flex aic gap2"><div class="pbar f1"><div class="pfill ${person.progress === 100 ? 'green' : ''}" style="width:${Math.min(100,Math.max(0,person.progress || 0))}%"></div></div><span class="fw6">${person.progress || 0}%</span></div></td><td><span class="badge ${badgeClass(person.status)}">${escape(person.status)}</span></td>`;
       tr.addEventListener('click', () => openDetail(person));
       tr.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openDetail(person); } });
       rows.appendChild(tr);
@@ -106,7 +106,7 @@
     const selected = deptSelect.value;
     deptSelect.innerHTML = '<option value="">All departments</option>' + departments.map(item => `<option>${escape(item)}</option>`).join('');
     deptSelect.value = selected;
-    document.getElementById('result-count').textContent = `${visibleLearners.length} of ${all.length} sample learner records shown · ${org.activeLearners} active accounts`;
+    document.getElementById('result-count').textContent = `${visibleLearners.length} of ${all.length} sample learner records shown Â· ${org.activeLearners} active accounts`;
     document.getElementById('learners-active').textContent = org.activeLearners;
     document.getElementById('learners-licences').textContent = Math.max(0,org.licenceLimit-org.activeLearners);
     document.getElementById('learners-assigned').textContent = data.assignedCourseIds(orgId).length;
@@ -114,7 +114,7 @@
   }
   function openDetail(person) {
     document.getElementById('detail-name').textContent = `${person.first} ${person.last}`;
-    document.getElementById('detail-subtitle').textContent = `${person.designation} · ${person.department} · ${person.email}`;
+    document.getElementById('detail-subtitle').textContent = `${person.designation} Â· ${person.department} Â· ${person.email}`;
     document.getElementById('detail-completion').textContent = `${person.progress || 0}%`;
     const courseIds = person.assignedCourseIds || data.assignedCourseIds(orgId);
     document.getElementById('detail-course-count').textContent = courseIds.length;

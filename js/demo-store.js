@@ -368,9 +368,44 @@
     let panel=bar.querySelector('.notification-panel');
     if(!panel){panel=document.createElement('section');panel.className='notification-panel';panel.hidden=true;panel.setAttribute('aria-label','Notifications');bell.insertAdjacentElement('afterend',panel);}
     function showNotifications(){const entries=visibleNotifications();panel.replaceChildren();const heading=document.createElement('div');heading.className='notification-heading';heading.textContent='Notifications';panel.appendChild(heading);if(!entries.length){const empty=document.createElement('p');empty.className='command-empty';empty.textContent='You’re all caught up.';panel.appendChild(empty);}else entries.slice(0,8).forEach(item=>{const row=document.createElement('article');row.className=`notification-item${item.read?'':' unread'}`;const title=document.createElement('strong');title.textContent=item.title;const body=document.createElement('span');body.textContent=item.body;row.append(title,body);panel.appendChild(row);});const unread=entries.filter(item=>!item.read).length;const count=bell.querySelector('.notification-count');count.textContent=unread;count.hidden=!unread;if(unread){const clear=document.createElement('button');clear.type='button';clear.className='notification-clear';clear.textContent='Mark all as read';clear.addEventListener('click',()=>{markNotificationsRead(currentOrganisationId());showNotifications();});panel.appendChild(clear);}}
-    bell.addEventListener('click',()=>{panel.hidden=!panel.hidden;showNotifications();});
+    bell.addEventListener('click',(e)=>{e.stopPropagation();panel.hidden=!panel.hidden;if(profilePanel)profilePanel.hidden=true;showNotifications();});
     document.addEventListener('empowerone:notifications-changed',showNotifications);
-    document.addEventListener('click',event=>{if(!panel.contains(event.target)&&event.target!==bell)panel.hidden=true;});
+    
+    // Add Profile Dropdown
+    let avatar=bar.querySelector('.av');
+    let profilePanel=bar.querySelector('.profile-panel');
+    if(avatar && !profilePanel){
+      profilePanel=document.createElement('section');
+      profilePanel.className='notification-panel profile-panel';
+      profilePanel.hidden=true;
+      profilePanel.style.width='220px';
+      avatar.insertAdjacentElement('afterend',profilePanel);
+      
+      const editProfile=document.createElement('a');
+      editProfile.className='command-result';
+      editProfile.href='settings.html';
+      editProfile.innerHTML='<strong>Edit Profile</strong><span>Manage your account</span>';
+      
+      const logout=document.createElement('a');
+      logout.className='command-result mt2';
+      logout.href='login.html';
+      logout.style.borderTop='1px solid var(--border)';
+      logout.style.borderRadius='0 0 8px 8px';
+      logout.innerHTML='<strong style="color:var(--danger)">Sign Out</strong><span>Clear session</span>';
+      
+      profilePanel.append(editProfile,logout);
+      
+      avatar.addEventListener('click',(e)=>{
+        e.stopPropagation();
+        profilePanel.hidden=!profilePanel.hidden;
+        panel.hidden=true; // hide notifs
+      });
+    }
+
+    document.addEventListener('click',event=>{
+      if(!panel.contains(event.target)&&event.target!==bell)panel.hidden=true;
+      if(profilePanel && !profilePanel.contains(event.target)&&event.target!==avatar)profilePanel.hidden=true;
+    });
     showNotifications();
   }
 

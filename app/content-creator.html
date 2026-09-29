@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Course — EmpowerOne</title>
+  <title>Create Course â€” EmpowerOne</title>
   <link rel="stylesheet" href="../styles/app.css">
   <style>
     .creator-shell{display:grid;grid-template-columns:minmax(0,1fr) minmax(270px,340px);gap:0;height:calc(100vh - 58px);overflow:hidden;min-width:0}
@@ -40,7 +40,7 @@
 <div class="shell">
   <div class="sidebar">
     <div class="sidebar-logo">
-      <img src="../Images and Files/LOGO PNG.png" alt="EmpowerOne">
+      <img src="../assets/images/empowerone-logo.png" alt="EmpowerOne">
     </div>
     <nav class="snav">
       <a href="content-creator.html" class="snav-item">
@@ -137,7 +137,7 @@
             </div>
           </div>
           <input type="file" id="thumb-upload" style="display:none" accept="image/png,image/jpeg,image/webp">
-          <p class="form-hint">Recommended: 1280×720px JPG or PNG. Will appear as course cover image.</p>
+          <p class="form-hint">Recommended: 1280Ã—720px JPG or PNG. Will appear as course cover image.</p>
         </div>
 
         <!-- MODULES -->
@@ -239,7 +239,7 @@
             </div>
             <div style="display:flex;flex-direction:column;gap:5px">
               <div style="padding:6px 10px;background:#fff;border:1px solid var(--border);border-radius:6px;font-size:.78rem">A. Items by alphabetical order</div>
-              <div style="padding:6px 10px;background:var(--suc-bg);border:1px solid var(--success);border-radius:6px;font-size:.78rem;color:var(--success);font-weight:600">B. Items by annual consumption value ✓</div>
+              <div style="padding:6px 10px;background:var(--suc-bg);border:1px solid var(--success);border-radius:6px;font-size:.78rem;color:var(--success);font-weight:600">B. Items by annual consumption value âœ“</div>
               <div style="padding:6px 10px;background:#fff;border:1px solid var(--border);border-radius:6px;font-size:.78rem">C. Items by physical size</div>
               <div style="padding:6px 10px;background:#fff;border:1px solid var(--border);border-radius:6px;font-size:.78rem">D. Items by purchase date</div>
             </div>
@@ -278,11 +278,11 @@
           <div class="divider"></div>
           <div class="fs-xs t-tm mb3">Submission Checklist</div>
           <div style="display:flex;flex-direction:column;gap:6px">
-            <div class="flex aic gap2 fs-xs"><span style="color:var(--success)">✓</span> Course title added</div>
-            <div class="flex aic gap2 fs-xs"><span style="color:var(--success)">✓</span> Description added</div>
-            <div class="flex aic gap2 fs-xs"><span style="color:var(--warn)">○</span> Thumbnail uploaded</div>
-            <div class="flex aic gap2 fs-xs"><span style="color:var(--success)">✓</span> At least 1 module</div>
-            <div class="flex aic gap2 fs-xs"><span style="color:var(--success)">✓</span> Assessment added</div>
+            <div class="flex aic gap2 fs-xs"><span style="color:var(--success)">âœ“</span> Course title added</div>
+            <div class="flex aic gap2 fs-xs"><span style="color:var(--success)">âœ“</span> Description added</div>
+            <div class="flex aic gap2 fs-xs"><span style="color:var(--warn)">â—‹</span> Thumbnail uploaded</div>
+            <div class="flex aic gap2 fs-xs"><span style="color:var(--success)">âœ“</span> At least 1 module</div>
+            <div class="flex aic gap2 fs-xs"><span style="color:var(--success)">âœ“</span> Assessment added</div>
           </div>
         </div>
         <div class="save-bar">
@@ -314,7 +314,7 @@
 
 <div class="modal-overlay" id="question-modal" style="display:none" role="presentation">
   <section class="modal" role="dialog" aria-modal="true" aria-labelledby="question-modal-title">
-    <header class="modal-header"><h3 id="question-modal-title">Add assessment question</h3><button class="btn btn-ghost btn-sm" type="button" onclick="closeQuestionEditor()" aria-label="Close question editor">×</button></header>
+    <header class="modal-header"><h3 id="question-modal-title">Add assessment question</h3><button class="btn btn-ghost btn-sm" type="button" onclick="closeQuestionEditor()" aria-label="Close question editor">Ã—</button></header>
     <form id="question-form"><div class="modal-body">
       <label class="form-group mb4"><span class="form-label">Question</span><textarea class="form-textarea" name="question" rows="2" required></textarea></label>
       <div class="form-row fr-2 mb4"><label class="form-group"><span class="form-label">Option A</span><input class="form-input" name="option0" required></label><label class="form-group"><span class="form-label">Option B</span><input class="form-input" name="option1" required></label></div>
@@ -439,10 +439,10 @@ function addContent(btn, type) {
     const list = btn.closest('.module-content-list');
     const empty = list.querySelector('.empty'); if (empty) empty.remove();
     const row = document.createElement('div'); row.className = 'content-row'; row.dataset.contentType = type; row.dataset.fileName = file.name; row.dataset.fileSize = file.size; row.dataset.contentId = `content-${Date.now()}-${Math.random().toString(36).slice(2,5)}`;
-    const icon = document.createElement('div'); icon.className = `content-row-icon ${type === 'video' ? 'cri-vid' : 'cri-pdf'}`; icon.textContent = type === 'video' ? '▶' : type === 'pdf' ? 'PDF' : 'DOC';
+    const icon = document.createElement('div'); icon.className = `content-row-icon ${type === 'video' ? 'cri-vid' : 'cri-pdf'}`; icon.textContent = type === 'video' ? 'â–¶' : type === 'pdf' ? 'PDF' : 'DOC';
     const title = document.createElement('span'); title.className = 'content-row-name'; title.textContent = file.name;
     const meta = document.createElement('span'); meta.className = 'fs-xs t-tm'; meta.textContent = `${(file.size / (1024 * 1024)).toFixed(1)} MB`;
-    const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'content-row-del'; remove.setAttribute('aria-label',`Remove ${file.name}`); remove.textContent = '×'; remove.addEventListener('click', () => { row.remove(); scheduleDraftSave(); });
+    const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'content-row-del'; remove.setAttribute('aria-label',`Remove ${file.name}`); remove.textContent = 'Ã—'; remove.addEventListener('click', () => { row.remove(); scheduleDraftSave(); });
     row.append(icon,title,meta,remove); list.insertBefore(row, btn.closest('.add-content-row')); scheduleDraftSave();
   }, { once: true });
   input.click();
@@ -450,10 +450,10 @@ function addContent(btn, type) {
 
 function addSubtitle(btn) {
   const input = document.createElement('input'); input.type = 'file'; input.accept = '.vtt,.srt,text/vtt,application/x-subrip'; input.setAttribute('aria-label','Choose subtitle file');
-  input.addEventListener('change', () => { const file=input.files[0]; if(!file)return; const list=btn.closest('.module-content-list'); const row=document.createElement('div');row.className='content-row subtitle-name';row.dataset.fileName=file.name;const label=document.createElement('span');label.className='content-row-name';label.textContent=`Subtitles · ${file.name}`;const meta=document.createElement('span');meta.className='fs-xs t-tm';meta.textContent='Subtitle track';row.append(label,meta);list.insertBefore(row,btn.closest('.add-content-row'));scheduleDraftSave();},{once:true}); input.click();
+  input.addEventListener('change', () => { const file=input.files[0]; if(!file)return; const list=btn.closest('.module-content-list'); const row=document.createElement('div');row.className='content-row subtitle-name';row.dataset.fileName=file.name;const label=document.createElement('span');label.className='content-row-name';label.textContent=`Subtitles Â· ${file.name}`;const meta=document.createElement('span');meta.className='fs-xs t-tm';meta.textContent='Subtitle track';row.append(label,meta);list.insertBefore(row,btn.closest('.add-content-row'));scheduleDraftSave();},{once:true}); input.click();
 }
 
-function scheduleDraftSave() { clearTimeout(autosaveTimer); showCreatorStatus('Saving changes…'); autosaveTimer = setTimeout(() => saveDraft({silent:true}), 700); }
+function scheduleDraftSave() { clearTimeout(autosaveTimer); showCreatorStatus('Saving changesâ€¦'); autosaveTimer = setTimeout(() => saveDraft({silent:true}), 700); }
 
 function wireModuleReordering() {
   const container = document.getElementById('modules-container'); let dragged = null;
@@ -513,7 +513,7 @@ function restoreDraft(draft) {
     const list=card.querySelector('.module-content-list');
     const empty=list.querySelector('.empty');if(empty)empty.remove();
     (module.items||[]).forEach(item=>appendContentRow(list,item));
-    (module.subtitles||[]).forEach(name=>{const row=document.createElement('div');row.className='content-row subtitle-name';row.dataset.fileName=name;const label=document.createElement('span');label.className='content-row-name';label.textContent=`Subtitles · ${name}`;row.append(label);list.insertBefore(row,list.querySelector('.add-content-row'));});
+    (module.subtitles||[]).forEach(name=>{const row=document.createElement('div');row.className='content-row subtitle-name';row.dataset.fileName=name;const label=document.createElement('span');label.className='content-row-name';label.textContent=`Subtitles Â· ${name}`;row.append(label);list.insertBefore(row,list.querySelector('.add-content-row'));});
   });
   document.getElementById('preview-title').textContent=draft.title||'Course Title';
   updateModuleNumbers();
@@ -521,10 +521,10 @@ function restoreDraft(draft) {
 
 function appendContentRow(list,item) {
   const row=document.createElement('div');row.className='content-row';row.dataset.contentType=item.type||'document';row.dataset.contentId=item.id||`content-${Date.now()}`;row.dataset.fileName=item.fileName||item.title;row.dataset.fileSize=String(item.size||0);
-  const icon=document.createElement('div');icon.className=`content-row-icon ${item.type==='video'?'cri-vid':'cri-pdf'}`;icon.textContent=item.type==='video'?'▶':item.type==='pdf'?'PDF':'DOC';
+  const icon=document.createElement('div');icon.className=`content-row-icon ${item.type==='video'?'cri-vid':'cri-pdf'}`;icon.textContent=item.type==='video'?'â–¶':item.type==='pdf'?'PDF':'DOC';
   const title=document.createElement('span');title.className='content-row-name';title.textContent=item.title;
   const meta=document.createElement('span');meta.className='fs-xs t-tm';meta.textContent=`${((item.size||0)/(1024*1024)).toFixed(1)} MB`;
-  const remove=document.createElement('button');remove.type='button';remove.className='content-row-del';remove.setAttribute('aria-label',`Remove ${item.title}`);remove.textContent='×';remove.addEventListener('click',()=>{row.remove();scheduleDraftSave();});
+  const remove=document.createElement('button');remove.type='button';remove.className='content-row-del';remove.setAttribute('aria-label',`Remove ${item.title}`);remove.textContent='Ã—';remove.addEventListener('click',()=>{row.remove();scheduleDraftSave();});
   row.append(icon,title,meta,remove);list.insertBefore(row,list.querySelector('.add-content-row'));
 }
 

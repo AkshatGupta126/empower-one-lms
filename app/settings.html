@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Manage EmpowerOne account, organisation and notification preferences.">
-  <title>Settings — EmpowerOne</title><link rel="stylesheet" href="../styles/app.css">
+  <title>Settings â€” EmpowerOne</title><link rel="stylesheet" href="../styles/app.css">
   <style>
     .settings-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:22px;align-items:start}
     .settings-nav{padding:8px}.settings-tab{display:flex;width:100%;gap:10px;align-items:center;padding:11px 12px;border:0;border-radius:8px;background:transparent;color:var(--ts);text-align:left;font:500 .83rem var(--fb);cursor:pointer}
@@ -19,13 +19,13 @@
 </head>
 <body>
 <div class="shell">
-  <aside class="sidebar"><div class="sidebar-logo"><img src="../Images and Files/LOGO PNG.png" alt="EmpowerOne"></div>
+  <aside class="sidebar"><div class="sidebar-logo"><img src="../assets/images/empowerone-logo.png" alt="EmpowerOne"></div>
     <nav class="snav" aria-label="Platform navigation">
-      <a href="spoc-dashboard.html" class="snav-item"><span>▦</span><span>Dashboard</span></a>
-      <div class="snav-section">Organisation</div><a href="learners.html" class="snav-item"><span>♙</span><span>Learners</span></a><a href="organisation-courses.html" class="snav-item"><span>▱</span><span>Courses</span></a>
-      <div class="snav-section">Account</div><a href="settings.html" class="snav-item active" aria-current="page"><span>⚙</span><span>Settings</span></a>
+      <a href="spoc-dashboard.html" class="snav-item"><span>â–¦</span><span>Dashboard</span></a>
+      <div class="snav-section">Organisation</div><a href="learners.html" class="snav-item"><span>â™™</span><span>Learners</span></a><a href="organisation-courses.html" class="snav-item"><span>â–±</span><span>Courses</span></a>
+      <div class="snav-section">Account</div><a href="settings.html" class="snav-item active" aria-current="page"><span>âš™</span><span>Settings</span></a>
     </nav>
-    <div class="sidebar-foot"><div class="suser"><div class="av av-md" style="background:var(--blue)">PS</div><div class="suser-info"><div class="suser-name">Priya Sharma</div><div class="suser-role">SPOC · Jetex Manufacturing</div></div></div><a href="login.html" class="snav-item mt2" style="color:var(--danger)">Sign Out</a></div>
+    <div class="sidebar-foot"><div class="suser"><div class="av av-md" style="background:var(--blue)">PS</div><div class="suser-info"><div class="suser-name">Priya Sharma</div><div class="suser-role">SPOC Â· Jetex Manufacturing</div></div></div><a href="login.html" class="snav-item mt2" style="color:var(--danger)">Sign Out</a></div>
   </aside>
   <main class="main"><header class="topbar"><div class="tb-left"><div class="breadcrumb"><span class="t-tm">Jetex Manufacturing Pvt. Ltd.</span><span class="sep">/</span><span class="cur">Settings</span></div></div><div class="tb-right"><div class="av av-md">PS</div></div></header>
     <div class="page"><div class="ph"><div class="ph-left"><h1>Settings</h1><p>Manage your account and organisation preferences.</p></div></div>
@@ -38,8 +38,33 @@
         </nav>
         <section class="card settings-content">
           <section class="settings-panel" data-settings-panel="profile"><h2>Profile information</h2><p>Details shown to colleagues in this demo environment.</p>
-            <form id="profile-form"><div class="form-row fr-2 mb4"><label class="form-group"><span class="form-label">Full name</span><input class="form-input" name="name" required></label><label class="form-group"><span class="form-label">Work email</span><input class="form-input" name="email" type="email" required readonly></label></div>
-              <div class="settings-notice">Authentication and password changes are managed by the production identity service; this browser demo does not change credentials.</div><div class="settings-footer"><button class="btn btn-primary" type="submit">Save profile</button></div></form>
+            <form id="profile-form">
+              <div class="mb5 flex aic gap4">
+                <div class="av av-lg" id="profile-avatar-preview" style="width: 72px; height: 72px; font-size: 1.8rem; background: var(--blue);"></div>
+                <div>
+                  <label class="btn btn-secondary btn-sm" style="cursor:pointer">
+                    Upload Picture
+                    <input type="file" id="profile-picture-upload" accept=".jpg, .jpeg, .png" hidden>
+                  </label>
+                  <p class="form-hint mt2" style="font-size: 0.75rem;">JPG or PNG. Max size 2MB.</p>
+                </div>
+              </div>
+              <div class="form-row fr-2 mb4">
+                <label class="form-group">
+                  <span class="form-label">Full name</span>
+                  <input class="form-input" name="name" id="profile-name-input" required>
+                </label>
+                <label class="form-group">
+                  <span class="form-label">Work email</span>
+                  <input class="form-input" name="email" id="profile-email-input" type="email" required>
+                </label>
+              </div>
+              <div class="settings-notice hr-notice" style="display:none; margin-bottom: 16px;">
+                <strong>Note:</strong> Name and email are managed by your HR department. Please contact your administrator to request changes.
+              </div>
+              <div class="settings-notice">Authentication and password changes are managed by the production identity service; this browser demo does not change credentials.</div>
+              <div class="settings-footer"><button class="btn btn-primary" type="submit">Save profile</button></div>
+            </form>
           </section>
           <section class="settings-panel" data-settings-panel="organisation" hidden><h2>Organisation profile</h2><p>Organisation details are only available within your assigned tenant.</p>
             <form id="organisation-form"><label class="form-group mb4"><span class="form-label">Organisation name</span><input class="form-input" name="name" required></label><label class="form-group"><span class="form-label">Departments</span><textarea class="form-textarea" name="departments" rows="4" aria-describedby="department-hint"></textarea><span class="form-hint" id="department-hint">Enter one department per line. Used for learner roster filters.</span></label><div class="settings-footer"><button class="btn btn-primary" type="submit">Save organisation</button></div></form>
@@ -47,7 +72,7 @@
           <section class="settings-panel" data-settings-panel="notifications" hidden><h2>Notification preferences</h2><p>Choose which learning events you want to see in the product.</p>
             <form id="notifications-form"><label class="setting-switch"><div><strong>Course review updates</strong><span>Approval and change requests on your submitted courses</span></div><input type="checkbox" name="courseReviews" checked></label><label class="setting-switch"><div><strong>Learner progress alerts</strong><span>Overdue learning and assessment outcomes</span></div><input type="checkbox" name="learnerProgress" checked></label><label class="setting-switch"><div><strong>Organisation assignments</strong><span>When courses are added or updated for your organisation</span></div><input type="checkbox" name="courseAssignments" checked></label><div class="settings-footer"><button class="btn btn-primary" type="submit">Save preferences</button></div></form>
           </section>
-          <section class="settings-panel" data-settings-panel="platform" hidden><h2>Platform configuration</h2><p>Branding and platform defaults for the demo preview.</p><form id="platform-form"><label class="form-group mb4"><span class="form-label">Platform name</span><input class="form-input" name="platformName" value="EmpowerOne" required></label><label class="form-group"><span class="form-label">Default passing score</span><select class="form-select" name="passScore"><option value="70">70% — Phase 1 standard</option></select></label><div class="settings-footer"><button class="btn btn-primary" type="submit">Save platform settings</button></div></form></section>
+          <section class="settings-panel" data-settings-panel="platform" hidden><h2>Platform configuration</h2><p>Branding and platform defaults for the demo preview.</p><form id="platform-form"><label class="form-group mb4"><span class="form-label">Platform name</span><input class="form-input" name="platformName" value="EmpowerOne" required></label><label class="form-group"><span class="form-label">Default passing score</span><select class="form-select" name="passScore"><option value="70">70% â€” Phase 1 standard</option></select></label><div class="settings-footer"><button class="btn btn-primary" type="submit">Save platform settings</button></div></form></section>
         </section>
       </div>
     </div>
@@ -72,11 +97,53 @@
   };
   nav.innerHTML = (roleLinks[role] || roleLinks.spoc).map((item,index) => `${index===0?'<div class="snav-section">Workspace</div>':''}<a href="${item[0]}" class="snav-item ${item[0]==='settings.html'?'active':''}">${item[1]}</a>`).join('');
   document.querySelector('.sidebar .suser-name').textContent = user.name;
-  document.querySelector('.sidebar .suser-role').textContent = role === 'learner' ? `${user.designation || 'Learner'} · ${user.department || 'Manufacturing'}` : role === 'superadmin' ? 'Platform Administrator' : role === 'creator' ? 'Content Creator' : `SPOC · ${org.name}`;
+  document.querySelector('.sidebar .suser-role').textContent = role === 'learner' ? `${user.designation || 'Learner'} Â· ${user.department || 'Manufacturing'}` : role === 'superadmin' ? 'Platform Administrator' : role === 'creator' ? 'Content Creator' : `SPOC Â· ${org.name}`;
   document.querySelector('.sidebar-foot .av').textContent = user.name.split(/\s+/).map(part => part[0]).join('').slice(0,2).toUpperCase();
   document.querySelector('.breadcrumb .t-tm').textContent = role === 'superadmin' ? 'Platform' : role === 'creator' ? 'Creator workspace' : role === 'learner' ? 'My Learning' : org.name;
   document.querySelector('#profile-form [name="name"]').value = user.name;
   document.querySelector('#profile-form [name="email"]').value = user.email;
+  const avatarPreview = document.getElementById('profile-avatar-preview');
+  if (avatarPreview) avatarPreview.textContent = user.name.split(/\s+/).map(part => part[0]).join('').slice(0,2).toUpperCase();
+
+  // Handle HR role locking
+  if (role === 'learner' || role === 'creator') {
+    const nameInput = document.getElementById('profile-name-input');
+    const emailInput = document.getElementById('profile-email-input');
+    
+    [nameInput, emailInput].forEach(el => {
+      el.disabled = true;
+      el.style.background = 'var(--surface)';
+      el.style.color = 'var(--ts)';
+      el.style.cursor = 'not-allowed';
+      el.style.borderColor = 'var(--border)';
+    });
+    
+    document.querySelector('.hr-notice').style.display = 'block';
+  } else {
+    // For HR/Superadmin, only email is readonly (handled by system), name can be edited
+    document.getElementById('profile-email-input').readOnly = true;
+    document.getElementById('profile-email-input').style.background = 'var(--surface)';
+    document.getElementById('profile-email-input').style.color = 'var(--ts)';
+    document.getElementById('profile-email-input').style.cursor = 'not-allowed';
+  }
+  
+  // Dummy picture upload handler
+  const picUpload = document.getElementById('profile-picture-upload');
+  if (picUpload) {
+    picUpload.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          avatarPreview.style.backgroundImage = `url(${e.target.result})`;
+          avatarPreview.style.backgroundSize = 'cover';
+          avatarPreview.style.backgroundPosition = 'center';
+          avatarPreview.textContent = '';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
   document.querySelector('#organisation-form [name="name"]').value = org.name;
   document.querySelector('#organisation-form [name="departments"]').value = org.departments.join('\n');
   Object.entries(prefs.notifications || {}).forEach(([name,value]) => { const field = document.querySelector(`#notifications-form [name="${name}"]`); if (field) field.checked = Boolean(value); });
