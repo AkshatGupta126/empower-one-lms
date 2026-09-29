@@ -1,34 +1,31 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="EmpowerOne is the workforce capability platform for manufacturing: consistent training across shifts, assigned by role, and visible to HR and plant leaders.">
-  <meta property="og:title" content="EmpowerOne — Make workforce capability run like a system">
-  <meta property="og:description" content="Keep the training you trust. Now let it run every day across shifts, departments and plants.">
+  <meta name="description" content="EmpowerOne is a digital industrial training platform built for manufacturing organisations — consistent training assigned by role, visible to HR and plant leaders.">
+  <meta property="og:title" content="EmpowerOne — Workforce Capability for Manufacturing">
+  <meta property="og:description" content="Role-based industrial training. Consistent across shifts. Visible to HR and plant leadership.">
   <meta property="og:type" content="website">
-  <title>EmpowerOne - Skill Today. Impact Tomorrow.</title>
+  <title>EmpowerOne — Skill Today. Impact Tomorrow.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/landing.css">
 </head>
 <body>
-  <nav class="lnav" id="lnav">
+  <nav class="lnav" id="lnav" role="navigation" aria-label="Primary navigation">
     <div class="lnav-inner">
-      <a href="index.html" class="lnav-logo">
-        <img src="Images and Files/LOGO PNG.png" alt="EmpowerOne" style="height:36px">
-      </a>
-      <button class="lnav-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-navigation">
-        <span></span><span></span><span></span>
+      <a href="index.html" class="lnav-logo" aria-label="EmpowerOne home"><img src="Images and Files/LOGO PNG.png" alt="EmpowerOne" style="height:36px"></a>
+      <button class="lnav-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
       </button>
-      <ul class="lnav-links" id="primary-navigation">
-        <li><a href="#dashboard-preview">Platform</a></li>
+      <ul class="lnav-links" id="primary-navigation" role="list">
+        <li><a href="#platform">Platform</a></li>
         <li><a href="#how">How It Works</a></li>
         <li><a href="#courses">Courses</a></li>
         <li><a href="#dashboard-preview">For HR</a></li>
         <li><a href="#roles">For Leaders</a></li>
-        <li><a href="#why">About</a></li>
       </ul>
       <div class="lnav-actions">
         <a href="app/login.html" class="lbtn lbtn-outline">Log In</a>
@@ -37,374 +34,241 @@
     </div>
   </nav>
 
-  <section class="hero">
+  <section class="hero" aria-labelledby="hero-heading">
     <div class="hero-content">
-      <div class="hero-eyebrow"><span class="eyebrow-dot"></span> A Digital Industrial Training Platform</div>
-      <h1>Training happens.<br>It just doesn't run<br>as a <span class="hero-highlight">system.</span></h1>
+      <div class="hero-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Digital Industrial Training Platform</div>
+      <h1 id="hero-heading">Training happens.<br>It just doesn't run<br>as a <span class="hero-highlight">system.</span></h1>
       <p class="hero-sub">Keep the training you trust. Now let it run every day — across shifts, built around each role, with a clear record of who has completed what.</p>
       <div class="hero-btns">
         <a href="#contact" class="lbtn lbtn-primary lbtn-lg">Book a Demo</a>
         <a href="app/login.html" class="lbtn lbtn-outline lbtn-lg">Explore Platform</a>
       </div>
-      <div class="hero-stats">
-        <div class="hstat"><span class="hstat-val">147</span><span class="hstat-lbl">Employees enrolled</span></div>
-        <div class="hstat-sep"></div>
-        <div class="hstat"><span class="hstat-val">74%</span><span class="hstat-lbl">Avg completion rate</span></div>
-        <div class="hstat-sep"></div>
-        <div class="hstat"><span class="hstat-val">3</span><span class="hstat-lbl">Courses ready to go</span></div>
+      <div class="hero-pill-row">
+        <div class="hero-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Role-based assignment</div>
+        <div class="hero-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Consistent across shifts</div>
+        <div class="hero-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Visible to HR &amp; leaders</div>
       </div>
     </div>
-    <div class="hero-visual">
+    <div class="hero-visual" aria-hidden="true">
       <div class="hero-mockup">
-        <div class="mockup-bar">
-          <div class="mockup-dots"><span></span><span></span><span></span></div>
-          <div class="mockup-title">EmpowerOne Platform</div>
+        <div class="mockup-chrome">
+          <div class="mockup-chrome-dots"><span></span><span></span><span></span></div>
+          <div class="mockup-chrome-title">EmpowerOne — Example Workspace</div>
         </div>
         <div class="mockup-body">
           <div class="mockup-sidebar">
-            <div class="ms-item ms-active"></div>
-            <div class="ms-item"></div>
-            <div class="ms-item"></div>
-            <div class="ms-item"></div>
-            <div class="ms-item"></div>
+            <div class="ms-logo"><img src="Images and Files/LOGO PNG.png" alt="" style="height:18px;filter:brightness(0) invert(1);opacity:.8"></div>
+            <div class="ms-item ms-active"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Dashboard</span></div>
+            <div class="ms-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>Courses</span></div>
+            <div class="ms-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span>Learners</span></div>
+            <div class="ms-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Reports</span></div>
           </div>
           <div class="mockup-main">
+            <div class="mockup-topbar"><span class="mockup-page-title">Training &amp; Capability</span><div class="mockup-av">HR</div></div>
             <div class="mockup-kpis">
-              <div class="mk" style="background:#E8F0FE"><div class="mk-v" style="color:#0050D8">147</div><div class="mk-l">Enrolled</div></div>
-              <div class="mk" style="background:#E6F6F0"><div class="mk-v" style="color:#0D7A4E">74%</div><div class="mk-l">Completed</div></div>
-              <div class="mk" style="background:#FEF3E2"><div class="mk-v" style="color:#A05C00">12</div><div class="mk-l">Overdue</div></div>
+              <div class="mk mk-primary"><div class="mk-v">86</div><div class="mk-l">Employees enrolled</div></div>
+              <div class="mk mk-secondary"><div class="mk-v">68%</div><div class="mk-l">Training completion</div></div>
+              <div class="mk mk-tertiary"><div class="mk-v">94%</div><div class="mk-l">Mandatory training</div></div>
             </div>
+            <div class="mockup-section-label">Department Progress</div>
             <div class="mockup-chart">
-              <div class="mch-label">Department Progress</div>
-              <div class="mbar-row"><span>Mfg</span><div class="mbar"><div style="width:81%;background:#0050D8;height:100%;border-radius:4px"></div></div><b>81%</b></div>
-              <div class="mbar-row"><span>Mat</span><div class="mbar"><div style="width:72%;background:#0050D8;height:100%;border-radius:4px"></div></div><b>72%</b></div>
-              <div class="mbar-row"><span>Qlty</span><div class="mbar"><div style="width:66%;background:#0050D8;height:100%;border-radius:4px"></div></div><b>66%</b></div>
-              <div class="mbar-row"><span>Mnt</span><div class="mbar"><div style="width:58%;background:#F59E0B;height:100%;border-radius:4px"></div></div><b>58%</b></div>
+              <div class="mbar-row"><span class="mbar-dept">Manufacturing</span><div class="mbar"><div class="mbar-fill" style="width:78%"></div></div><b>78%</b></div>
+              <div class="mbar-row"><span class="mbar-dept">Materials</span><div class="mbar"><div class="mbar-fill" style="width:71%"></div></div><b>71%</b></div>
+              <div class="mbar-row"><span class="mbar-dept">Quality</span><div class="mbar"><div class="mbar-fill mbar-fill-mid" style="width:63%"></div></div><b>63%</b></div>
+              <div class="mbar-row"><span class="mbar-dept">Maintenance</span><div class="mbar"><div class="mbar-fill mbar-fill-soft" style="width:55%"></div></div><b>55%</b></div>
             </div>
+            <div class="mockup-section-label" style="margin-top:10px">Learner Status</div>
             <div class="mockup-learners">
-              <div class="ml-row"><div class="ml-av" style="background:#0050D8">RK</div><div><div class="ml-name">Rajesh Kumar</div><div class="ml-prog"><div class="ml-fill" style="width:80%"></div></div></div><span class="ml-pct">80%</span></div>
-              <div class="ml-row"><div class="ml-av" style="background:#0D7A4E">PS</div><div><div class="ml-name">Priya Sharma</div><div class="ml-prog"><div class="ml-fill" style="width:100%;background:#0D7A4E"></div></div></div><span class="ml-pct" style="color:#0D7A4E">Done</span></div>
-              <div class="ml-row"><div class="ml-av" style="background:#A05C00">AM</div><div><div class="ml-name">Amit Mehta</div><div class="ml-prog"><div class="ml-fill" style="width:0%"></div></div></div><span class="ml-pct" style="color:#C41A1A">Overdue</span></div>
+              <div class="ml-row"><div class="ml-av">L1</div><div class="ml-info"><div class="ml-name">Learner 01 — Manufacturing</div><div class="ml-prog"><div class="ml-fill" style="width:82%"></div></div></div><span class="ml-pct">82%</span></div>
+              <div class="ml-row"><div class="ml-av">L2</div><div class="ml-info"><div class="ml-name">Learner 02 — Materials</div><div class="ml-prog"><div class="ml-fill" style="width:100%"></div></div></div><span class="ml-badge">Done</span></div>
+              <div class="ml-row"><div class="ml-av ml-av-muted">L3</div><div class="ml-info"><div class="ml-name">Learner 03 — Maintenance</div><div class="ml-prog"><div class="ml-fill" style="width:24%"></div></div></div><span class="ml-pct ml-pct-soft">24%</span></div>
             </div>
           </div>
         </div>
       </div>
-      <div class="hero-signal signal-top"><span class="signal-icon">✓</span><span><strong>Training standardised</strong><small>Across every shift</small></span></div>
-      <div class="hero-signal signal-bottom"><span class="signal-icon">↗</span><span><strong>74% completion</strong><small>+12% this month</small></span></div>
+      <div class="hero-signal signal-top"><span class="signal-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span><span><strong>Training standardised</strong><small>Consistent across every shift</small></span></div>
+      <div class="hero-signal signal-bottom"><span class="signal-icon signal-icon-blue" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span><span><strong>68% avg. completion</strong><small>Tracked per person</small></span></div>
     </div>
   </section>
 
-  <section class="section section-white" id="why">
+  <section class="section section-white" id="why" aria-labelledby="why-heading">
     <div class="sc">
-      <div class="eyebrow">The Problem</div>
-      <h2>Machines are calibrated. Processes are audited.<br>Capability is assumed.</h2>
-      <p class="sc-sub">Indian manufacturing has built genuine excellence in systems - TPM, TQM, lean, ISO and IATF. Workforce capability is the one input that never had an equivalent system.</p>
-      <div class="gap-grid">
-        <div class="gap-card gap-good">
-          <div class="gap-icon">&#9881;</div>
-          <h4>Machines</h4>
-          <p>Maintained on a schedule — calibration plans, maintenance cycles, uptime logs.</p>
-          <div class="gap-pill gap-pill-good">Systematic</div>
-        </div>
-        <div class="gap-card gap-good">
-          <div class="gap-icon">&#128203;</div>
-          <h4>Processes</h4>
-          <p>Checked by audit — SOPs, work instructions, certifications, ISO compliance.</p>
-          <div class="gap-pill gap-pill-good">Systematic</div>
-        </div>
-        <div class="gap-card gap-bad">
-          <div class="gap-icon">&#128119;</div>
-          <h4>People</h4>
-          <p>Trained when time allows — sessions happen, but depth varies and records are scattered.</p>
-          <div class="gap-pill gap-pill-bad">Ad hoc</div>
-        </div>
+      <div class="eyebrow">The Capability Gap</div>
+      <h2 id="why-heading">Machines are calibrated.<br>Processes are audited.<br>Capability is assumed.</h2>
+      <p class="sc-sub">Manufacturing has built genuine excellence in operating systems — TPM, TQM, lean, ISO, IATF. Workforce capability is the one input that never had an equivalent system.</p>
+      <div class="gap-grid" role="list">
+        <div class="gap-card gap-card-sys" role="listitem"><div class="gap-card-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div><h3>Machines</h3><p>Maintained on a schedule — calibration plans, maintenance cycles, uptime logs, service records.</p><div class="gap-pill gap-pill-sys"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Systematic</div></div>
+        <div class="gap-card gap-card-sys" role="listitem"><div class="gap-card-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><h3>Processes</h3><p>Checked by audit — SOPs, work instructions, documented controls, ISO compliance and certification.</p><div class="gap-pill gap-pill-sys"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Systematic</div></div>
+        <div class="gap-card gap-card-gap" role="listitem"><div class="gap-card-icon gap-card-icon-gap" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><h3>People</h3><p>Trained when time allows — depth varies, records are scattered, and gaps are invisible.</p><div class="gap-pill gap-pill-gap"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Ad hoc</div></div>
       </div>
-      <div class="prob-grid">
-        <div class="prob-item"><div class="prob-icon">&#9200;</div><div><strong>Not regular</strong><p>A session runs when it can be scheduled, not when a person needs it</p></div></div>
-        <div class="prob-item"><div class="prob-icon">&#128260;</div><div><strong>Not standardised</strong><p>The same role is taught differently across shifts, plants and trainers</p></div></div>
-        <div class="prob-item"><div class="prob-icon">&#128193;</div><div><strong>Not in one place</strong><p>Records sit in registers, sheets and people's heads — no single view of who is trained</p></div></div>
+      <div class="prob-grid" role="list">
+        <div class="prob-item" role="listitem"><div class="prob-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><strong>Not regular</strong><p>A session runs when it can be scheduled — not when a person needs it.</p></div></div>
+        <div class="prob-item" role="listitem"><div class="prob-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div><div><strong>Not standardised</strong><p>The same role is taught differently across shifts, plants and trainers.</p></div></div>
+        <div class="prob-item" role="listitem"><div class="prob-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg></div><div><strong>Not in one place</strong><p>Records sit in registers, sheets and people's heads — no single view of who is trained.</p></div></div>
       </div>
     </div>
   </section>
 
-  <section class="section section-bg training-today" id="training-today">
+  <section class="section section-navy" id="the-shift" aria-labelledby="shift-heading">
     <div class="sc">
-      <div class="eyebrow">Training Today</div>
-      <h2>Training happens.<br>It just doesn't run as a system.</h2>
-      <p class="sc-sub">Sessions depend on a trainer being free, a batch coming together and production allowing the time. That makes capability hard to see and difficult to repeat.</p>
-      <div class="training-friction-grid">
-        <article class="friction-card"><span class="friction-index">01</span><div class="friction-glyph" aria-hidden="true"><span></span><span></span><span></span></div><h3>Availability</h3><p>Next scheduled session</p><strong>3 weeks away</strong><small>Learning starts when a session can be arranged.</small></article>
-        <article class="friction-card"><span class="friction-index">02</span><div class="shift-stack"><span>Shift A</span><span>Shift B</span><span>Shift C</span></div><h3>Consistency</h3><p>Same SOP, understood by</p><strong>Every shift?</strong><small>Training depth varies between plants, teams and trainers.</small></article>
-        <article class="friction-card"><span class="friction-index">03</span><div class="record-stack"><span>Registers</span><span>Sheets</span><span>Memory</span></div><h3>Visibility</h3><p>Who has finished which training?</p><strong>Not in one place</strong><small>Records are scattered, so gaps are hard to follow up.</small></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-navy" id="the-shift">
-    <div class="sc">
-      <div class="eyebrow" style="color:#7FB3FF">The Shift</div>
-      <h2 style="color:#fff">Keep the training you trust.<br>Now let it run every day.</h2>
-      <p class="sc-sub" style="color:rgba(255,255,255,0.7)">Everything that works today stays. EmpowerOne adds the routine, the reach and the record.</p>
+      <div class="eyebrow eyebrow-on-dark">The Shift</div>
+      <h2 id="shift-heading" class="on-dark">Keep the training you trust.<br>Now let it run every day.</h2>
+      <p class="sc-sub sc-sub-dark">Everything that works today stays. EmpowerOne adds the routine, the reach and the record.</p>
       <div class="shift-compare">
-        <div class="shift-col shift-today">
-          <div class="shift-header">Today</div>
-          <div class="shift-row"><span class="shift-dot sdot-bad"></span>A new joiner waits for the next session</div>
-          <div class="shift-row"><span class="shift-dot sdot-bad"></span>A session runs when trainer and batch align</div>
-          <div class="shift-row"><span class="shift-dot sdot-bad"></span>Depth depends on who delivered it</div>
-          <div class="shift-row"><span class="shift-dot sdot-bad"></span>A register shows who attended</div>
-        </div>
-        <div class="shift-arrow">&#8594;</div>
-        <div class="shift-col shift-future">
-          <div class="shift-header">With EmpowerOne</div>
-          <div class="shift-row"><span class="shift-dot sdot-good"></span>A new joiner starts on day one</div>
-          <div class="shift-row"><span class="shift-dot sdot-good"></span>Learning runs whenever the shift allows</div>
-          <div class="shift-row"><span class="shift-dot sdot-good"></span>Every learner gets the same content</div>
-          <div class="shift-row"><span class="shift-dot sdot-good"></span>Completion is recorded per person</div>
-        </div>
+        <div class="shift-col shift-today"><div class="shift-header">Today</div><div class="shift-row"><span class="shift-dot shift-dot-neutral" aria-hidden="true"></span>A new joiner waits for the next available session</div><div class="shift-row"><span class="shift-dot shift-dot-neutral" aria-hidden="true"></span>A session runs when trainer and batch can align</div><div class="shift-row"><span class="shift-dot shift-dot-neutral" aria-hidden="true"></span>Depth depends on who delivered it</div><div class="shift-row"><span class="shift-dot shift-dot-neutral" aria-hidden="true"></span>A register shows who attended</div></div>
+        <div class="shift-arrow" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        <div class="shift-col shift-future"><div class="shift-header shift-header-brand">With EmpowerOne</div><div class="shift-row shift-row-brand"><span class="shift-dot shift-dot-brand" aria-hidden="true"></span>A new joiner starts on day one</div><div class="shift-row shift-row-brand"><span class="shift-dot shift-dot-brand" aria-hidden="true"></span>Learning runs whenever the shift allows</div><div class="shift-row shift-row-brand"><span class="shift-dot shift-dot-brand" aria-hidden="true"></span>Every learner gets the same content</div><div class="shift-row shift-row-brand"><span class="shift-dot shift-dot-brand" aria-hidden="true"></span>Completion is recorded per person</div></div>
       </div>
     </div>
   </section>
 
-  <section class="section section-white" id="courses">
+  <section class="section section-bg" id="platform" aria-labelledby="platform-heading">
+    <div class="sc">
+      <div class="eyebrow">Platform Capabilities</div>
+      <h2 id="platform-heading">One platform.<br>Every part of the training workflow.</h2>
+      <p class="sc-sub">From content to completion — EmpowerOne gives HR and plant leaders a single system to assign, track and report on workforce training.</p>
+      <div class="platform-grid" role="list">
+        <div class="platform-card" role="listitem"><div class="platform-card-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div><div class="platform-card-label">Learn</div><h3>Structured course content</h3><p>Courses organised into modules, with video learning, PDF documents and MCQ assessments — accessible from any device.</p></div>
+        <div class="platform-card" role="listitem"><div class="platform-card-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="platform-card-label">Assign</div><h3>Role-based assignment</h3><p>Courses are assigned by department and role. Every learner works through what is relevant to them — nothing more, nothing less.</p></div>
+        <div class="platform-card" role="listitem"><div class="platform-card-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="platform-card-label">Track</div><h3>Progress &amp; completion visibility</h3><p>See where each learner stands. Resume learning picks up exactly where they left off.</p></div>
+        <div class="platform-card" role="listitem"><div class="platform-card-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="platform-card-label">Identify</div><h3>Training gap visibility</h3><p>Learners who are behind are visible at organisation and department level — so nothing slips through unnoticed.</p></div>
+        <div class="platform-card" role="listitem"><div class="platform-card-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="platform-card-label">Act</div><h3>Follow-up workflow</h3><p>Send reminders, reassign courses or extend deadlines directly from the dashboard. Action is one step from insight.</p></div>
+        <div class="platform-card" role="listitem"><div class="platform-card-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg></div><div class="platform-card-label">Report</div><h3>HR &amp; leadership reporting</h3><p>Organisation and department-level training reports for HR teams and plant leaders — without manual collation.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white" id="courses" aria-labelledby="courses-heading">
     <div class="sc">
       <div class="eyebrow">Courses Ready to Run</div>
-      <h2>Industrial courses, built by people<br>who work inside plants</h2>
-      <p class="sc-sub">No lorem ipsum. No generic content. Courses written for manufacturing roles and departments, ready to assign from day one.</p>
-      <div class="courses-grid">
-        <div class="cc">
-          <div class="cc-thumb" style="background:linear-gradient(135deg,#022670,#0050D8)">
-            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
-          </div>
-          <div class="cc-body">
-            <div class="cc-tag">Materials &amp; Stores</div>
-            <h4>Inventory Management</h4>
-            <p>Stock control, FIFO/FEFO principles, cycle counting, shortage prevention and warehouse organisation.</p>
-            <div class="cc-meta"><span>&#128249; 34 videos</span><span>&#8987; ~8 hrs</span><span>&#127981; All depts.</span></div>
-          </div>
-        </div>
-        <div class="cc">
-          <div class="cc-thumb" style="background:linear-gradient(135deg,#0D4A8C,#1E7FD8)">
-            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-          </div>
-          <div class="cc-body">
-            <div class="cc-tag">Manufacturing &amp; Engineering</div>
-            <h4>OEE &amp; OLE</h4>
-            <p>Overall Equipment Effectiveness and Overall Labour Effectiveness — measurement, losses, and improvement strategies.</p>
-            <div class="cc-meta"><span>&#128249; 9 videos</span><span>&#8987; ~3 hrs</span><span>&#127981; Manufacturing</span></div>
-          </div>
-        </div>
-        <div class="cc">
-          <div class="cc-thumb" style="background:linear-gradient(135deg,#1A4A7A,#2196C8)">
-            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-          </div>
-          <div class="cc-body">
-            <div class="cc-tag">Materials &amp; Purchase</div>
-            <h4>Supplier Capacity Planning</h4>
-            <p>Vendor assessment, capacity modelling, lead time management and supply chain risk mitigation.</p>
-            <div class="cc-meta"><span>&#128249; 5 videos</span><span>&#8987; ~2 hrs</span><span>&#127981; Materials</span></div>
-          </div>
-        </div>
-        <div class="cc cc-more">
-          <div class="cc-more-num">+</div>
-          <h4>More courses coming</h4>
-          <p>Resource Planning, Quality Systems, TPM Basics, 5S Workplace Organisation, Safety Induction and more.</p>
-          <a href="#contact" class="lbtn lbtn-primary" style="margin-top:16px;display:inline-flex">Request a course</a>
-        </div>
+      <h2 id="courses-heading">Industrial courses, built for<br>manufacturing departments</h2>
+      <p class="sc-sub">Written for real manufacturing roles — not generic content. Structured, practical and ready to assign from day one.</p>
+      <div class="courses-grid" role="list">
+        <article class="cc" role="listitem">
+          <div class="cc-header"><div class="cc-dept-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div><span class="cc-tag">Materials &amp; Stores</span></div>
+          <div class="cc-body"><h3>Inventory Management</h3><p>Stock control, FIFO / FEFO principles, cycle counting, shortage prevention and warehouse organisation.</p><div class="cc-focus"><span class="cc-focus-label">Learning focus</span><div class="cc-focus-tags"><span>Inventory control</span><span>Stock visibility</span><span>Operational discipline</span></div></div><div class="cc-dept-row"><div class="cc-dept-chip"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Materials</div></div></div>
+        </article>
+        <article class="cc" role="listitem">
+          <div class="cc-header"><div class="cc-dept-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div><span class="cc-tag">Manufacturing &amp; Engineering</span></div>
+          <div class="cc-body"><h3>OEE &amp; OLE</h3><p>Overall Equipment Effectiveness and Labour Effectiveness — measurement, six big losses and improvement strategies.</p><div class="cc-focus"><span class="cc-focus-label">Learning focus</span><div class="cc-focus-tags"><span>Equipment effectiveness</span><span>Labour effectiveness</span><span>Performance analysis</span></div></div><div class="cc-dept-row"><div class="cc-dept-chip"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>Manufacturing</div></div></div>
+        </article>
+        <article class="cc" role="listitem">
+          <div class="cc-header"><div class="cc-dept-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><span class="cc-tag">Materials &amp; Purchase</span></div>
+          <div class="cc-body"><h3>Supplier Capacity</h3><p>Capacity assessment, demand comparison, bottleneck identification and shop-floor verification of supplier capability.</p><div class="cc-focus"><span class="cc-focus-label">Learning focus</span><div class="cc-focus-tags"><span>Capacity assessment</span><span>Demand comparison</span><span>Bottleneck analysis</span></div></div><div class="cc-dept-row"><div class="cc-dept-chip"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Materials</div></div></div>
+        </article>
+        <article class="cc" role="listitem">
+          <div class="cc-header"><div class="cc-dept-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><span class="cc-tag">Cross-functional</span></div>
+          <div class="cc-body"><h3>Resource Planning</h3><p>Manpower, capacity, material and material-handling resource planning across departments.</p><div class="cc-focus"><span class="cc-focus-label">Learning focus</span><div class="cc-focus-tags"><span>Manpower planning</span><span>Capacity planning</span><span>Material planning</span></div></div><div class="cc-dept-row"><div class="cc-dept-chip cc-dept-chip-wide"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg>Cross-functional</div></div></div>
+        </article>
       </div>
+      <div class="courses-more-strip"><div class="courses-more-content"><div class="courses-more-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div><div><strong>More courses in development</strong><p>Quality Systems, TPM Basics, 5S, Safety Induction and more — request what your plant needs.</p></div></div><a href="#contact" class="lbtn lbtn-outline">Request a course</a></div>
     </div>
   </section>
 
-  <section class="section section-bg" id="how">
+  <section class="section section-bg" id="how" aria-labelledby="how-heading">
     <div class="sc">
       <div class="eyebrow">Getting Started</div>
-      <h2>Four steps to go live —<br>only one needs you</h2>
+      <h2 id="how-heading">Four steps to go live —<br>only one needs you.</h2>
       <p class="sc-sub">The only task on your side is a one-time list of employees and their departments. No HR bandwidth? We add and onboard your learners ourselves.</p>
-      <div class="steps-row">
-        <div class="step-card">
-          <div class="step-num">01</div>
-          <h4>We set up your organisation</h4>
-          <p>Your plant is created on the platform and admin access is handed over.</p>
-          <span class="step-badge step-us">EmpowerOne</span>
-        </div>
-        <div class="step-arrow">&#8594;</div>
-        <div class="step-card">
-          <div class="step-num">02</div>
-          <h4>Employees are added</h4>
-          <p>Names and departments go in — by your team, or by ours.</p>
-          <span class="step-badge step-either">You, or us</span>
-        </div>
-        <div class="step-arrow">&#8594;</div>
-        <div class="step-card">
-          <div class="step-num">03</div>
-          <h4>Employees start learning</h4>
-          <p>Each person logs in and works through the courses for their department.</p>
-          <span class="step-badge step-them">Your employees</span>
-        </div>
-        <div class="step-arrow">&#8594;</div>
-        <div class="step-card">
-          <div class="step-num">04</div>
-          <h4>You see where everyone stands</h4>
-          <p>Progress by learner, department and plant — with what to follow up on.</p>
-          <span class="step-badge step-auto">Automatic</span>
-        </div>
+      <div class="steps-track" role="list">
+        <div class="step-card" role="listitem"><div class="step-num">01</div><div class="step-body"><h3>We set up your organisation</h3><p>Your plant is created on the platform and admin access is handed over.</p></div><span class="step-badge step-badge-us">EmpowerOne</span></div>
+        <div class="step-connector" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        <div class="step-card" role="listitem"><div class="step-num">02</div><div class="step-body"><h3>Employees are added</h3><p>Names and departments go in — by your team or by ours. One list is all it takes.</p></div><span class="step-badge step-badge-either">You, or us</span></div>
+        <div class="step-connector" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        <div class="step-card" role="listitem"><div class="step-num">03</div><div class="step-body"><h3>Employees start learning</h3><p>Each person logs in and works through the courses assigned to their department — at their own pace.</p></div><span class="step-badge step-badge-them">Your employees</span></div>
+        <div class="step-connector" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        <div class="step-card" role="listitem"><div class="step-num">04</div><div class="step-body"><h3>You see where everyone stands</h3><p>Progress by learner, department and plant — automatic and always current.</p></div><span class="step-badge step-badge-auto">Automatic</span></div>
       </div>
     </div>
   </section>
 
-  <section class="section section-white" id="roles">
+  <section class="section section-white" id="roles" aria-labelledby="roles-heading">
     <div class="sc">
       <div class="eyebrow">Built Around Each Role</div>
-      <h2>Everyone learns the basics.<br>Every role learns its own.</h2>
-      <p class="sc-sub">Nobody sits through courses that are not theirs. Assignments are made by department and role.</p>
-      <div class="roles-grid">
-        <div class="role-card"><div class="role-ic" style="background:#E8F0FE;color:#0050D8"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><h4>Every Learner</h4><div class="role-tags"><span>Best Practices</span><span>Workplace Ops</span><span>Management Basics</span></div></div>
-        <div class="role-card"><div class="role-ic" style="background:#E6F6F0;color:#0D7A4E"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><h4>Manufacturing</h4><div class="role-tags"><span>OEE &amp; OLE</span><span>TPM Basics</span><span>5S</span><span>Production Planning</span></div></div>
-        <div class="role-card"><div class="role-ic" style="background:#FEF3E2;color:#A05C00"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div><h4>Materials</h4><div class="role-tags"><span>Inventory Mgmt</span><span>Supplier Capacity</span><span>Resource Planning</span></div></div>
-        <div class="role-card"><div class="role-ic" style="background:#FDEAEA;color:#C41A1A"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div><h4>Quality</h4><div class="role-tags"><span>Quality Systems</span><span>IATF Awareness</span><span>Inspection Methods</span></div></div>
-        <div class="role-card"><div class="role-ic" style="background:#E8F0FE;color:#022670"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><h4>Maintenance</h4><div class="role-tags"><span>Preventive Maintenance</span><span>Root Cause Analysis</span></div></div>
-        <div class="role-card"><div class="role-ic" style="background:#E8F0FE;color:#022670"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><h4>Engineering / R&amp;D · Tool Room · NPD</h4><div class="role-tags"><span>Process capability</span><span>Tool readiness</span><span>Product development</span></div></div>
-        <div class="role-card"><div class="role-ic" style="background:#E6F6F0;color:#0D7A4E"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><h4>Management</h4><div class="role-tags"><span>KPIs &amp; MIS</span><span>Performance Mgmt</span><span>Leadership Basics</span></div></div>
+      <h2 id="roles-heading">Everyone learns the basics.<br>Every role learns its own.</h2>
+      <p class="sc-sub">Nobody sits through courses that are not theirs. Assignments are made by department and role — relevant content, for the right people.</p>
+      <div class="roles-grid" role="list">
+        <div class="role-card" role="listitem"><div class="role-card-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><h3>Manufacturing</h3><div class="role-tags"><span>OEE &amp; OLE</span><span>TPM Basics</span><span>5S</span><span>Production Planning</span></div></div>
+        <div class="role-card" role="listitem"><div class="role-card-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div><h3>Materials</h3><div class="role-tags"><span>Inventory Mgmt</span><span>Supplier Capacity</span><span>Resource Planning</span></div></div>
+        <div class="role-card" role="listitem"><div class="role-card-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div><h3>Quality</h3><div class="role-tags"><span>Quality Systems</span><span>IATF Awareness</span><span>Inspection Methods</span></div></div>
+        <div class="role-card" role="listitem"><div class="role-card-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div><h3>Maintenance</h3><div class="role-tags"><span>Preventive Maintenance</span><span>Root Cause Analysis</span></div></div>
+        <div class="role-card" role="listitem"><div class="role-card-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h3>Engineering / R&amp;D</h3><div class="role-tags"><span>Process Capability</span><span>Product Development</span></div></div>
+        <div class="role-card" role="listitem"><div class="role-card-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><h3>Tool Room &amp; NPD</h3><div class="role-tags"><span>Tool Readiness</span><span>New Product Development</span></div></div>
       </div>
+      <div class="roles-universal"><div class="roles-universal-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div><strong>Every learner</strong> also receives cross-functional content — workplace best practices, management awareness and operational fundamentals.</div></div>
     </div>
   </section>
 
-  <section class="section section-bg" id="dashboard-preview">
+  <section class="section section-bg" id="dashboard-preview" aria-labelledby="dashboard-heading">
     <div class="sc">
       <div class="eyebrow">Training &amp; Capability Dashboard</div>
-      <h2>See where training stands — and act on it</h2>
-      <p class="sc-sub">Every gap shows up as something to act on, not a score to explain.</p>
-      <div class="dp-card-wrap">
-        <div class="dp-topbar">
-          <img src="Images and Files/LOGO PNG.png" alt="EmpowerOne" style="height:28px">
-          <div style="display:flex;align-items:center;gap:16px;margin-left:auto">
-            <span style="font-size:12px;color:#7A8FB5;font-family:'Inter',sans-serif">Jetex Manufacturing Pvt. Ltd.</span>
-            <div class="dav">HR</div>
-          </div>
-        </div>
+      <h2 id="dashboard-heading">See where training stands —<br>and act on it.</h2>
+      <p class="sc-sub">Every gap shows up as something to act on. HR and plant leaders have a single view across all departments.</p>
+      <div class="dp-wrap" role="img" aria-label="EmpowerOne dashboard — example workspace">
+        <div class="dp-topbar"><img src="Images and Files/LOGO PNG.png" alt="EmpowerOne" style="height:26px;width:auto"><div class="dp-topbar-right"><span class="dp-org-label">Example Organisation</span><div class="dp-av">HR</div></div></div>
         <div class="dp-body">
+          <div class="dp-page-header"><div class="dp-page-title">Training &amp; Capability</div><div class="dp-page-sub">Example workspace</div></div>
           <div class="dp-kpis">
-            <div class="dpk"><div class="dpk-v" style="color:#022670">147</div><div class="dpk-l">Employees enrolled</div></div>
-            <div class="dpk"><div class="dpk-v" style="color:#0D7A4E">74%</div><div class="dpk-l">Training completion</div></div>
-            <div class="dpk"><div class="dpk-v" style="color:#0050D8">91%</div><div class="dpk-l">Mandatory done</div></div>
-            <div class="dpk"><div class="dpk-v" style="color:#A05C00">2.4 hrs</div><div class="dpk-l">Avg. learning time</div></div>
+            <div class="dpk"><div class="dpk-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="dpk-v">86</div><div class="dpk-l">Employees enrolled</div></div>
+            <div class="dpk"><div class="dpk-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="dpk-v">68%</div><div class="dpk-l">Training completion</div></div>
+            <div class="dpk"><div class="dpk-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="dpk-v">94%</div><div class="dpk-l">Mandatory training</div></div>
+            <div class="dpk"><div class="dpk-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="dpk-v">2.6 hrs</div><div class="dpk-l">Avg. learning time</div></div>
           </div>
-          <div class="dp-row">
+          <div class="dp-panels">
             <div class="dp-panel">
               <div class="dp-panel-title">Training Status</div>
-              <div class="dpst-item"><div class="dpst-dot" style="background:#C41A1A"></div><span>12 overdue</span><div class="dpst-actions"><a class="lbtn" href="app/spoc-dashboard.html">Send reminder</a><a class="lbtn lbtn-outline" href="app/spoc-dashboard.html">Reassign</a><a class="lbtn lbtn-outline" href="app/spoc-dashboard.html">Extend deadline</a></div></div>
-              <div class="dpst-item"><div class="dpst-dot" style="background:#0050D8"></div><span>26 in progress</span></div>
-              <div class="dpst-item"><div class="dpst-dot" style="background:#0D7A4E"></div><span>109 completed</span></div>
+              <div class="dpst-item"><div class="dpst-indicator dpst-ind-behind"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><span>9 learners — not started</span><div class="dpst-actions"><a class="dp-action-btn" href="app/spoc-dashboard.html">Send reminder</a><a class="dp-action-btn dp-action-outline" href="app/spoc-dashboard.html">Reassign</a></div></div>
+              <div class="dpst-item"><div class="dpst-indicator dpst-ind-progress"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><span>28 learners — in progress</span></div>
+              <div class="dpst-item"><div class="dpst-indicator dpst-ind-done"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div><span>49 learners — completed</span></div>
             </div>
             <div class="dp-panel">
               <div class="dp-panel-title">By Department</div>
-              <div class="dp-dept-row"><span>Manufacturing</span><div class="dpbar"><div style="width:81%;background:#0050D8;height:100%;border-radius:4px"></div></div><b>81%</b></div>
-              <div class="dp-dept-row"><span>Materials</span><div class="dpbar"><div style="width:72%;background:#0050D8;height:100%;border-radius:4px"></div></div><b>72%</b></div>
-              <div class="dp-dept-row"><span>Quality</span><div class="dpbar"><div style="width:66%;background:#0050D8;height:100%;border-radius:4px"></div></div><b>66%</b></div>
-              <div class="dp-dept-row"><span>Maintenance</span><div class="dpbar"><div style="width:58%;background:#F59E0B;height:100%;border-radius:4px"></div></div><b>58%</b></div>
+              <div class="dp-dept-row"><span>Manufacturing</span><div class="dpbar"><div class="dpbar-fill" style="width:78%"></div></div><b>78%</b></div>
+              <div class="dp-dept-row"><span>Materials</span><div class="dpbar"><div class="dpbar-fill" style="width:71%"></div></div><b>71%</b></div>
+              <div class="dp-dept-row"><span>Quality</span><div class="dpbar"><div class="dpbar-fill dpbar-fill-mid" style="width:63%"></div></div><b>63%</b></div>
+              <div class="dp-dept-row"><span>Maintenance</span><div class="dpbar"><div class="dpbar-fill dpbar-fill-soft" style="width:55%"></div></div><b>55%</b></div>
             </div>
           </div>
-          <div class="workflow-strip" aria-label="Training operations workflow"><div class="workflow-label">The workflow</div><div class="workflow-step"><b>01</b><span>Assign</span></div><i></i><div class="workflow-step"><b>02</b><span>Track</span></div><i></i><div class="workflow-step"><b>03</b><span>Identify gaps</span></div><i></i><div class="workflow-step"><b>04</b><span>Follow up</span></div><i></i><div class="workflow-step"><b>05</b><span>Report</span></div></div>
-          <a class="dashboard-demo-link" href="app/spoc-dashboard.html">Explore the HR dashboard <span aria-hidden="true">→</span></a>
+          <div class="workflow-strip"><div class="workflow-label">The workflow</div><div class="workflow-step"><b>01</b><span>Assign</span></div><div class="workflow-connector" aria-hidden="true"></div><div class="workflow-step"><b>02</b><span>Track</span></div><div class="workflow-connector" aria-hidden="true"></div><div class="workflow-step"><b>03</b><span>Identify gaps</span></div><div class="workflow-connector" aria-hidden="true"></div><div class="workflow-step"><b>04</b><span>Follow up</span></div><div class="workflow-connector" aria-hidden="true"></div><div class="workflow-step"><b>05</b><span>Report</span></div></div>
+          <a class="dp-explore-link" href="app/spoc-dashboard.html">Explore the HR dashboard <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section section-navy" id="contact">
-    <div class="sc" style="text-align:center">
-      <div class="eyebrow" style="color:#BBD3FF">See EmpowerOne in your plant</div>
-      <h2 style="color:#fff">Make workforce capability<br>run like a system.</h2>
-      <p style="color:rgba(255,255,255,0.75);margin:16px auto 32px;font-size:1.05rem;max-width:620px">Talk through your shifts, departments and training priorities with our team.</p>
-      <form class="demo-request-form" id="demo-request-form">
-        <label><span>Your name</span><input name="name" autocomplete="name" required placeholder="e.g. Meera Sharma"></label>
-        <label><span>Work email</span><input name="email" type="email" autocomplete="email" required placeholder="meera@company.com"></label>
-        <label><span>Organisation</span><input name="organisation" autocomplete="organization" required placeholder="Company name"></label>
-        <button class="lbtn lbtn-primary" type="submit">Book a Demo</button>
-      </form>
-      <p class="demo-form-disclaimer">This preview stores demo requests in this browser only; it does not send contact details to EmpowerOne.</p>
-      <p class="demo-request-status" id="demo-request-status" role="status" aria-live="polite"></p>
-      <a class="demo-mail-link" href="mailto:hello@empowerone.in">Prefer email? hello@empowerone.in</a>
+  <section class="section section-navy" id="contact" aria-labelledby="contact-heading">
+    <div class="sc sc-center">
+      <div class="eyebrow eyebrow-on-dark">See EmpowerOne in your plant</div>
+      <h2 id="contact-heading" class="on-dark">Make workforce capability<br>run like a system.</h2>
+      <p class="cta-sub">Talk through your shifts, departments and training priorities with our team.</p>
+      <div class="cta-actions">
+        <a href="mailto:hello@empowerone.in?subject=Demo%20Request&body=Organisation%3A%0AContact%20name%3A%0AMessage%3A" class="lbtn lbtn-white lbtn-lg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Book a Demo</a>
+        <a href="app/login.html" class="lbtn lbtn-ghost-white lbtn-lg">Explore Platform</a>
+      </div>
+      <p class="cta-contact-alt">Prefer to write directly? <a href="mailto:hello@empowerone.in" class="cta-email-link">hello@empowerone.in</a></p>
     </div>
   </section>
 
-  <footer class="lfooter">
+  <footer class="lfooter" role="contentinfo">
     <div class="lnav-inner">
-      <div>
-        <img src="Images and Files/LOGO PNG.png" alt="EmpowerOne" style="height:32px;margin-bottom:12px">
-        <p style="font-size:0.8rem;max-width:240px;color:#7A8FB5;font-family:Inter,sans-serif">A digital industrial training platform built for manufacturing companies.</p>
-      </div>
-      <div class="footer-links">
-        <a href="app/login.html">Platform Login</a>
-        <a href="#why">Capability Gap</a>
-        <a href="#dashboard-preview">For HR</a>
-        <a href="#courses">Courses</a>
-        <a href="#contact">Book a Demo</a>
-        <a href="mailto:hello@empowerone.in">Contact</a>
-      </div>
-      <div style="font-size:0.78rem;color:#7A8FB5;text-align:right;font-family:Inter,sans-serif">
-        <p>&copy; 2026 EmpowerOne.</p>
-        <p>Skill Today. Impact Tomorrow.</p>
-      </div>
+      <div class="footer-brand"><a href="index.html" aria-label="EmpowerOne home"><img src="Images and Files/LOGO PNG.png" alt="EmpowerOne" style="height:32px;width:auto;margin-bottom:12px"></a><p class="footer-tagline">A digital industrial training platform built for manufacturing organisations.</p></div>
+      <nav class="footer-nav" aria-label="Footer navigation"><a href="#platform">Platform</a><a href="#courses">Courses</a><a href="#dashboard-preview">For HR</a><a href="#how">How It Works</a><a href="#contact">Book a Demo</a><a href="app/login.html">Log In</a><a href="mailto:hello@empowerone.in">Contact</a></nav>
+      <div class="footer-meta"><p>&copy; 2026 EmpowerOne.</p><p class="footer-tagline-small">Skill Today. Impact Tomorrow.</p></div>
     </div>
   </footer>
 
   <script>
-    const nav = document.getElementById('lnav');
-    const menuToggle = document.querySelector('.lnav-menu-toggle');
-    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
-    menuToggle.addEventListener('click', () => {
-      const isOpen = nav.classList.toggle('menu-open');
-      menuToggle.setAttribute('aria-expanded', String(isOpen));
-    });
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const t = document.querySelector(a.getAttribute('href'));
-        if (t) {
-          e.preventDefault();
-          nav.classList.remove('menu-open');
-          menuToggle.setAttribute('aria-expanded', 'false');
-          t.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
-        }
-      });
-    });
-    const demoForm = document.getElementById('demo-request-form');
-    demoForm.addEventListener('submit', event => {
-      event.preventDefault();
-      if (!demoForm.reportValidity()) return;
-      const values = Object.fromEntries(new FormData(demoForm).entries());
-      try {
-        const requests = JSON.parse(localStorage.getItem('empowerone.demoRequests') || '[]');
-        requests.push({ ...values, createdAt: new Date().toISOString() });
-        localStorage.setItem('empowerone.demoRequests', JSON.stringify(requests));
-      } catch (error) {
-        document.getElementById('demo-request-status').textContent = 'We could not save the request in this browser. Please email hello@empowerone.in.';
-        return;
-      }
-      demoForm.reset();
-      document.getElementById('demo-request-status').textContent = 'Thank you. Your demo request is saved in this preview; our team will follow up.';
-    });
-    const animated = document.querySelectorAll('.cc, .gap-card, .step-card, .role-card, .dp-panel, .dpk, .friction-card');
-    if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.documentElement.classList.add('motion-ready');
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('anim-in'); obs.unobserve(e.target); } });
-      }, { threshold: 0.1 });
-      animated.forEach(el => obs.observe(el));
-    }
-    const visual = document.querySelector('.hero-visual');
-    if (visual && matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      visual.addEventListener('pointermove', event => {
-        const rect = visual.getBoundingClientRect();
-        const x = (event.clientX - rect.left) / rect.width - 0.5;
-        const y = (event.clientY - rect.top) / rect.height - 0.5;
-        visual.style.setProperty('--tilt-x', `${(-y * 4).toFixed(2)}deg`);
-        visual.style.setProperty('--tilt-y', `${(x * 6).toFixed(2)}deg`);
-      });
-      visual.addEventListener('pointerleave', () => {
-        visual.style.setProperty('--tilt-x', '0deg');
-        visual.style.setProperty('--tilt-y', '0deg');
-      });
-    }
+    var nav=document.getElementById('lnav'),mt=document.querySelector('.lnav-menu-toggle');
+    window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
+    function closeMenu(){nav.classList.remove('menu-open');mt.setAttribute('aria-expanded','false');mt.setAttribute('aria-label','Open navigation menu');}
+    function openMenu(){nav.classList.add('menu-open');mt.setAttribute('aria-expanded','true');mt.setAttribute('aria-label','Close navigation menu');}
+    mt.addEventListener('click',function(){nav.classList.contains('menu-open')?closeMenu():openMenu();});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('menu-open'))closeMenu();});
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();closeMenu();t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}});});
+    var animated=document.querySelectorAll('.cc,.gap-card,.step-card,.role-card,.dp-panel,.dpk,.platform-card');
+    if('IntersectionObserver'in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('motion-ready');var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('anim-in');obs.unobserve(e.target);}});},{threshold:0.1});animated.forEach(function(el){obs.observe(el);});}
+    var vis=document.querySelector('.hero-visual');
+    if(vis&&matchMedia('(hover: hover) and (pointer: fine)').matches&&!matchMedia('(prefers-reduced-motion: reduce)').matches){vis.addEventListener('pointermove',function(e){var r=vis.getBoundingClientRect();var x=(e.clientX-r.left)/r.width-.5;var y=(e.clientY-r.top)/r.height-.5;vis.style.setProperty('--tilt-x',(-y*3).toFixed(2)+'deg');vis.style.setProperty('--tilt-y',(x*5).toFixed(2)+'deg');},{passive:true});vis.addEventListener('pointerleave',function(){vis.style.setProperty('--tilt-x','0deg');vis.style.setProperty('--tilt-y','0deg');});}
   </script>
 </body>
 </html>
